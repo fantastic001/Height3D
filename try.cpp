@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     cout << "Compiling...\n";
 
     // draw red triangle 
-    GLuint program = initProgram();
+    Program program = initProgram();
 
     cout << "Drawing triangle\n";
 

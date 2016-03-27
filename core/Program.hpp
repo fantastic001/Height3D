@@ -1,12 +1,15 @@
 #ifndef HEIGHT3D_PROGRAM_HPP
-#define // HEIGHT3D_PROGRAM_HPP
+#define HEIGHT3D_PROGRAM_HPP
 
 #include "Shader.hpp"
 
 class Program 
 {
-	
+	GLuint program_id;
 public:
+	Program(); 
+	~Program();
+
 	bool addShader(Shader shader);
 	int getAttributeLocation(char* name);
 	
@@ -14,10 +17,11 @@ public:
 	void disableAttributeArray(int location);
 
 	void link();
+	void bind(); 
 
 	GLuint getProgramId();
 
-	void setAttributeArray(int location, GLenum type, std::vector<float> values, int stride = 0);
+	void setAttributeArray(int location, int vertex_size);
 	
 	void setUniformValue(int location, GLfloat value);
 

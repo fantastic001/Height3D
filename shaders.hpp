@@ -8,13 +8,13 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Shader.hpp"
+#include "core/Shader.hpp"
+#include "core/Program.hpp"
 
 using namespace std;
 
 GLuint shaderCompileFromFile(GLenum type, const char *filePath);
 void shaderAttachFromFile(GLuint program, GLenum type, const char *filePath);
-GLuint initProgram(void);
 
 size_t shaderLoadSource(char* buffer, const char* path) 
 {
@@ -103,42 +103,49 @@ shaderAttachFromFile(GLuint program, GLenum type, const char *filePath)
 	 * to has been destroyed */
 }
 
-GLuint
+Program
 initProgram(void)
 {
 
     glewInit();
-    GLint result;
-
+    //GLint result;
+    Program program;
+    program.addShader(Shader(GL_VERTEX_SHADER, "shader.vp"));
+    program.addShader(Shader(GL_FRAGMENT_SHADER, "shader.fp"));
+    program.link();
+    program.bind();
+/*
     cout << "Creating program...\n";
-    /* create program object and attach shaders */
+    // create program object and attach shaders 
     GLuint g_program = glCreateProgram();
     cout << "Attaching shaders\n";
     shaderAttachFromFile(g_program, GL_VERTEX_SHADER, "shader.vp");
     shaderAttachFromFile(g_program, GL_FRAGMENT_SHADER, "shader.fp");
 
     cout << "Linking...\n";
-    /* link the program and make sure that there were no errors */
+    // link the program and make sure that there were no errors 
     glLinkProgram(g_program);
     glGetProgramiv(g_program, GL_LINK_STATUS, &result);
     if(result == GL_FALSE) {
 	GLint length;
 	char *log;
 
-	/* get the program info log */
+	// get the program info log 
 	glGetProgramiv(g_program, GL_INFO_LOG_LENGTH, &length);
 	log = (char*) malloc(length);
 	glGetProgramInfoLog(g_program, length, &result, log);
 
-	/* print an error message and the info log */
+	// print an error message and the info log 
 	fprintf(stderr, "sceneInit(): Program linking failed: %s\n", log);
 	free(log);
 
-	/* delete the program */
+	// delete the program 
 	glDeleteProgram(g_program);
 	g_program = 0;
     }
-    return g_program;
+    glUseProgram(g_program);
+*/
+    return program;
 }
 
 
