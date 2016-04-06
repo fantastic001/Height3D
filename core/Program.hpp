@@ -11,7 +11,7 @@ public:
 	~Program();
 
 	bool addShader(Shader shader);
-	int getAttributeLocation(char* name);
+	int getAttributeLocation(const char* name);
 	
 	void enableAttributeArray(int location);
 	void disableAttributeArray(int location);

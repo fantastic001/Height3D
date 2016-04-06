@@ -17,7 +17,7 @@ bool Program::addShader(Shader shader)
 	glAttachShader(program_id, shader.getShaderId());
 }
 	
-int Program::getAttributeLocation(char* name) 
+int Program::getAttributeLocation(const char* name) 
 {
 	return glGetAttribLocation(program_id, name);
 	// TODO throw exception if returned value is -1
