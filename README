@@ -1,0 +1,29 @@
+
+##### How to compile?
+
+Just run 
+
+	cmake . 
+	make 
+
+and you will get your executables
+
+##### How to test?
+
+just run for unit tests
+	
+	cmake . 
+	make
+	make test
+
+and for functional tests
+
+	cmake . 
+	make
+	make functional
+
+##### Cleaning 
+
+just run
+
+	make clean
