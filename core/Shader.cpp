@@ -1,4 +1,5 @@
 #include "Shader.hpp"
+#include "common.hpp"
 
 #include <fstream>
 #include <string> 
