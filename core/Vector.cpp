@@ -11,6 +11,9 @@ Vector::Vector(float x1, float y1, float z1, float w1)
 	z = z1; 
 	w = w1;
 }
+Vector::Vector(float x1, float y1, float z1) : Vector(x1, y1, z1, 1)
+{
+}
 
 Vector::Vector(float x1, float y1, float z1, float w1, bool column1) 
 {

@@ -8,6 +8,7 @@ add_executable(Tutorial
 	try.cpp core/Buffer.cpp
 	core/Program.cpp
 	core/Vector.cpp
+	core/Matrix.cpp
 	core/Shader.cpp
 	gui/Window.cpp
 )
@@ -23,11 +24,13 @@ add_executable(unittest
 	core/Buffer.cpp
 	core/Program.cpp
 	core/Vector.cpp
+	core/Matrix.cpp
 	core/Shader.cpp
 	
 	gui/Window.cpp
 
 	tests/test_vector.cpp
+	tests/test_matrix.cpp
 )
 include_directories(${GLEW_INCLUDE_DIRS})
 include_directories(.)
@@ -41,6 +44,7 @@ add_executable(test_functional
 	core/Buffer.cpp
 	core/Program.cpp
 	core/Vector.cpp
+	core/Matrix.cpp
 	core/Shader.cpp
 	
 	gui/Window.cpp
