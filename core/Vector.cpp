@@ -2,6 +2,9 @@
 #include "common.hpp"
 #include "Vector.hpp" 
 
+#include <cmath>
+
+using namespace std; 
 
 Vector::Vector(float x1, float y1, float z1, float w1) 
 {
@@ -69,6 +72,12 @@ Vector Vector::cross(Vector v)
 Vector Vector::transpose() 
 {
 	return Vector(x,y,z,w,!column);
+}
+
+Vector Vector::normalized() 
+{
+	float l = sqrt(x*x + y*y + z*z);
+	return Vector(x/l, y/l, z/l, w);
 }
 
 float Vector::getX() 

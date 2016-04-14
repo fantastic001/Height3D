@@ -26,6 +26,11 @@ public:
 
 	Vector transpose();
 
+	/*
+	Return normalized vector (except w-component)
+	*/
+	Vector normalized();
+
 	float getX();
 	float getY();
 	float getZ();
