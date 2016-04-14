@@ -18,6 +18,12 @@ public:
 	Vector& operator- (Vector v); 
 	
 	float dot(Vector v); 
+
+	/*
+	Computes cross product
+	*/
+	Vector cross(Vector v);
+
 	Vector transpose();
 
 	float getX();

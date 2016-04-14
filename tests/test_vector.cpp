@@ -48,6 +48,16 @@ BOOST_AUTO_TEST_CASE( operators )
 	BOOST_CHECK(v1.getW() == 8.0);
 }
 
+BOOST_AUTO_TEST_CASE( cross )
+{
+	Vector v1(1.0, 1.0, 1.0);
+	Vector v2(0.0, 2.0, 1.0);
+	Vector result = v1.cross(v2);
+	BOOST_CHECK(result.getX() == -1);
+	BOOST_CHECK(result.getY() == -1);
+	BOOST_CHECK(result.getZ() == 2);
+}
+
 BOOST_AUTO_TEST_CASE( dot ) 
 {
 	Vector v1(1.0, 1.0, 1.0, 1.0);

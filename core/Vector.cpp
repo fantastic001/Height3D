@@ -55,6 +55,17 @@ float Vector::dot(Vector v)
 {
 	return x*v.getX() + y*v.getY() + z*v.getZ() + w*v.getW();
 }
+
+Vector Vector::cross(Vector v)
+{
+	return Vector(
+		y*v.getZ() - z*v.getY(),
+		z*v.getX() - x*v.getZ(),
+		x*v.getY() - y*v.getX(),
+		w
+	);
+}
+
 Vector Vector::transpose() 
 {
 	return Vector(x,y,z,w,!column);
