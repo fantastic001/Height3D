@@ -1,0 +1,10 @@
+#ifndef HEIGHT3D_ABSTRACT_MODEL_HPP
+#define HEIGHT3D_ABSTRACT_MODEL_HPP
+
+
+class AbstractModel 
+{
+
+};
+
+#endif // HEIGHT3D_ABSTRACT_MODEL_HPP
