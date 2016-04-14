@@ -66,7 +66,20 @@ void Program::setUniformValue(int location, GLfloat value)
 	glUniform1f(location, value);
 }
 
-// TODO setUniformValue for vectors and matrices 3x3 4x4 2x2 
+void Program::setUniformValue(int location, Matrix m) 
+{
+	float mat[16]; 
+	int k = 0; 
+	for (int i = 0; i<4; i++) 
+	{
+		for (int j = 0; j<4; j++) 
+		{
+			mat[k] = m.getElement(i,j);
+			k++;
+		}
+	}
+	glUniformMatrix4fv(location, 1, false, mat);
+}
 
 int Program::getUniformLocation(char* name) 
 {

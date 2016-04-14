@@ -2,6 +2,9 @@
 #define HEIGHT3D_PROGRAM_HPP
 
 #include "Shader.hpp"
+#include "Matrix.hpp"
+#include "Vector.hpp"
+
 
 class Program 
 {
@@ -24,6 +27,7 @@ public:
 	void setAttributeArray(int location, int vertex_size);
 	
 	void setUniformValue(int location, GLfloat value);
+	void setUniformValue(int location, Matrix m); 
 
 	// TODO setUniformValue for vectors and matrices 3x3 4x4 2x2 
 
