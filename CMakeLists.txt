@@ -9,6 +9,8 @@ add_executable(Tutorial
 	core/Program.cpp
 	core/Vector.cpp
 	core/Matrix.cpp
+	core/Texture.cpp
+	core/AbstractModel.cpp
 	core/Shader.cpp
 	gui/Window.cpp
 )
@@ -25,6 +27,8 @@ add_executable(unittest
 	core/Program.cpp
 	core/Vector.cpp
 	core/Matrix.cpp
+	core/Texture.cpp
+	core/AbstractModel.cpp
 	core/Shader.cpp
 	
 	gui/Window.cpp
@@ -45,11 +49,14 @@ add_executable(test_functional
 	core/Program.cpp
 	core/Vector.cpp
 	core/Matrix.cpp
+	core/Texture.cpp
+	core/AbstractModel.cpp
 	core/Shader.cpp
 	
 	gui/Window.cpp
 
 	functional/basic.cpp
+	functional/textures.cpp
 )
 include_directories(${GLEW_INCLUDE_DIRS})
 target_link_libraries(test_functional ${GLEW_LIBRARIES})

@@ -7,9 +7,16 @@
 
 class Texture 
 {
-	int id; 
+	GLuint id; 
 	GLenum type;
+	int m_width, m_height, m_format;
 public:
+	Texture(GLenum texture_type, int width, int height, GLint format = GL_RGB);
+	
+	/*
+	NOTE: data has to be in the correct format data[width][height][format] where format is 3 or 4
+	*/
+	void sendData(GLvoid* data);
 	
 	void bind(); 
 };

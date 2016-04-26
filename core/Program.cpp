@@ -81,6 +81,11 @@ void Program::setUniformValue(int location, Matrix m)
 	glUniformMatrix4fv(location, 1, false, mat);
 }
 
+void Program::setUniformValue(int samplerLocation) 
+{
+	glUniform1f(samplerLocation, 0);
+}
+
 int Program::getUniformLocation(char* name) 
 {
 	return glGetUniformLocation(program_id, name);
