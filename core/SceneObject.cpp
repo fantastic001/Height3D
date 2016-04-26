@@ -2,14 +2,34 @@
 
 using namespace std;
 
-SceneObject::SceneObject(AbstractModel _model, Texture _texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c);
-	~SceneObject();
+SceneObject::SceneObject(AbstractModel _model, Texture _texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c) 
+{
+}
+
+SceneObject::~SceneObject()
+{
+}
 	
-	void move(Vector t);
-	void rotate(float _alpha, float _phi);
+void SceneObject::move(Vector t) 
+{
+}
 
-	Vector getPosition();
-	void setAttributes(Program* prog, int vLocation, int texCoordLocation, int modelLocation);
-	void bindTexture();
+void SceneObject::rotate(float _alpha, float _phi) 
+{
+}
 
-	void draw();
+Vector SceneObject::getPosition() 
+{
+}
+
+void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocation, int modelLocation) 
+{
+}
+
+void SceneObject::bindTexture() 
+{
+}
+
+void SceneObject::draw()
+{
+}
