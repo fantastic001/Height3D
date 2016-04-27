@@ -1,6 +1,6 @@
 #version 120
 
-vec2 st;
+varying vec2 st;
 uniform sampler2D image;
 
 void main()
