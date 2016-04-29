@@ -129,7 +129,7 @@ BOOST_AUTO_TEST_CASE( scene )
 
 	int vertexLocation = program.getAttributeLocation("vPosition");
 	int texCoordLocation = program.getAttributeLocation("uv");
-	int vertexColorLocation = program.getUniformLocation("vColor");
+	int vertexColorLocation = program.getAttributeLocation("vColor");
 	int samplerLocation = program.getUniformLocation("image");
 	int modelLocation = program.getUniformLocation("model");
 	int perspectiveLocation= program.getUniformLocation("perspective");
