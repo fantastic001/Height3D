@@ -12,7 +12,7 @@ uniform mat4 perspective;
 
 void main()
 {
-  gl_Position = vPosition;
+  gl_Position = perspective * model * vPosition;
   st = uv;
   color = vColor;
 }

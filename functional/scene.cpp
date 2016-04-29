@@ -139,13 +139,13 @@ BOOST_AUTO_TEST_CASE( scene )
 	program.enableAttributeArray(vertexColorLocation);
 
 	Scene scene;
-	scene.setCamera(0, 0, 0, Vector(0, 1.0, 0), Vector(0, 1, 0));
-	scene.setPerspective(3.1415 / 4, 1.0, 1, 1);
+	scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
+	scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
 	
 	SceneObject* cube = scene.addObject(new SceneObject(
 		new  CubeModel(), // use cube model to draw this object
 		new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
-		0.0, 0.0, 0.0, // location 
+		0.0, 0.0, 1.0, // location 
 		0.0, 0.0, // angles of rotation 
 		0.5, 0.5, 0.5  // size
 	));
