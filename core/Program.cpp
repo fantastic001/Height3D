@@ -78,7 +78,7 @@ void Program::setUniformValue(int location, Matrix m)
 			k++;
 		}
 	}
-	glUniformMatrix4fv(location, 1, false, mat);
+	glUniformMatrix4fv(location, 1, true, mat);
 }
 
 void Program::setUniformValue(int samplerLocation) 
