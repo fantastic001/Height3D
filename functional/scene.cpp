@@ -21,6 +21,7 @@
 
 #include <gui/Window.hpp>
 
+#include <cmath>
 
 using namespace std;
 
@@ -145,17 +146,20 @@ BOOST_AUTO_TEST_CASE( scene )
 	SceneObject* cube = scene.addObject(new SceneObject(
 		new  CubeModel(), // use cube model to draw this object
 		new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
-		0.0, 0.0, 1.0, // location 
+		0.0, 0.0, 0.0, // location 
 		0.0, 0.0, // angles of rotation 
 		0.5, 0.5, 0.5  // size
 	));
-	for (int i = 0; i<5; i++) 
+	float alpha = 0.0; 
+	for (int i = 0; i<60; i++) 
 	{
 		glClearColor ( 0.0, 0.0, 0.0, 1.0 );
 		glClear ( GL_COLOR_BUFFER_BIT );
+		alpha += 3.14 / 20;
+		scene.setCamera(0,1,0, Vector(5*cos(alpha), -1, 5*sin(alpha)), Vector(0,1,0));
 		scene.drawObjects(&program, modelLocation, perspectiveLocation, vertexLocation, texCoordLocation, vertexColorLocation, samplerLocation);
 		win.redraw();
-		win.delay(500);
+		win.delay(30);
 	}
 	
 	SDL_Quit();
