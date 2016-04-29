@@ -63,7 +63,7 @@ add_executable(test_functional
 	core/SceneObject.cpp
 	
 	functional/basic.cpp
-	#functional/textures.cpp
+	functional/textures.cpp
 	functional/scene.cpp
 )
 include_directories(${GLEW_INCLUDE_DIRS})

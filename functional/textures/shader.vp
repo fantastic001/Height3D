@@ -6,6 +6,6 @@ varying vec2 st;
 
 void main()
 {
-  gl_Position = model*vPosition;
+  gl_Position = vPosition;
   st = uv;
 }

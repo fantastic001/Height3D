@@ -1,5 +1,5 @@
 
-#define BOOST_TEST_MODULE Functional_Scene
+//#define BOOST_TEST_MODULE Functional_Scene
 #include <boost/test/unit_test.hpp>
 
 #include <iostream>
@@ -110,7 +110,7 @@ protected:
 	}
 };
 
-BOOST_AUTO_TEST_CASE( scene )
+BOOST_AUTO_TEST_CASE( functional_scene )
 {
 
 	Window win(512, 512, "tutorial");
