@@ -1,0 +1,18 @@
+#version 120
+
+attribute vec4 vPosition;
+attribute vec4 vColor;
+attribute vec2 uv;
+
+varying vec4 color;
+varying vec2 st;
+
+uniform mat4 model;
+uniform mat4 perspective;
+
+void main()
+{
+  gl_Position = vPosition;
+  st = uv;
+  color = vColor;
+}

@@ -8,13 +8,33 @@
 class AbstractModel 
 {
 
+	int m_count;
 public:
-	void send(Buffer& vertexBuffer, Buffer& indexBuffer, Buffer& colorBuffer, Buffer& textureBuffer); 
+	void send(Buffer* vertexBuffer, Buffer* indexBuffer, Buffer* colorBuffer, Buffer* textureBuffer); 
+	int count();
 
 protected:
+	/*
+	Should return std::vector populated with vertex locations. 
+	Every vertex is defined by its location using triple coordinates (x,y,z)
+
+	For example, if we have 3 vertices, our std::vector has to have size of 9 
+	*/
 	virtual std::vector<float> genVertices() = 0; 
-	virtual std::vector<float> genIndices() = 0; 
+	
+	/*
+	Should return std::vector populated with indices which define order of drawing. Size of this vector has to be multiple of 3.
+	*/
+	virtual std::vector<int> genIndices() = 0; 
+	
+	/*
+	Should return color values for each vertex from vertex array. Size has to be (vertexCount) * 3
+	*/
 	virtual std::vector<float> genVertexColors() = 0; 
+	
+	/*
+	Should return std::vector populated with texture coordinates in range [0.0, 1.0]. Size is vertexCount * 2
+	*/
 	virtual std::vector<float> genTextureCoordinates() = 0; 
 
 

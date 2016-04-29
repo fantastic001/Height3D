@@ -2,18 +2,17 @@
 #include "common.hpp"
 #include "Scene.hpp"
 
+#include <cmath>
+
 using namespace std;
 
-Scene::Scene(float a, float b, float c) 
+Scene::Scene() 
 {
-	m_width = a; 
-	m_height = b; 
-	m_depth = c;
 }
 
 Scene::~Scene() 
 {
-	for (int i = 0; i<objects.size(); i++) 
+	for (int i = 0; i<m_objects.size(); i++) 
 	{
 		delete m_objects.at(i);
 	}
@@ -47,12 +46,12 @@ Matrix Scene::getPerspectiveMatrix(float x, float y, float z, Vector direction, 
 	// first we set camera params
 	direction = direction.normalized();
 	Vector normal = direction.cross(up).normalized();
-	Vector up = normal.cross(direction).normalized();
+	Vector u = normal.cross(direction).normalized();
 	direction = Vector(-direction.getX(), -direction.getY(), -direction.getZ());
 	Vector eye(x,y,z);
 	Matrix camera(
 		normal.getX(), normal.getY(), normal.getZ(), -normal.dot(eye),
-		up.getX(), up.getY(), up.getZ(), -up.dot(eye), 
+		u.getX(), u.getY(), u.getZ(), -u.dot(eye), 
 		direction.getX(), direction.getY(), direction.getZ(), -direction.dot(eye),
 		0, 0, 0, 1
 	);
@@ -60,22 +59,22 @@ Matrix Scene::getPerspectiveMatrix(float x, float y, float z, Vector direction, 
 	float f = 1.0 / tan(fovy / 2);
 	float d = far - near;
 	Matrix perspective(
-		f/aspect, 0, 0, 0, 
-		0, f, 0, 0,
-		0 0, -(near + far)/d, -2*near*far/d, 
-		0, 0, -1, 0.0
+		f/aspect, 0.0, 0, 0, 
+		0.0, f, 0.0, 0.0,
+		0.0, 0.0, -(near + far)/d, -2*near*far/d, 
+		0.0, 0.0, -1, 0.0
 	);
 	Matrix result = perspective.mult(camera);
 	return result;
 }
 	
-void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation) 
+void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocation) 
 {
-	prog->setUniformValue(PerspectiveMatrixLocation, getPerspectiveMatrix(m_cx, m_cy, m_cz, m_direction, m_up, m_fovy, m_aspect, m_near, m_far));
+	prog->setUniformValue(perspectiveMatrixLocation, getPerspectiveMatrix(m_cx, m_cy, m_cz, m_direction, m_up, m_fovy, m_aspect, m_near, m_far));
 	for (int i = 0; i<m_objects.size(); i++) 
 	{
 		SceneObject *obj = m_objects.at(i);
-		obj->setAttributes(prog, vLocation, texCoordLocation, modelUniformMatrixLocation);
+		obj->setAttributes(prog, vLocation, texCoordLocation, vertexColorLocation, modelUniformMatrixLocation, samplerLocation);
 		obj->bindTexture();
 		obj->bindIndexBuffer();
 		obj->draw();

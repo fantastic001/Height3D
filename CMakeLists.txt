@@ -12,6 +12,8 @@ add_executable(Tutorial
 	core/Texture.cpp
 	core/AbstractModel.cpp
 	core/Shader.cpp
+	core/Scene.cpp
+	core/SceneObject.cpp
 	gui/Window.cpp
 )
 find_package(OpenGL)
@@ -31,6 +33,8 @@ add_executable(unittest
 	core/AbstractModel.cpp
 	core/Shader.cpp
 	
+	core/Scene.cpp
+	core/SceneObject.cpp
 	gui/Window.cpp
 
 	tests/test_vector.cpp
@@ -55,8 +59,12 @@ add_executable(test_functional
 	
 	gui/Window.cpp
 
+	core/Scene.cpp
+	core/SceneObject.cpp
+	
 	functional/basic.cpp
-	functional/textures.cpp
+	#functional/textures.cpp
+	functional/scene.cpp
 )
 include_directories(${GLEW_INCLUDE_DIRS})
 target_link_libraries(test_functional ${GLEW_LIBRARIES})

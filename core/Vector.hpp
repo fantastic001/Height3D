@@ -8,6 +8,7 @@ class Vector
 	bool column; 
 
 public: 
+	Vector();
 	Vector(float x1, float y1, float z1, float w1); 
 	Vector(float x1, float y1, float z1, float w1, bool column1);
 	Vector(float x1, float y1, float z1);

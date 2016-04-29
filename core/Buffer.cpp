@@ -20,6 +20,10 @@ void Buffer::sendData(std::vector<float> data)
 	sendData(&data[0], data.size());
 }
 
+void Buffer::sendData(std::vector<int> data) 
+{
+	sendData(&data[0], data.size());
+}
 void Buffer::sendData(Vector* data, int n, bool include_w) 
 {
 	vector<float> vdata;
@@ -36,4 +40,10 @@ void Buffer::sendData(float* data, int n)
 {
 	bind();
 	glBufferData(type, n * sizeof(float), data, GL_STATIC_DRAW);
+}
+
+void Buffer::sendData(int* data, int n) 
+{
+	bind();
+	glBufferData(type, n * sizeof(int), data, GL_STATIC_DRAW);
 }

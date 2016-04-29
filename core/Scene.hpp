@@ -17,15 +17,12 @@ class Scene
 	float m_fovy, m_aspect, m_near, m_far;
 	
 	// camera parameters
-	float m_cx, float m_cy, float m_cz;
+	float m_cx, m_cy, m_cz;
 	Vector m_direction;
 	Vector m_up;
 
-	// perspective parameters 
-	float m_fovy;
-
 public:
-	Scene(float a, float b, float c);
+	Scene();
 	~Scene();
 
 	SceneObject* addObject(SceneObject* object);
@@ -49,7 +46,7 @@ public:
 	static Matrix getPerspectiveMatrix(float x, float y, float z, Vector direction, Vector up, float fovy, float aspect, float near, float far);
 	
 
-	void drawObjects(Program* prog, int modelUniformMatrixLocation, int PerspectiveMatrixLocation);
+	void drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocatio);
 };
 
 #endif // HEIGHT3D_SCENE_HPP

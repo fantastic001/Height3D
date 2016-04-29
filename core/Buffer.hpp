@@ -21,8 +21,10 @@ public:
 	void bind();
 
 	void sendData(std::vector<float> data);
+	void sendData(std::vector<int> data);
 	void sendData(Vector* data, int n, bool include_w = true);
 	void sendData(float* data, int n);
+	void sendData(int* data, int n);
 };
 
 #endif // HEIGHT3D_BUFFER_HPP

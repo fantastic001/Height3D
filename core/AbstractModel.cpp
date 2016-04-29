@@ -3,24 +3,31 @@
 
 using namespace std;
 
-void AbstractModel::send(Buffer& vertexBuffer, Buffer& indexBuffer, Buffer& colorBuffer, Buffer& textureBuffer) 
+void AbstractModel::send(Buffer* vertexBuffer, Buffer* indexBuffer, Buffer* colorBuffer, Buffer* textureBuffer) 
 {
 	vector<float> 
 	vertices = genVertices(), 
-	indices = genIndices(), 
 	colors = genVertexColors(), 
 	coords = genTextureCoordinates(); 
+
+	vector<int> indices = genIndices();
+	m_count = indices.size();
 	
-	vertexBuffer.bind(); 
-	vertexBuffer.sendData(vertices); 
+	vertexBuffer->bind(); 
+	vertexBuffer->sendData(vertices); 
 
-	indexBuffer.bind(); 
-	indexBuffer.sendData(indices); 
+	indexBuffer->bind(); 
+	indexBuffer->sendData(indices); 
 
-	colorBuffer.bind();
-	colorBuffer.sendData(colors);
+	colorBuffer->bind();
+	colorBuffer->sendData(colors);
 
-	textureBuffer.bind();
-	textureBuffer.sendData(coords);
+	textureBuffer->bind();
+	textureBuffer->sendData(coords);
 
+}
+
+int AbstractModel::count() 
+{
+	return m_count;
 }
