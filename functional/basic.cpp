@@ -44,8 +44,8 @@ BOOST_AUTO_TEST_CASE( basic )
 	
 	glewInit();
 	Program program;
-	program.addShader(Shader(GL_VERTEX_SHADER, "shader.vp"));
-	program.addShader(Shader(GL_FRAGMENT_SHADER, "shader.fp"));
+	program.addShader(Shader(GL_VERTEX_SHADER, "functional/basic//shader.vp"));
+	program.addShader(Shader(GL_FRAGMENT_SHADER, "functional/basic/shader.fp"));
 	program.link();
 	program.bind();
 
