@@ -14,10 +14,13 @@ SET(core_source_files
 	src/core/Shader.cpp
 	src/core/Scene.cpp
 	src/core/SceneObject.cpp
+	src/core/Loop.cpp
+	src/core/Event.cpp
 )
 
 SET(gui_source_files 
 	src/gui/Window.cpp
+	src/loops/SDLLoop.cpp
 )
 
 find_package(OpenGL)
@@ -57,6 +60,7 @@ add_executable(test_functional
 	functional/basic.cpp
 	functional/textures.cpp
 	functional/scene.cpp
+	functional/event.cpp
 	${core_source_files}
 	${gui_source_files}
 )
