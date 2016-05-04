@@ -32,12 +32,12 @@ protected:
 
 	void onKeyPress(Event e)
 	{
-		cout << "Pressed " << e.getKeyCode() << endl;
+		cout << "Pressed " << e.getKey().keycode << endl;
 	}
 
 	void onKeyRelease(Event e) 
 	{
-		cout << "Released " << e.getKeyCode() << endl;
+		cout << "Released " << e.getKey().keycode << endl;
 	}
 
 	void onQuit() {

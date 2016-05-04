@@ -2,15 +2,21 @@
 #ifndef HEIGHT3D_EVENT_HPP
 #define HEIGHT3D_EVENT_HPP
 
+typedef struct 
+{
+	char scancode; 
+	char keycode; 
+} Key; 
+
 class Event {
 
-	char m_key; 
+	Key m_key; 
 
 public:
 	
-	Event(char key);
+	Event(Key key);
 
-	char getKeyCode(); 
+	Key getKey(); 
 	
 };
 

@@ -25,10 +25,15 @@ void SDLLoop::handleEvents()
 		switch( event.type ) 
 		{
 			case SDL_KEYDOWN:
-				onKeyPress(Event((char) event.key.keysym.sym));
+				Key k; 
+				k.scancode = event.key.keysym.scancode;
+				k.keycode = event.key.keysym.sym;
+				onKeyPress(Event(k));
 				break;
 			case SDL_KEYUP:
-				onKeyRelease(Event((char) event.key.keysym.sym));
+				k.scancode = event.key.keysym.scancode;
+				k.keycode = event.key.keysym.sym;
+				onKeyRelease(Event(k));
 				break;
 			case SDL_QUIT:
 				this->quit();

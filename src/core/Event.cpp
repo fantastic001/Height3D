@@ -1,12 +1,12 @@
 
 #include "Event.hpp"
 
-Event::Event(char key) 
+Event::Event(Key key) 
 {
 	m_key = key; 
 }
 
-char Event::getKeyCode() 
+Key Event::getKey() 
 {
 	return m_key; 
 }
