@@ -1,6 +1,6 @@
 
 #include "SDLLoop.hpp"
-#include <core/Event.hpp>
+#include "SDLEvent.hpp"
 
 #define GL3_PROTOTYPES 1
 #include <GL/glew.h>
@@ -28,12 +28,12 @@ void SDLLoop::handleEvents()
 				Key k; 
 				k.scancode = event.key.keysym.scancode;
 				k.keycode = event.key.keysym.sym;
-				onKeyPress(Event(k));
+				onKeyPress(SDLEvent(k));
 				break;
 			case SDL_KEYUP:
 				k.scancode = event.key.keysym.scancode;
 				k.keycode = event.key.keysym.sym;
-				onKeyRelease(Event(k));
+				onKeyRelease(SDLEvent(k));
 				break;
 			case SDL_QUIT:
 				this->quit();
@@ -47,3 +47,4 @@ void SDLLoop::handleEvents()
 		window->delay(50);
 	}
 }
+
