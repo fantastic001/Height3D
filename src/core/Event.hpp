@@ -17,6 +17,8 @@ public:
 	Event(Key key);
 
 	Key getKey(); 
+
+	bool operator==(Event e); 
 	
 };
 

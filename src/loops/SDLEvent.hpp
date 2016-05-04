@@ -14,6 +14,8 @@ public:
 	SDLEvent(Key k) : Event(k) {}
 
 	bool isKey(SDL_Keycode k);
+
+	static Event asEvent(SDL_Keycode k);
 };
 
 #endif // HEIGHT3D_LOOPS_SDLEVENT_HPP
