@@ -43,6 +43,7 @@ void SDLLoop::handleEvents()
 	if (!isFinished()) {
 		glClearColor ( 0.0, 0.0, 0.0, 1.0 );
 		glClear ( GL_COLOR_BUFFER_BIT );
+		onFrame();
 		window->redraw();
 		window->delay(50);
 	}

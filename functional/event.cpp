@@ -44,6 +44,8 @@ protected:
 		SDL_Quit();
 	}
 
+	void onFrame() {}
+
 
 };
 

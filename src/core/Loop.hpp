@@ -22,6 +22,7 @@ protected:
 	virtual void onKeyPress(Event e) = 0;
 	virtual void onKeyRelease(Event e) = 0;
 	virtual void onQuit() = 0;
+	virtual void onFrame() = 0;
 
 };
 
