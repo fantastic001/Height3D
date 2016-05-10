@@ -16,6 +16,7 @@ SET(core_source_files
 	src/core/SceneObject.cpp
 	src/core/Loop.cpp
 	src/core/Event.cpp
+	src/core/Light.cpp
 )
 
 SET(gui_source_files 

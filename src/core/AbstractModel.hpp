@@ -37,6 +37,11 @@ protected:
 	*/
 	virtual std::vector<float> genTextureCoordinates() = 0; 
 
+	/*
+	For each vertex define normal vector
+	*/
+	virtual std::vector<Vector> genNormals();
+
 
 };
 

@@ -28,6 +28,12 @@ public:
 	
 	void setUniformValue(int location, GLfloat value);
 	void setUniformValue(int location, Matrix m); 
+
+	/*
+	Sets vec4 type uniform variable in shader to specified vector
+	*/
+	void setUniformValue(int location, Vector v);
+
 	void setUniformValue(int samplerLocation); 
 
 	// TODO setUniformValue for vectors and matrices 3x3 4x4 2x2 

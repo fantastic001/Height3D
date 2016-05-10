@@ -81,6 +81,17 @@ void Program::setUniformValue(int location, Matrix m)
 	glUniformMatrix4fv(location, 1, true, mat);
 }
 
+void Program::setUniformValue(int location, Vector v)
+{
+	float a[4] = {
+			v.getX(), 
+			v.getY(), 
+			v.getZ(), 
+			v.getW()
+		};
+	glUniform4fv(location, 4, a);
+}
+
 void Program::setUniformValue(int samplerLocation) 
 {
 	glUniform1f(samplerLocation, 0);

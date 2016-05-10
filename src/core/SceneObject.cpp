@@ -24,6 +24,12 @@ SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, flo
 	iBuffer = new Buffer( GL_ELEMENT_ARRAY_BUFFER );
 }
 
+
+SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, Material material) : SceneObject(_model, _texture, _x, _y, _z, _alpha, _phi, _a, _b, _c) 
+{
+	m_material = material;
+}
+
 SceneObject::~SceneObject() 
 {
 	delete vBuffer; 
@@ -82,6 +88,26 @@ void SceneObject::bindTexture()
 void SceneObject::bindIndexBuffer() 
 {
 	iBuffer->bind();
+}
+
+Vector getAmbientProduct(Light *light) 
+{
+	
+}
+
+Vector getDiffuseProduct(Light *light) 
+{
+	
+}
+
+Vector getSpecularProduct(Light *light) 
+{
+	
+}
+
+Material getMaterial() 
+{
+	
 }
 
 void SceneObject::draw() 

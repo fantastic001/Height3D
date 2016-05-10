@@ -6,6 +6,8 @@
 #include "Program.hpp"
 #include "Buffer.hpp"
 #include "Texture.hpp"
+#include "Material.hpp"
+#include "Light.hpp"
 
 class SceneObject 
 {
@@ -19,8 +21,11 @@ class SceneObject
 	Buffer* cBuffer;
 	Buffer* iBuffer;
 
+	Material m_material;
+
 public:
 	SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c);
+	SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, Material material);
 
 	/*
 	Texture and AbstractModel won't be deleted after SceneObject is deleted
@@ -34,6 +39,24 @@ public:
 	void setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation);
 	void bindTexture();
 	void bindIndexBuffer();
+	
+	/*
+	Returns Vector(R, G, B, 1.0)
+	*/
+	Vector getAmbientProduct(Light *light);
+	/*
+	Returns Vector(R, G, B, 1.0)
+	*/
+	Vector getDiffuseProduct(Light *light);
+	/*
+	Returns Vector(R, G, B, 1.0)
+	*/
+	Vector getSpecularProduct(Light *light);
+
+	/*
+	Returns currently used material 
+	*/
+	Material getMaterial();
 
 	void draw();
 };

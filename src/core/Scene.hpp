@@ -9,6 +9,7 @@
 #include "Matrix.hpp"
 #include "Vector.hpp"
 #include "Program.hpp"
+#include "Light.hpp"
 
 class Scene 
 {
@@ -20,6 +21,9 @@ class Scene
 	float m_cx, m_cy, m_cz;
 	Vector m_direction;
 	Vector m_up;
+
+	std::vector<Light*> lights;
+	std::vector<int> lightPositions;
 
 public:
 	Scene();
@@ -46,7 +50,10 @@ public:
 	static Matrix getPerspectiveMatrix(float x, float y, float z, Vector direction, Vector up, float fovy, float aspect, float near, float far);
 	
 
-	void drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocatio);
+	void drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocatio, bool phong=false);
+	
+	void addLight(Light* l, int lightPositionLocation);
 };
+	
 
 #endif // HEIGHT3D_SCENE_HPP

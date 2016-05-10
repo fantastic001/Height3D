@@ -31,3 +31,8 @@ int AbstractModel::count()
 {
 	return m_count;
 }
+
+std::vector<Vector> AbstractModel::genNormals()
+{
+	return std::vector<Vector>();
+}
