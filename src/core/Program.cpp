@@ -97,6 +97,11 @@ void Program::setUniformValue(int samplerLocation)
 	glUniform1f(samplerLocation, 0);
 }
 
+void Program::setUniformValue(int location, Color c)
+{
+	setUniformValue(location, Vector(c.red, c.green, c.blue, 1.0));
+}
+
 int Program::getUniformLocation(char* name) 
 {
 	return glGetUniformLocation(program_id, name);

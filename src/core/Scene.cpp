@@ -68,7 +68,7 @@ Matrix Scene::getPerspectiveMatrix(float x, float y, float z, Vector direction, 
 	return result;
 }
 	
-void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocation, bool phong)
+void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocation, bool phong, int shininessLocation)
 {
 	prog->setUniformValue(perspectiveMatrixLocation, getPerspectiveMatrix(m_cx, m_cy, m_cz, m_direction, m_up, m_fovy, m_aspect, m_near, m_far));
 	for (int i = 0; i<m_objects.size(); i++) 
@@ -76,9 +76,13 @@ void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int persp
 		SceneObject *obj = m_objects.at(i);
 		if (phong) 
 		{
+			prog->setUniformValue(shininessLocation, obj->getMaterial().shininess);
 			for (int j = 0; j<lights.size(); j++) 
 			{
 				prog->setUniformValue(lightPositions.at(j), lights.at(j)->getPosition());
+				prog->setUniformValue(ambientProducts.at(j), obj->getAmbientProduct(lights.at(j)));
+				prog->setUniformValue(diffuseProducts.at(j), obj->getDiffuseProduct(lights.at(j)));
+				prog->setUniformValue(specularProducts.at(j), obj->getSpecularProduct(lights.at(j)));
 			}
 		}
 		obj->setAttributes(prog, vLocation, texCoordLocation, vertexColorLocation, modelUniformMatrixLocation, samplerLocation);
@@ -88,8 +92,11 @@ void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int persp
 	}
 }
 
-void Scene::addLight(Light* l, int lightPositionLocation) 
+void Scene::addLight(Light* l, int lightPositionLocation, int ambientProductLocation, int diffuseProductLocation, int specularProductLocation)
 {
 	lights.push_back(l);
 	lightPositions.push_back(lightPositionLocation);
+	ambientProducts.push_back(ambientProductLocation);
+	diffuseProducts.push_back(diffuseProductLocation);
+	specularProducts.push_back(specularProductLocation);
 }

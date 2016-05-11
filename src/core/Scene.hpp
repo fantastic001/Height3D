@@ -24,6 +24,9 @@ class Scene
 
 	std::vector<Light*> lights;
 	std::vector<int> lightPositions;
+	std::vector<int> ambientProducts;
+	std::vector<int> diffuseProducts; 
+	std::vector<int> specularProducts;
 
 public:
 	Scene();
@@ -50,9 +53,9 @@ public:
 	static Matrix getPerspectiveMatrix(float x, float y, float z, Vector direction, Vector up, float fovy, float aspect, float near, float far);
 	
 
-	void drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocatio, bool phong=false);
+	void drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocatio, bool phong=false, int shininessLocation = 0);
 	
-	void addLight(Light* l, int lightPositionLocation);
+	void addLight(Light* l, int lightPositionLocation, int ambientProductLocation, int diffuseProductLocation, int specularProductLocation);
 };
 	
 
