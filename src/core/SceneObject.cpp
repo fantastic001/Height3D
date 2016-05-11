@@ -2,6 +2,7 @@
 #include "Buffer.hpp"
 #include "SceneObject.hpp"
 
+#include <cmath>
 
 using namespace std;
 
@@ -92,21 +93,19 @@ void SceneObject::bindIndexBuffer()
 
 Color SceneObject::getAmbientProduct(Light *light) 
 {
-	float r,g,b; 
-	r = light->getAmbient().red * m_material.ka.red;
-	g = light->getAmbient().green * m_material.ka.green;
-	b = light->getAmbient().blue * m_material.ka.blue;
-	return Color(r,g,b);
+	return light->getAmbient() * m_material.ka;
 }
 
 Color SceneObject::getDiffuseProduct(Light *light) 
 {
-	
+	Vector r = light->getPosition() - getPosition();
+	float d = sqrt(r.dot(r));
+	return light->getDiffuse() * m_material.kd * (1.0 / (m_material.alpha + m_material.beta*d + m_material.gamma*d*d));
 }
 
 Color SceneObject::getSpecularProduct(Light *light) 
 {
-	
+	return m_material.ks * light->getSpecular();
 }
 
 Material SceneObject::getMaterial() 

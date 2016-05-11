@@ -11,7 +11,8 @@ typedef struct
 	Color ks;
 	float alpha;
 	float beta;
-	float shineness;
+	float gamma;
+	float shininess;
 } Material;
 
 #endif // HEIGHT3D_MATERIAL_HPP
