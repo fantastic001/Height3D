@@ -19,3 +19,18 @@ Vector Light::getPosition()
 {
 	return Vector(m_x, m_y, m_z, 1.0);
 }
+
+Color Light::getAmbient() 
+{
+	return m_ambient;
+}
+
+Color Light::getDiffuse() 
+{
+	return m_diffuse;
+}
+
+Color Light::getSpecular() 
+{
+	return m_specular;
+}

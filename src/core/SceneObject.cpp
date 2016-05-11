@@ -90,24 +90,28 @@ void SceneObject::bindIndexBuffer()
 	iBuffer->bind();
 }
 
-Vector getAmbientProduct(Light *light) 
+Color SceneObject::getAmbientProduct(Light *light) 
+{
+	float r,g,b; 
+	r = light->getAmbient().red * m_material.ka.red;
+	g = light->getAmbient().green * m_material.ka.green;
+	b = light->getAmbient().blue * m_material.ka.blue;
+	return Color(r,g,b);
+}
+
+Color SceneObject::getDiffuseProduct(Light *light) 
 {
 	
 }
 
-Vector getDiffuseProduct(Light *light) 
+Color SceneObject::getSpecularProduct(Light *light) 
 {
 	
 }
 
-Vector getSpecularProduct(Light *light) 
+Material SceneObject::getMaterial() 
 {
-	
-}
-
-Material getMaterial() 
-{
-	
+	return m_material;
 }
 
 void SceneObject::draw() 

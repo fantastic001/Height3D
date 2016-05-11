@@ -8,6 +8,7 @@
 #include "Texture.hpp"
 #include "Material.hpp"
 #include "Light.hpp"
+#include "Color.hpp"
 
 class SceneObject 
 {
@@ -40,18 +41,9 @@ public:
 	void bindTexture();
 	void bindIndexBuffer();
 	
-	/*
-	Returns Vector(R, G, B, 1.0)
-	*/
-	Vector getAmbientProduct(Light *light);
-	/*
-	Returns Vector(R, G, B, 1.0)
-	*/
-	Vector getDiffuseProduct(Light *light);
-	/*
-	Returns Vector(R, G, B, 1.0)
-	*/
-	Vector getSpecularProduct(Light *light);
+	Color getAmbientProduct(Light *light);
+	Color getDiffuseProduct(Light *light);
+	Color getSpecularProduct(Light *light);
 
 	/*
 	Returns currently used material 

@@ -18,6 +18,10 @@ public:
 		);
 	
 	Vector getPosition();
+
+	Color getAmbient();
+	Color getDiffuse();
+	Color getSpecular();
 };
 
 #endif // HEIGHT3D_LIGHT_HPP
