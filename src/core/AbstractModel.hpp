@@ -10,7 +10,7 @@ class AbstractModel
 
 	int m_count;
 public:
-	void send(Buffer* vertexBuffer, Buffer* indexBuffer, Buffer* colorBuffer, Buffer* textureBuffer); 
+	void send(Buffer* vertexBuffer, Buffer* indexBuffer, Buffer* colorBuffer, Buffer* textureBuffer, Buffer* normalsBuffer = NULL); 
 	int count();
 
 protected:
