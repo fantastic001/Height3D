@@ -23,6 +23,7 @@ public:
 	void sendData(std::vector<float> data);
 	void sendData(std::vector<int> data);
 	void sendData(Vector* data, int n, bool include_w = true);
+	void sendData(std::vector<Vector> data, bool include_w = true);
 	void sendData(float* data, int n);
 	void sendData(int* data, int n);
 };

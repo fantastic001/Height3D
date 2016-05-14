@@ -36,6 +36,11 @@ void Buffer::sendData(Vector* data, int n, bool include_w)
 	sendData(vdata);
 }
 
+void Buffer::sendData(std::vector<Vector> data, bool include_w) 
+{
+	sendData(&data[0], data.size(), include_w);
+}
+
 void Buffer::sendData(float* data, int n) 
 {
 	bind();
