@@ -21,6 +21,7 @@ class SceneObject
 	Buffer* tBuffer;
 	Buffer* cBuffer;
 	Buffer* iBuffer;
+	Buffer* nBuffer;
 
 	Material m_material;
 
@@ -37,7 +38,7 @@ public:
 	void rotate(float _alpha, float _phi);
 
 	Vector getPosition();
-	void setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation);
+	void setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation, int normalLocation = -1);
 	void bindTexture();
 	void bindIndexBuffer();
 	

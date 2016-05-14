@@ -23,6 +23,7 @@ SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, flo
 	cBuffer = new Buffer( GL_ARRAY_BUFFER );
 	tBuffer = new Buffer( GL_ARRAY_BUFFER );
 	iBuffer = new Buffer( GL_ELEMENT_ARRAY_BUFFER );
+	nBuffer = new Buffer( GL_ARRAY_BUFFER );
 }
 
 
@@ -37,6 +38,7 @@ SceneObject::~SceneObject()
 	delete cBuffer; 
 	delete tBuffer; 
 	delete iBuffer; 
+	delete nBuffer;
 }
 	
 void SceneObject::move(Vector t) 
@@ -56,9 +58,14 @@ Vector SceneObject::getPosition()
 {
 	return Vector(m_x, m_y, m_z);
 }
-void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation) 
-{
-	m_model->send(vBuffer, iBuffer, cBuffer, tBuffer);
+void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation, int normalLocation) 
+{	if (normalLocation == -1) {
+		m_model->send(vBuffer, iBuffer, cBuffer, tBuffer);
+	}
+	else 
+	{
+		m_model->send(vBuffer, iBuffer, cBuffer, tBuffer, nBuffer);
+	}
 	
 	vBuffer->bind();
 	prog->setAttributeArray(vLocation, 3);
@@ -68,6 +75,12 @@ void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocati
 	
 	cBuffer->bind();
 	prog->setAttributeArray(vertexColorLocation, 4);
+	
+	if (normalLocation >= 0) 
+	{
+		nBuffer->bind();
+		prog->setAttributeArray(normalLocation, 3);
+	}
 
 	// now we generate our model transformation
 	Matrix S = Matrix::scale(m_a, m_b, m_c);
