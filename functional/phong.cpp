@@ -203,19 +203,35 @@ protected:
 			0.0, 0.0, // angles of rotation 
 			0.5, 0.5, 0.5,  // size
 			Material(
-				Color(1,1,1), // ambiental conductivity
+				Color(0.5,0,0), // ambiental conductivity
 				Color(0.5, 0.5, 0.5), // diffusional conductivity
-				Color(1,0,0), // specular conductivity
+				Color(0,0.5,0.5), // specular conductivity
 				2, 1, 0.2, // diffusion params
 				1 // shininess
 			)
 		));
+		SceneObject *cube2 = scene.addObject(
+			new SceneObject(
+				new CubeModel(),
+				new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB),
+				5.0, 0.0, 0.0,
+				0.0, 0.0, 
+				0.5, 0.5, 0.5,
+				Material(
+					Color(0, 1, 1),
+					Color(1, 0, 0),
+					Color(0,0,0),
+					1, 0, 1,
+					1
+				)
+			)
+		);
 		alpha = 0.0;
 		cout << "Adding light\n";
 		scene.addLight(new Light(0, 2, 0, // position
 				Color(0.5, 0.0, 0.0), // ambient component
-				Color(0.1, 0, 0), // diffuse component
-				Color(0.0, 0.0, 0.0) // specular component
+				Color(0.5, 0.2, 0.1), // diffuse component
+				Color(0.0, 0.8, 0.9) // specular component
 			),
 			lightPositionLocation, ambientProductLocation, diffuseProductLocation, specularProductLocation
 		); 
