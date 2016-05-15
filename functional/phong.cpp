@@ -28,7 +28,7 @@
 
 using namespace std;
 
-class CubeModel : public AbstractModel 
+class PhongCubeModel : public AbstractModel 
 {
 protected: 
 	std::vector<float> genVertices() 
@@ -197,30 +197,30 @@ protected:
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
 		cube = scene.addObject(new SceneObject(
-			new  CubeModel(), // use cube model to draw this object
+			new  PhongCubeModel(), // use cube model to draw this object
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
 			0.0, 0.0, 0.0, // location 
 			0.0, 0.0, // angles of rotation 
 			0.5, 0.5, 0.5,  // size
 			Material(
-				Color(0.5,0,0), // ambiental conductivity
-				Color(0.5, 0.5, 0.5), // diffusional conductivity
-				Color(0,0.5,0.5), // specular conductivity
+				Color(1.0,0,0), // ambiental conductivity
+				Color(1.0, 0, 0), // diffusional conductivity
+				Color(1.0, 0, 0), // specular conductivity
 				2, 1, 0.2, // diffusion params
 				1 // shininess
 			)
 		));
 		SceneObject *cube2 = scene.addObject(
 			new SceneObject(
-				new CubeModel(),
+				new PhongCubeModel(),
 				new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB),
 				5.0, 0.0, 0.0,
 				0.0, 0.0, 
 				0.5, 0.5, 0.5,
 				Material(
-					Color(0, 1, 1),
 					Color(1, 0, 0),
-					Color(0,0,0),
+					Color(1, 0, 0),
+					Color(1,0,0),
 					1, 0, 1,
 					1
 				)
@@ -229,9 +229,9 @@ protected:
 		alpha = 0.0;
 		cout << "Adding light\n";
 		scene.addLight(new Light(0, 2, 0, // position
-				Color(0.5, 0.0, 0.0), // ambient component
-				Color(0.5, 0.2, 0.1), // diffuse component
-				Color(0.0, 0.8, 0.9) // specular component
+				Color(0.2, 0.0, 0.0), // ambient component
+				Color(0.4, 0.0, 0.0), // diffuse component
+				Color(0.4, 0.8, 0.9) // specular component
 			),
 			lightPositionLocation, ambientProductLocation, diffuseProductLocation, specularProductLocation
 		); 
