@@ -89,7 +89,7 @@ void Program::setUniformValue(int location, Vector v)
 			v.getZ(), 
 			v.getW()
 		};
-	glUniform4fv(location, 4, a);
+	glUniform4fv(location, 1, a);
 }
 
 void Program::setUniformValue(int samplerLocation) 
