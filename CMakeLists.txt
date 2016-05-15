@@ -63,6 +63,7 @@ add_executable(test_functional
 	functional/textures.cpp
 	functional/scene.cpp
 	functional/scene_loop.cpp
+	functional/phong.cpp
 	${core_source_files}
 	${gui_source_files}
 )

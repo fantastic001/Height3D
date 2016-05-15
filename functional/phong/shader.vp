@@ -1,0 +1,26 @@
+#version 120
+
+attribute vec4 vPosition;
+attribute vec4 vColor;
+attribute vec2 uv;
+attribute vec4 Normal;
+
+
+varying vec3 N;
+varying vec3 L;
+varying vec3 E;
+
+uniform mat4 model;
+uniform mat4 perspective;
+uniform vec4 LightPosition;
+
+void main()
+{
+  gl_Position = perspective * model * vPosition;
+  
+  N = Normal.xyz;
+  L = LightPosition.xyz - vPosition.xyz;
+  if (LightPosition.w == 0) L = LightPosition.xyz;
+  E = vPosition.xyz;
+
+}
