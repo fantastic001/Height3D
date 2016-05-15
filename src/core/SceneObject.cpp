@@ -76,7 +76,7 @@ void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocati
 	cBuffer->bind();
 	prog->setAttributeArray(vertexColorLocation, 4);
 	
-	if (normalLocation >= 0) 
+	if (normalLocation != -1) 
 	{
 		nBuffer->bind();
 		prog->setAttributeArray(normalLocation, 3);

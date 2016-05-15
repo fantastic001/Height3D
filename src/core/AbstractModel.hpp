@@ -40,7 +40,7 @@ protected:
 	/*
 	For each vertex define normal vector
 	*/
-	virtual std::vector<Vector> genNormals();
+	virtual std::vector<float> genNormals();
 
 
 };

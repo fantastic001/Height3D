@@ -68,7 +68,7 @@ Matrix Scene::getPerspectiveMatrix(float x, float y, float z, Vector direction, 
 	return result;
 }
 	
-void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocation, bool phong, int shininessLocation)
+void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocation, bool phong, int shininessLocation, int normalLocation)
 {
 	prog->setUniformValue(perspectiveMatrixLocation, getPerspectiveMatrix(m_cx, m_cy, m_cz, m_direction, m_up, m_fovy, m_aspect, m_near, m_far));
 	for (int i = 0; i<m_objects.size(); i++) 
@@ -85,7 +85,7 @@ void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int persp
 				prog->setUniformValue(specularProducts.at(j), obj->getSpecularProduct(lights.at(j)));
 			}
 		}
-		obj->setAttributes(prog, vLocation, texCoordLocation, vertexColorLocation, modelUniformMatrixLocation, samplerLocation);
+		obj->setAttributes(prog, vLocation, texCoordLocation, vertexColorLocation, modelUniformMatrixLocation, samplerLocation, normalLocation);
 		obj->bindTexture();
 		obj->bindIndexBuffer();
 		obj->draw();

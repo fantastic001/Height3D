@@ -9,7 +9,7 @@ void AbstractModel::send(Buffer* vertexBuffer, Buffer* indexBuffer, Buffer* colo
 	vertices = genVertices(), 
 	colors = genVertexColors(), 
 	coords = genTextureCoordinates(); 
-	vector<Vector> normals = genNormals();
+	vector<float> normals = genNormals();
 
 	vector<int> indices = genIndices();
 	m_count = indices.size();
@@ -38,7 +38,7 @@ int AbstractModel::count()
 	return m_count;
 }
 
-std::vector<Vector> AbstractModel::genNormals()
+std::vector<float> AbstractModel::genNormals()
 {
-	return std::vector<Vector>();
+	return std::vector<float>();
 }
