@@ -23,6 +23,8 @@ SET(gui_source_files
 	src/gui/Window.cpp
 	src/loops/SDLLoop.cpp
 	src/loops/SDLEvent.cpp
+
+	src/models/SurfaceModel.cpp
 )
 
 find_package(OpenGL)
@@ -64,6 +66,7 @@ add_executable(test_functional
 	functional/scene.cpp
 	functional/scene_loop.cpp
 	functional/phong.cpp
+	functional/surface.cpp
 	${core_source_files}
 	${gui_source_files}
 )
