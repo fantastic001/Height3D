@@ -49,13 +49,13 @@ std::vector<int> SurfaceModel::genIndices()
 	{
 		for (float z = -1.0; z<1.0; z += dz) 
 		{
-			indices.push_back(index + 0);
-			indices.push_back(index + 1);
-			indices.push_back(index + 2);
+			indices.push_back(4*index + 0);
+			indices.push_back(4*index + 1);
+			indices.push_back(4*index + 2);
 
-			indices.push_back(index + 1);
-			indices.push_back(index + 2);
-			indices.push_back(index + 3);
+			indices.push_back(4*index + 1);
+			indices.push_back(4*index + 2);
+			indices.push_back(4*index + 3);
 
 			index++;
 
