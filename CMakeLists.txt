@@ -26,6 +26,8 @@ SET(gui_source_files
 	src/loops/SDLEvent.cpp
 
 	src/models/SurfaceModel.cpp
+
+	src/textures/GradientTextureFactory.cpp
 )
 
 find_package(OpenGL)

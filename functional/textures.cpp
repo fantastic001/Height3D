@@ -17,6 +17,8 @@
 
 #include "gui/Window.hpp"
 
+#include <textures/GradientTextureFactory.hpp>
+
 using namespace std;
 
 BOOST_AUTO_TEST_CASE( textures )
@@ -64,7 +66,7 @@ BOOST_AUTO_TEST_CASE( textures )
 	coords_buffer.bind();
 	program.setAttributeArray(coords_loc, 2);
 
-	unsigned char image[512][512][3];
+	/*unsigned char image[512][512][3];
 	for (int i = 0; i<512; i++) 
 	{
 		for (int j = 0; j<512; j++) 
@@ -75,7 +77,8 @@ BOOST_AUTO_TEST_CASE( textures )
 		}
 	}
 	Texture t(GL_TEXTURE_2D, 512, 512);
-	t.sendData(image);
+	t.sendData(image);*/
+	Texture t = GradientTextureFactory(Color(0, 0, 1.0), Color(1.0, 0, 0), 512, 512).getTexture();
 	t.bind();
 
 	program.setUniformValue(sampler_loc);
