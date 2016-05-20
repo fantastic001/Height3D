@@ -66,14 +66,14 @@ BOOST_AUTO_TEST_CASE( textures )
 	coords_buffer.bind();
 	program.setAttributeArray(coords_loc, 2);
 
-	/*unsigned char image[512][512][3];
+	/*float image[512][512][3];
 	for (int i = 0; i<512; i++) 
 	{
 		for (int j = 0; j<512; j++) 
 		{
-			image[i][j][2] = 255;
+			image[i][j][2] = 1.0;
 			image[i][j][1] = 0;
-			image[i][j][0] = j / 2;
+			image[i][j][0] = j / 512.0;
 		}
 	}
 	Texture t(GL_TEXTURE_2D, 512, 512);

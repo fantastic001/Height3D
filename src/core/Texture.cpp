@@ -28,6 +28,6 @@ void Texture::bind()
 void Texture::sendData(GLvoid *data) 
 {
 	this->bind();
-	glTexImage2D(GL_TEXTURE_2D, 0, m_format, m_width, m_height, 0, m_format, GL_UNSIGNED_BYTE, data);
+	glTexImage2D(GL_TEXTURE_2D, 0, m_format, m_width, m_height, 0, m_format, GL_FLOAT, data);
 	glGenerateMipmap(GL_TEXTURE_2D);
 }
