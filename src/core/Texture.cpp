@@ -14,6 +14,12 @@ Texture::Texture(GLenum texture_type, int width, int height, GLint format)
 	m_format = format;
 }
 
+Texture::Texture(GLenum texture_type, int width, int height, GLvoid* data, GLint format) : Texture(texture_type, width, height, format)
+{
+	m_data = data;
+	this->sendData(data);
+}
+
 void Texture::bind() 
 {
 	glBindTexture(type, id);
