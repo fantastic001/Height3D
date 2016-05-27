@@ -83,7 +83,8 @@ Vector Vector::transpose()
 Vector Vector::normalized() 
 {
 	float l = sqrt(x*x + y*y + z*z);
-	return Vector(x/l, y/l, z/l, w);
+	if (l>0) return Vector(x/l, y/l, z/l, w);
+	else return Vector(0,0,0,0);
 }
 
 float Vector::getX() 
