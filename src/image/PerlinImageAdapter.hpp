@@ -22,6 +22,9 @@ public:
 		m_perlin = p; 
 	}
 	
+	/*
+	Best results are achieved if frequency = 2 * size of Perlin noise
+	*/
 	void saveToFile(char* filename, int frequency)
 	{
 		Mat img(frequency, frequency, CV_8UC1);
