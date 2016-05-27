@@ -28,11 +28,17 @@ SET(gui_source_files
 	src/models/SurfaceModel.cpp
 
 	src/textures/GradientTextureFactory.cpp
+
+	src/noise/Perlin.cpp
+
+	src/interpolation/AbstractInterpolation.cpp
+	src/interpolation/BilinearInterpolation.cpp
 )
 
 find_package(OpenGL)
 find_package(GLEW)
 find_package(SDL2)
+find_package( OpenCV REQUIRED )
 include_directories(${GLEW_INCLUDE_DIRS} src/)
 
 
@@ -46,6 +52,7 @@ add_executable(Tutorial
 target_link_libraries(Tutorial ${GLEW_LIBRARIES})
 target_LINK_LIBRARIES(Tutorial ${OPENGL_LIBRARIES})
 target_link_libraries(Tutorial SDL2)
+link_libraries(${OpenCV_LIBS})
 
 
 
@@ -70,6 +77,7 @@ add_executable(test_functional
 	functional/scene_loop.cpp
 	functional/phong.cpp
 	functional/surface.cpp
+	functional/noise.cpp
 	${core_source_files}
 	${gui_source_files}
 )
