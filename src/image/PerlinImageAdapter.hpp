@@ -5,45 +5,19 @@
 
 #include <noise/Perlin.hpp>
 
-#include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
-
-#include <fstream>
-
-using namespace std;
-using namespace cv;
+#include <vector>
 
 class PerlinImageAdapter 
 {
-	Perlin *m_perlin;
+	std::vector<Perlin*> m_perlins;
+	std::vector<float> m_amplitudes;
 public:
-	PerlinImageAdapter(Perlin *p) 
-	{
-		m_perlin = p; 
-	}
+	void addFrequency(int frequency, float amplitude);
 	
 	/*
 	Best results are achieved if frequency = 2 * size of Perlin noise
 	*/
-	void saveToFile(char* filename, int frequency)
-	{
-		Mat img(frequency, frequency, CV_8UC1);
-		float t = 1.0 / frequency;
-		ofstream f("output.csv");
-		for (int i = 0; i< frequency; i++) 
-		{
-			for (int j = 0; j< frequency; j++) 
-			{
-				float v = m_perlin->getValue(j*t, i*t);
-				f << v;
-				img.at<char>(i,j) = (char) ((int) (127*v + 127));
-				if (j == frequency - 1) f << "\n";
-				else f << ",";
-			}
-		}
-		f.close();
-		imwrite(filename, img);
-	}
+	void saveToFile(char* filename, int frequency);
 
 };
 

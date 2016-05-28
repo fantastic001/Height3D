@@ -33,6 +33,8 @@ SET(gui_source_files
 
 	src/interpolation/AbstractInterpolation.cpp
 	src/interpolation/BilinearInterpolation.cpp
+
+	src/image/PerlinImageAdapter.cpp
 )
 
 find_package(OpenGL)
