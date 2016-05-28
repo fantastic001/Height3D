@@ -8,7 +8,6 @@ using namespace std;
 float lerp(float a0, float a1, float w) 
 {
 	w = w * w * w * (w * (6*w - 15) + 10);
-	w = 0.5 * (w + 1);
 	//if (0.0 > w) w = -w;
 	//if (w > 1.0) w=0.9;
 	return (1.0 - w)*a0 + w*a1;

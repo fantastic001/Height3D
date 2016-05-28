@@ -16,7 +16,7 @@ using namespace std;
 BOOST_AUTO_TEST_CASE( noise )
 {
 	PerlinImageAdapter adapter(new Perlin(16));
-	adapter.saveToFile("img.png", 32);
+	adapter.saveToFile("img.png", 512);
 }
 
 
