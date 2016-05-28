@@ -29,12 +29,11 @@ SET(gui_source_files
 
 	src/textures/GradientTextureFactory.cpp
 
-	src/noise/Perlin.cpp
+	src/noise/perlin/Perlin.cpp
+	src/noise/perlin/PerlinImageAdapter.cpp
 
 	src/interpolation/AbstractInterpolation.cpp
 	src/interpolation/BilinearInterpolation.cpp
-
-	src/image/PerlinImageAdapter.cpp
 )
 
 find_package(OpenGL)

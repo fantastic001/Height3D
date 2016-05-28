@@ -3,7 +3,7 @@
 #define HEIGHT3D_IMAGE_PERLIN_IMAGE_ADAPTER_HPP
 
 
-#include <noise/Perlin.hpp>
+#include "Perlin.hpp"
 
 #include <vector>
 

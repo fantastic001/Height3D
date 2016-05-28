@@ -9,7 +9,7 @@
 
 #include <SDL2/SDL.h>
 
-#include <image/PerlinImageAdapter.hpp>
+#include <noise/perlin/PerlinImageAdapter.hpp>
 
 using namespace std;
 
