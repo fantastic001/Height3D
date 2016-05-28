@@ -31,6 +31,7 @@ SET(gui_source_files
 
 	src/noise/perlin/Perlin.cpp
 	src/noise/perlin/PerlinImageAdapter.cpp
+	src/noise/perlin/PerlinSurfaceModel.cpp
 
 	src/interpolation/AbstractInterpolation.cpp
 	src/interpolation/BilinearInterpolation.cpp
@@ -79,6 +80,7 @@ add_executable(test_functional
 	functional/phong.cpp
 	functional/surface.cpp
 	functional/noise.cpp
+	functional/perlin_surface.cpp
 	${core_source_files}
 	${gui_source_files}
 )
