@@ -6,8 +6,11 @@
 
 using namespace std;
 
-SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c) 
+SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, bool cacheable)
 {
+	m_sent = false;
+	m_cacheable = cacheable;
+
 	m_model = _model;
 	m_texture = _texture; 
 	m_x = _x; 
@@ -27,7 +30,7 @@ SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, flo
 }
 
 
-SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, Material material) : SceneObject(_model, _texture, _x, _y, _z, _alpha, _phi, _a, _b, _c) 
+SceneObject::SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, Material material, bool cacheable) : SceneObject(_model, _texture, _x, _y, _z, _alpha, _phi, _a, _b, _c, cacheable)
 {
 	m_material = material;
 }
@@ -58,14 +61,20 @@ Vector SceneObject::getPosition()
 {
 	return Vector(m_x, m_y, m_z);
 }
-void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation, int normalLocation) 
-{	if (normalLocation == -1) {
-		m_model->send(vBuffer, iBuffer, cBuffer, tBuffer);
-	}
-	else 
+void SceneObject::setAttributes(Program* prog, int vLocation, int texCoordLocation, int vertexColorLocation, int modelLocation, int samplerLocation, int normalLocation)
+{	
+	if (!m_cacheable || (m_cacheable && !m_sent)) 
 	{
-		m_model->send(vBuffer, iBuffer, cBuffer, tBuffer, nBuffer);
+		m_sent = true;
+		if (normalLocation == -1) {
+			m_model->send(vBuffer, iBuffer, cBuffer, tBuffer);
+		}
+		else 
+		{
+			m_model->send(vBuffer, iBuffer, cBuffer, tBuffer, nBuffer);
+		}
 	}
+
 	
 	vBuffer->bind();
 	prog->setAttributeArray(vLocation, 3);

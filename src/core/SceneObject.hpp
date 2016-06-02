@@ -12,6 +12,9 @@
 
 class SceneObject 
 {
+	bool m_sent;
+	bool m_cacheable;
+
 	float m_x,m_y,m_z; 
 	float m_alpha, m_phi; 
 	float m_a,m_b,m_c; 
@@ -26,8 +29,8 @@ class SceneObject
 	Material m_material;
 
 public:
-	SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c);
-	SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, Material material);
+	SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, bool cacheable = true);
+	SceneObject(AbstractModel *_model, Texture *_texture, float _x, float _y, float _z, float _alpha, float _phi, float _a, float _b, float _c, Material material, bool cacheable = true);
 
 	/*
 	Texture and AbstractModel won't be deleted after SceneObject is deleted
