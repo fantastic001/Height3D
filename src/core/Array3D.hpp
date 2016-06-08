@@ -6,8 +6,21 @@ template <typename T> class Array3D
 {
 	T ***m_array;
 	int m_a, m_b, m_c;
-public:
-	Array3D(int a, int b, int c) 
+
+	void destroy() 
+	{
+		for (int i = 0; i<m_a; i++) 
+		{
+			for (int j = 0; j<m_b; j++) 
+			{
+				delete m_array[i][j];
+			}
+			delete m_array[i];
+		}
+		delete m_array; 
+	}
+
+	void create(int a, int b, int c) 
 	{
 		m_a = a;
 		m_b = b; 
@@ -22,22 +35,41 @@ public:
 			}
 		}
 	}
+public:
+
+	Array3D() 
+	{
+	
+	}
+
+	Array3D(int a, int b, int c) 
+	{
+		create(a,b,c);
+	}
 	~Array3D() 
 	{
-		for (int i = 0; i<m_a; i++) 
-		{
-			for (int j = 0; j<m_b; j++) 
-			{
-				delete m_array[i][j];
-			}
-			delete m_array[i];
-		}
-		delete m_array; 
+		destroy();
 	}
 
 	T& operator() (int i, int j, int k) 
 	{
 		return m_array[i][j][k];
+	}
+	
+	Array3D& operator=(Array3D& a) 
+	{
+		destroy();
+		create(a.getSizeX(), a.getSizeY(), a.getSizeZ());
+		for (int i = 0; i<a.getSizeX(); i++) 
+		{
+			for (int j = 0; j<a.getSizeY(); j++) 
+			{
+				for (int k = 0; k<a.getSizeZ(); k++) 
+				{
+					m_array[i][j][k] = a(i,j,k);
+				}
+			}
+		}
 	}
 
 	int getSizeX() {return m_a;}

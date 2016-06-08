@@ -26,6 +26,7 @@ SET(gui_source_files
 	src/loops/SDLEvent.cpp
 
 	src/models/SurfaceModel.cpp
+	src/models/VoxeledModel.cpp
 
 	src/textures/GradientTextureFactory.cpp
 
@@ -82,6 +83,7 @@ add_executable(test_functional
 	functional/surface.cpp
 	functional/noise.cpp
 	functional/perlin_surface.cpp
+	functional/voxel.cpp
 	${core_source_files}
 	${gui_source_files}
 )
