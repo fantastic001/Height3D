@@ -61,6 +61,7 @@ link_libraries(${OpenCV_LIBS})
 add_executable(unittest
 	tests/test_vector.cpp
 	tests/test_matrix.cpp
+	tests/test_3darray.cpp
 	${core_source_files}
 	${gui_source_files}
 )
