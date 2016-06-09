@@ -116,7 +116,7 @@ std::vector<float> VoxeledModel::genVertexColors()
 std::vector<float> VoxeledModel::genTextureCoordinates() 
 {
 
-	std::vector<float> v; 
+	std::vector<float> a;
 
 	for (int i = 0; i<m_array.getSizeX(); i++) 
 	{
@@ -126,19 +126,22 @@ std::vector<float> VoxeledModel::genTextureCoordinates()
 			{
 				if (m_array(i,j,k)) 
 				{
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0);
+					float u,v,u1,v1, x,y,x1,y1;
+					std::tie (u,v,u1,v1,x,y,x1,y1) = voxelTextureCoordinates(i,j,k);
+					a.push_back(u); a.push_back(v);
+					a.push_back(u1); a.push_back(v);
+					a.push_back(u1); a.push_back(v1);
+					a.push_back(u); a.push_back(v1);
+					
+					a.push_back(x); a.push_back(y);
+					a.push_back(x1); a.push_back(y);
+					a.push_back(x1); a.push_back(y1);
+					a.push_back(x); a.push_back(y1);
 				}
 			}
 		}
 	}
-	return v; 
+	return a;
 }
 
 std::vector<float> VoxeledModel::genNormals() 
@@ -154,14 +157,15 @@ std::vector<float> VoxeledModel::genNormals()
 			{
 				if (m_array(i,j,k)) 
 				{
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0); v.push_back(0);
+					Vector n = voxelNormal(i,j,k).normalized();
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
+					v.push_back(n.getX()); v.push_back(n.getY()); v.push_back(n.getZ());
 				}
 			}
 		}

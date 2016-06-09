@@ -44,6 +44,15 @@ protected:
 		if (i==0) return Color(1.0, 1.0, 0, 1.0);
 		return Color(1.0, 0,0,1.0);
 	}
+	tuple<float, float, float, float, float, float, float, float> voxelTextureCoordinates(int i, int j, int k) 
+	{
+		return tuple<float, float, float, float, float, float, float, float>(0,0,0,0,0,0,0,0);
+	}
+
+	Vector voxelNormal(int i, int j, int k) 
+	{
+		return Vector(1.0,0,0);
+	}
 };
 
 class MyVoxeledModelTestLoop : public SDLLoop 

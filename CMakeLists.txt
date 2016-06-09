@@ -38,6 +38,8 @@ SET(gui_source_files
 	src/interpolation/BilinearInterpolation.cpp
 )
 
+add_compile_options(-std=c++11)
+
 find_package(OpenGL)
 find_package(GLEW)
 find_package(SDL2)
