@@ -31,6 +31,20 @@
 using namespace std;
 
 
+class CubeVoxel : public VoxeledModel 
+{
+public:
+	CubeVoxel(Array3D<bool> & a) : VoxeledModel(a) 
+	{
+
+	}
+protected:
+	Color voxelColor(int i, int j, int k) 
+	{
+		return Color(1.0, 0,0,1.0);
+	}
+};
+
 class MyVoxeledModelTestLoop : public SDLLoop 
 {
 
@@ -102,9 +116,15 @@ protected:
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
 		
 
-		Array3D<bool> voxels(1,1,1);
+		Array3D<bool> voxels(10,10,10);
+		for (int i = 0; i<10; i++) 
+			for (int j = 0; j<10; j++) 
+				for (int k = 0; k<10; k++) 
+					if ((i==0&&k==0) || (i==0&&k==9) || (i==9&&k==0) || (i==9&&k==9)) 
+						voxels(i,j,k) = true;
+					else voxels(i,j,k) = false; 
 		voxels(0,0,0) = true;
-		VoxeledModel* model = new VoxeledModel(voxels);
+		VoxeledModel* model = new CubeVoxel(voxels);
 		cube = scene.addObject(new SceneObject(
 			model, 
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 

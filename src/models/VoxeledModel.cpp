@@ -57,23 +57,23 @@ std::vector<int> VoxeledModel::genIndices()
 			{
 				if (m_array(i,j,k)) 
 				{
-					v.push_back(36*start + 0); v.push_back(36*start + 1); v.push_back(36*start + 2);
-					v.push_back(36*start + 0); v.push_back(36*start + 3); v.push_back(36*start + 2);
+					v.push_back(8*start + 0); v.push_back(8*start + 1); v.push_back(8*start + 2);
+					v.push_back(8*start + 0); v.push_back(8*start + 3); v.push_back(8*start + 2);
 					
-					v.push_back(36*start + 0); v.push_back(36*start + 3); v.push_back(36*start + 4);
-					v.push_back(36*start + 3); v.push_back(36*start + 4); v.push_back(36*start + 7);
+					v.push_back(8*start + 0); v.push_back(8*start + 3); v.push_back(8*start + 4);
+					v.push_back(8*start + 3); v.push_back(8*start + 4); v.push_back(8*start + 7);
 
-					v.push_back(36*start + 1); v.push_back(36*start + 2); v.push_back(36*start + 5);
-					v.push_back(36*start + 2); v.push_back(36*start + 5); v.push_back(36*start + 6);
+					v.push_back(8*start + 1); v.push_back(8*start + 2); v.push_back(8*start + 5);
+					v.push_back(8*start + 2); v.push_back(8*start + 5); v.push_back(8*start + 6);
 
-					v.push_back(36*start + 0); v.push_back(36*start + 1); v.push_back(36*start + 5);
-					v.push_back(36*start + 0); v.push_back(36*start + 4); v.push_back(36*start + 5);
+					v.push_back(8*start + 0); v.push_back(8*start + 1); v.push_back(8*start + 5);
+					v.push_back(8*start + 0); v.push_back(8*start + 4); v.push_back(8*start + 5);
 					
-					v.push_back(36*start + 2); v.push_back(36*start + 3); v.push_back(36*start + 6);
-					v.push_back(36*start + 3); v.push_back(36*start + 6); v.push_back(36*start + 7);
+					v.push_back(8*start + 2); v.push_back(8*start + 3); v.push_back(8*start + 6);
+					v.push_back(8*start + 3); v.push_back(8*start + 6); v.push_back(8*start + 7);
 
-					v.push_back(36*start + 4); v.push_back(36*start + 5); v.push_back(36*start + 6);
-					v.push_back(36*start + 4); v.push_back(36*start + 6); v.push_back(36*start + 7);
+					v.push_back(8*start + 4); v.push_back(8*start + 5); v.push_back(8*start + 6);
+					v.push_back(8*start + 4); v.push_back(8*start + 6); v.push_back(8*start + 7);
 
 					start++;
 				}
@@ -96,14 +96,15 @@ std::vector<float> VoxeledModel::genVertexColors()
 			{
 				if (m_array(i,j,k)) 
 				{
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
-					v.push_back(1.0); v.push_back(0.0); v.push_back(0); v.push_back(0);
+					Color c = voxelColor(i,j,k);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
+					v.push_back(c.red); v.push_back(c.green); v.push_back(c.blue); v.push_back(c.alpha);
 				}
 			}
 		}

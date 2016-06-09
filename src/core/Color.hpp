@@ -7,11 +7,20 @@ typedef struct Color
 	float red; 
 	float green; 
 	float blue;
+	float alpha;
 	Color(float r, float g, float b) 
 	{
 		red = r; 
 		green = g; 
 		blue = b;
+		alpha = 1.0;
+	}
+	Color(float r, float g, float b, float a) 
+	{
+		red = r; 
+		green = g; 
+		blue = b;
+		alpha = a;
 	}
 	Color() 
 	{
