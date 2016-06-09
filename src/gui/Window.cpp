@@ -1,6 +1,8 @@
 
 #include "Window.hpp"
 
+#include <core/common.hpp>
+
 Window::Window(int width, int height, const char* name) 
 {
 	SDL_Init(SDL_INIT_VIDEO);
@@ -16,6 +18,10 @@ Window::Window(int width, int height, const char* name)
 	maincontext = SDL_GL_CreateContext(mainwindow);
 	
 	SDL_GL_SetSwapInterval(1);
+	
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+
 }
 
 Window::~Window() 
@@ -25,6 +31,7 @@ Window::~Window()
 
 void Window::redraw() 
 {
+	glClear(GL_DEPTH_BUFFER_BIT);
 	SDL_GL_SwapWindow(mainwindow);
 }
 
