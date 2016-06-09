@@ -28,7 +28,7 @@ protected:
 	virtual std::vector<int> genIndices() = 0; 
 	
 	/*
-	Should return color values for each vertex from vertex array. Size has to be (vertexCount) * 3
+	Should return color values for each vertex from vertex array. Size has to be (vertexCount) * 4
 	*/
 	virtual std::vector<float> genVertexColors() = 0; 
 	
