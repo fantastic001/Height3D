@@ -41,6 +41,7 @@ public:
 protected:
 	Color voxelColor(int i, int j, int k) 
 	{
+		if (i==0) return Color(1.0, 1.0, 0, 1.0);
 		return Color(1.0, 0,0,1.0);
 	}
 };
