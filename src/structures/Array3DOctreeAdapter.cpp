@@ -25,7 +25,7 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 	return node; 
 }
 
-Array3DOctreeAdapter::Array3DOctreeAdapter(Array3D<bool> arr)
+Array3DOctreeAdapter::Array3DOctreeAdapter(Array3D<bool> &arr)
 {
 	m_root = NULL;
 

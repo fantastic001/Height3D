@@ -18,7 +18,7 @@ public:
 	node is active if arr()i,j,k is true 
 	position is indices (i,j,k) 
 	*/
-	Array3DOctreeAdapter(Array3D<bool> arr); 
+	Array3DOctreeAdapter(Array3D<bool> &arr); 
 
 	Octree* getRoot();
 };
