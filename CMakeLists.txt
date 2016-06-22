@@ -36,6 +36,9 @@ SET(gui_source_files
 
 	src/interpolation/AbstractInterpolation.cpp
 	src/interpolation/BilinearInterpolation.cpp
+
+	src/structures/Octree.cpp
+	src/structures/Array3DOctreeAdapter.cpp
 )
 
 add_compile_options(-std=c++11)
@@ -65,6 +68,7 @@ add_executable(unittest
 	tests/test_vector.cpp
 	tests/test_matrix.cpp
 	tests/test_3darray.cpp
+	tests/test_array_octree_adapter.cpp
 	${core_source_files}
 	${gui_source_files}
 )

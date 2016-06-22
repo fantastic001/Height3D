@@ -17,6 +17,8 @@ public:
 	Vector& operator= (Vector v); 
 	Vector& operator+ (Vector v);
 	Vector& operator- (Vector v); 
+	bool operator==(Vector v);
+	bool operator!=(Vector v);
 	
 	float dot(Vector v); 
 

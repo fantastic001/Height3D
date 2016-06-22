@@ -59,6 +59,16 @@ Vector& Vector::operator- (Vector v)
 {
 	return *(new Vector(x - v.getX(), y - v.getY(), z - v.getZ(), w - v.getW(), column));
 }
+
+bool Vector::operator==(Vector v) 
+{
+	return v.getX() == getX() && v.getY() == getY() && v.getZ() == getZ() && v.getW() == getW();
+}
+
+bool Vector::operator!=(Vector v) 
+{
+	return v.getX() != getX() || v.getY() != getY() || v.getZ() != getZ() || v.getW() == getW();
+}
 	
 float Vector::dot(Vector v) 
 {
