@@ -2,7 +2,7 @@
 #include "Array3DOctreeAdapter.hpp" 
 #include <cstdlib>
 
-Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> arr, int startx, int endx, int starty, int endy, int startz, int endz) 
+Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz) 
 {
 	if (endx <= startx || endy <= starty && endz <= startz) return NULL; 
 	int x = (startx + endx) / 2; 
