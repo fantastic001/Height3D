@@ -51,15 +51,6 @@ include_directories(${GLEW_INCLUDE_DIRS} src/)
 
 
 
-add_executable(Tutorial
-	try.cpp
-	${core_source_files}
-	${gui_source_files}
-	
-)
-target_link_libraries(Tutorial ${GLEW_LIBRARIES})
-target_LINK_LIBRARIES(Tutorial ${OPENGL_LIBRARIES})
-target_link_libraries(Tutorial SDL2)
 link_libraries(${OpenCV_LIBS})
 
 
