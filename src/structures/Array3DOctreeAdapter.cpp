@@ -4,11 +4,11 @@
 
 Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz) 
 {
-	if (endx <= startx || endy <= starty || endz <= startz) return NULL; 
+	if (endx <= startx && endy <= starty && endz <= startz) return NULL; 
 	int x = (startx + endx) / 2; 
 	int y = (starty + endy) / 2; 
 	int z = (startz + endz) / 2;
-	if (x >= arr.getSizeX() || y >= arr.getSizeY() || z >= arr.getSizeZ()) 
+	if (x >= arr.getSizeX() || y >= arr.getSizeY() || z >= arr.getSizeZ())
 	{
 		return NULL;
 	}
@@ -16,7 +16,7 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 	bool active = arr(x,y,z);
 	float value = active ? 1.0 : 0.0;
 	Octree *node = new Octree(position,value, active);
-	if (endx - startx == 1 || endy - starty == 1 || endz - startz == 1) 
+	if (endx - startx == 1 && endy - starty == 1 && endz - startz == 1) 
 	{
 		
 		node->setChild(false, true, false, NULL);
