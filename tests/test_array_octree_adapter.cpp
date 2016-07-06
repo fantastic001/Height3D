@@ -15,4 +15,5 @@ BOOST_AUTO_TEST_CASE( array_octree_test )
 	OctreeNode* root = adapter.getRoot();
 	BOOST_CHECK(root->active());
 	BOOST_CHECK(! root->getChild(true, true, true)->active());
+	BOOST_CHECK(! root->getChild(true, true, true)->getChild(true, true, true) == NULL);
 }
