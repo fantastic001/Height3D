@@ -8,7 +8,10 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 	int x = (startx + endx) / 2; 
 	int y = (starty + endy) / 2; 
 	int z = (startz + endz) / 2;
-
+	if (x >= arr.getSizeX() || y >= arr.getSizeY() || z >= arr.getSizeZ()) 
+	{
+		return NULL;
+	}
 	Vector position((float) x, (float) y, (float) z);
 	bool active = arr(x,y,z);
 	float value = active ? 1.0 : 0.0;
