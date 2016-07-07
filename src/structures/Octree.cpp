@@ -64,3 +64,8 @@ Octree* Octree::getChild(bool right, bool up, bool front)
 {
 	return m_childs[getIndex(right, up, front)];
 }
+
+Octree* Octree::getChild(int index) 
+{
+	return m_childs[index];
+}
