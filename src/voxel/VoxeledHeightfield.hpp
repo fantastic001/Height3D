@@ -12,6 +12,8 @@ public:
 	Array3D<bool> generateArray(int precision);
 	Octree* generateOctree(int depth);
 
+	bool isActive(int i, int j, int k);
+
 protected:
 	/*
 	Specified values have to be between -1 and 1 and returned value should be between -1 and 1 
