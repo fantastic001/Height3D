@@ -8,7 +8,7 @@
 
 void traverse_octree(int &count, OctreeNode* node) 
 {
-	count++;
+	if (! node->hasChilds()) count++;
 	if (node->getChild(false, false, false) != NULL) traverse_octree(count, node->getChild(false, false, false));
 	if (node->getChild(false, false, true) != NULL) traverse_octree(count, node->getChild(false, false, true));
 	if (node->getChild(false, true, false) != NULL) traverse_octree(count, node->getChild(false, true, false));
@@ -22,21 +22,18 @@ void traverse_octree(int &count, OctreeNode* node)
 
 BOOST_AUTO_TEST_CASE( array_octree_test )
 {
-	Array3D<bool> a(3,3,3);
-	for (int i = 0; i<3; i++) for (int j = 0; j<3; j++) for (int k = 0; k<3; k++) a(i,j,k) = false; 
-	a(1,1,1) = true;
+	Array3D<bool> a(4,4,4);
+	for (int i = 0; i<4; i++) for (int j = 0; j<4; j++) for (int k = 0; k<4; k++) a(i,j,k) = false; 
+	a(2,2,2) = true;
 	Array3DOctreeAdapter adapter(a);
 	OctreeNode* root = adapter.getRoot();
-	BOOST_CHECK(root->active());
-	BOOST_CHECK( !root->getChild(true, true, true)->active());
-	BOOST_CHECK( root->getChild(true, true, true)->getChild(true, true, true) == NULL);
 	
 	int count = 0; 
 	traverse_octree(count, root); 
-	BOOST_CHECK_EQUAL(count, 27);
+	BOOST_CHECK_EQUAL(count, 64);
 }
 
-BOOST_AUTO_TEST_CASE( array_octree_compress_test )
+/*BOOST_AUTO_TEST_CASE( array_octree_compress_test )
 {
 	Array3D<bool> a(3,3,3);
 	for (int i = 0; i<3; i++) for (int j = 0; j<3; j++) for (int k = 0; k<3; k++) a(i,j,k) = false; 
@@ -49,22 +46,19 @@ BOOST_AUTO_TEST_CASE( array_octree_compress_test )
 	int count = 0; 
 	traverse_octree(count, root); 
 	BOOST_CHECK_EQUAL(count, 9);
-}
+}*/
 
 BOOST_AUTO_TEST_CASE( array_octree_large_test )
 {
 	int i,j,k;
 
-	Array3D<bool> a(5,5,5);
-	for (i = 0; i<3; i++) for (j = 0; j<3; j++) for (k = 0; k<3; k++) a(i,j,k) = false; 
+	Array3D<bool> a(8,8,8);
+	for (i = 0; i<8; i++) for (j = 0; j<8; j++) for (k = 0; k<8; k++) a(i,j,k) = false; 
 	a(2,2,2) = true;
 	Array3DOctreeAdapter adapter(a);
 	OctreeNode* root = adapter.getRoot();
-	BOOST_CHECK(root->active());
-	BOOST_CHECK(! root->getChild(true, true, true)->active());
-	BOOST_CHECK( root->getChild(true, true, true)->getChild(true, true, true) != NULL);
 
 	int count = 0; 
 	traverse_octree(count, root); 
-	BOOST_CHECK_EQUAL(count, 125);
+	BOOST_CHECK_EQUAL(count, 512);
 }

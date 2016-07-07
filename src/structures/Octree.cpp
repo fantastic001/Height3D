@@ -81,3 +81,9 @@ void Octree::destroyChild(int index)
 	m_childs[index] = NULL;
 }
 
+bool Octree::hasChilds() 
+{
+	bool ok = true; 
+	for (int i = 0; i<8; i++) ok = ok && m_childs[i] == NULL;
+	return !ok;
+}

@@ -5,41 +5,33 @@
 
 Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz) 
 {
-	if (endx <= startx && endy <= starty && endz <= startz) return NULL; 
+	if (endx == startx+1 && endy == starty+1 && endz == startz+1) 
+	{	
+		return new OctreeNode(
+			Vector(startx, starty, startz), 
+			arr(startx, starty, startz) ? 1.0 : 0.0, 
+			arr(startx, starty, startz)
+		); 
+	}
 	int x = (startx + endx) / 2; 
 	int y = (starty + endy) / 2; 
 	int z = (startz + endz) / 2;
-	if (x >= arr.getSizeX() || y >= arr.getSizeY() || z >= arr.getSizeZ())
-	{
-		return NULL;
-	}
-	if (m_added[z * arr.getSizeX() * arr.getSizeY() + y * arr.getSizeX() + x]) 
-	{
-		return NULL;
-	}
-	else 
-	{
-		m_added[z * arr.getSizeX() * arr.getSizeY() + y * arr.getSizeX() + x] = true; 
-	}
+	
 	Vector position((float) x, (float) y, (float) z);
 	bool active = arr(x,y,z);
 	float value = active ? 1.0 : 0.0;
 	Octree *node = new Octree(position,value, active);
-	if (endx - startx == 1 && endy - starty == 1 && endz - startz == 1) 
-	{
-		for (int i = 0; i<8; i++) node->setChild(i, NULL);
-	}
-	else {
-		node->setChild(false, false, false, addChilds(arr, startx, x, starty, y, startz, z));
-		node->setChild(false, false, true, addChilds(arr, startx, x, starty, y, z,  endz));
-		node->setChild(false, true, false, addChilds(arr, startx, x, y, endy, startz, z));
-		node->setChild(false, true, true, addChilds(arr, startx, x, y, endy, z, endz));
-		
-		node->setChild(true, false, false, addChilds(arr, x, endx, starty, y, startz, z));
-		node->setChild(true, false, true, addChilds(arr, x, endx, starty, y, z,  endz));
-		node->setChild(true, true, false, addChilds(arr, x, endx, y, endy, startz, z));
-		node->setChild(true, true, true, addChilds(arr, x, endx, y, endy, z, endz));
-	}
+	
+	node->setChild(false, false, false, addChilds(arr, startx, x, starty, y, startz, z));
+	node->setChild(false, false, true, addChilds(arr, startx, x, starty, y, z,  endz));
+	node->setChild(false, true, false, addChilds(arr, startx, x, y, endy, startz, z));
+	node->setChild(false, true, true, addChilds(arr, startx, x, y, endy, z, endz));
+	
+	node->setChild(true, false, false, addChilds(arr, x, endx, starty, y, startz, z));
+	node->setChild(true, false, true, addChilds(arr, x, endx, starty, y, z,  endz));
+	node->setChild(true, true, false, addChilds(arr, x, endx, y, endy, startz, z));
+	node->setChild(true, true, true, addChilds(arr, x, endx, y, endy, z, endz));
+	
 	if (m_compress) 
 	{
 		bool same_all = true;

@@ -34,6 +34,8 @@ public:
 	Octree* getChild(int index);
 
 	void destroyChild(int index);
+
+	bool hasChilds();
 };
 
 typedef Octree OctreeNode; 
