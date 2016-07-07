@@ -54,7 +54,12 @@ Octree* Octree::findNodeByPosition(Vector position)
 
 Octree* Octree::setChild(bool right, bool up, bool front, Octree* node) 
 {
-	int i = getIndex(right, up, front);
+	return setChild(getIndex(right, up, front), node);
+}
+
+Octree* Octree::setChild(int index, Octree* node) 
+{
+	int i = index;
 	if (m_childs[i] != NULL) delete m_childs[i];
 	m_childs[i] = node;
 	return m_childs[i];
