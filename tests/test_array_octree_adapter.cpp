@@ -6,18 +6,6 @@
 #include <core/Array3D.hpp>
 #include <structures/Array3DOctreeAdapter.hpp>
 
-BOOST_AUTO_TEST_CASE( array_octree_test )
-{
-	Array3D<bool> a(3,3,3);
-	for (int i = 0; i<3; i++) for (int j = 0; j<3; j++) for (int k = 0; k<3; k++) a(i,j,k) = false; 
-	a(1,1,1) = true;
-	Array3DOctreeAdapter adapter(a);
-	OctreeNode* root = adapter.getRoot();
-	BOOST_CHECK(root->active());
-	BOOST_CHECK( !root->getChild(true, true, true)->active());
-	BOOST_CHECK( root->getChild(true, true, true)->getChild(true, true, true) == NULL);
-}
-
 void traverse_octree(int &count, OctreeNode* node) 
 {
 	count++;
@@ -32,6 +20,22 @@ void traverse_octree(int &count, OctreeNode* node)
 	if (node->getChild(true, true, true) != NULL) traverse_octree(count, node->getChild(true, true, true));
 }
 
+BOOST_AUTO_TEST_CASE( array_octree_test )
+{
+	Array3D<bool> a(3,3,3);
+	for (int i = 0; i<3; i++) for (int j = 0; j<3; j++) for (int k = 0; k<3; k++) a(i,j,k) = false; 
+	a(1,1,1) = true;
+	Array3DOctreeAdapter adapter(a);
+	OctreeNode* root = adapter.getRoot();
+	BOOST_CHECK(root->active());
+	BOOST_CHECK( !root->getChild(true, true, true)->active());
+	BOOST_CHECK( root->getChild(true, true, true)->getChild(true, true, true) == NULL);
+	
+	int count = 0; 
+	traverse_octree(count, root); 
+	BOOST_CHECK_EQUAL(count, 27);
+}
+
 BOOST_AUTO_TEST_CASE( array_octree_large_test )
 {
 	int i,j,k;
@@ -43,7 +47,7 @@ BOOST_AUTO_TEST_CASE( array_octree_large_test )
 	OctreeNode* root = adapter.getRoot();
 	BOOST_CHECK(root->active());
 	BOOST_CHECK(! root->getChild(true, true, true)->active());
-	BOOST_CHECK( root->getChild(true, true, true)->getChild(true, true, true) == NULL);
+	BOOST_CHECK( root->getChild(true, true, true)->getChild(true, true, true) != NULL);
 
 	int count = 0; 
 	traverse_octree(count, root); 
