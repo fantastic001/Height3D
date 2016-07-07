@@ -74,3 +74,10 @@ Octree* Octree::getChild(int index)
 {
 	return m_childs[index];
 }
+
+void Octree::destroyChild(int index) 
+{
+	delete m_childs[index];
+	m_childs[index] = NULL;
+}
+

@@ -36,6 +36,21 @@ BOOST_AUTO_TEST_CASE( array_octree_test )
 	BOOST_CHECK_EQUAL(count, 27);
 }
 
+BOOST_AUTO_TEST_CASE( array_octree_compress_test )
+{
+	Array3D<bool> a(3,3,3);
+	for (int i = 0; i<3; i++) for (int j = 0; j<3; j++) for (int k = 0; k<3; k++) a(i,j,k) = false; 
+	a(1,1,1) = true;
+	Array3DOctreeAdapter adapter(a, true);
+	OctreeNode* root = adapter.getRoot();
+	BOOST_CHECK(root->active());
+	BOOST_CHECK( !root->getChild(true, true, true)->active());
+	
+	int count = 0; 
+	traverse_octree(count, root); 
+	BOOST_CHECK_EQUAL(count, 9);
+}
+
 BOOST_AUTO_TEST_CASE( array_octree_large_test )
 {
 	int i,j,k;

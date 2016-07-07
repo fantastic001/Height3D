@@ -27,17 +27,7 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 	Octree *node = new Octree(position,value, active);
 	if (endx - startx == 1 && endy - starty == 1 && endz - startz == 1) 
 	{
-		
-		node->setChild(false, true, false, NULL);
-		node->setChild(false, true, true, NULL);
-		node->setChild(false, false, false, NULL);
-		node->setChild(false, false, true, NULL);
-
-		node->setChild(true, true, false, NULL);
-		node->setChild(true, true, true, NULL);
-		node->setChild(true, false, false, NULL);
-		node->setChild(true, false, true, NULL);
-
+		for (int i = 0; i<8; i++) node->setChild(i, NULL);
 	}
 	else {
 		node->setChild(false, false, false, addChilds(arr, startx, x, starty, y, startz, z));
@@ -50,11 +40,28 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 		node->setChild(true, true, false, addChilds(arr, x, endx, y, endy, startz, z));
 		node->setChild(true, true, true, addChilds(arr, x, endx, y, endy, z, endz));
 	}
+	if (m_compress) 
+	{
+		bool same_all = true;
+		int i;
+		for (i = 0; i<8; i++) 
+		{
+			if (node->getChild(i) != NULL) same_all = same_all && active == node->getChild(i)->active(); 
+		}
+		if (same_all) 
+		{
+			for (i=0; i<8; i++) 
+			{
+				if (node->getChild(i) != NULL) node->destroyChild(i);
+			}
+		}
+	}
 	return node; 
 }
 
-Array3DOctreeAdapter::Array3DOctreeAdapter(Array3D<bool> &arr)
+Array3DOctreeAdapter::Array3DOctreeAdapter(Array3D<bool> &arr, bool compress)
 {
+	m_compress = compress;
 	m_root = NULL;
 	m_added = new bool[arr.getSizeX() * arr.getSizeY() * arr.getSizeZ()];
 	memset(m_added, 0, arr.getSizeX() * arr.getSizeY() * arr.getSizeZ());

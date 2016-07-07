@@ -32,6 +32,8 @@ public:
 	Octree* setChild(int index, Octree* node);
 	Octree* getChild(bool right, bool up, bool front);
 	Octree* getChild(int index);
+
+	void destroyChild(int index);
 };
 
 typedef Octree OctreeNode; 

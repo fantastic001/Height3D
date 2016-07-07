@@ -11,6 +11,7 @@ class Array3DOctreeAdapter
 
 	Octree* addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz);
 	bool* m_added; 
+	bool m_compress;
 public: 
 	/*
 	Compresses given array to octree 
@@ -19,7 +20,7 @@ public:
 	node is active if arr()i,j,k is true 
 	position is indices (i,j,k) 
 	*/
-	Array3DOctreeAdapter(Array3D<bool> &arr); 
+	Array3DOctreeAdapter(Array3D<bool> &arr, bool compress=false);
 
 	Octree* getRoot();
 };
