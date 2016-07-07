@@ -10,6 +10,7 @@ class Array3DOctreeAdapter
 	Octree* m_root; 
 
 	Octree* addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz);
+	bool* m_added; 
 public: 
 	/*
 	Compresses given array to octree 

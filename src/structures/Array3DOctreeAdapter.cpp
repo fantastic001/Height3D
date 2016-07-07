@@ -1,6 +1,7 @@
 
 #include "Array3DOctreeAdapter.hpp" 
 #include <cstdlib>
+#include <cstring>
 
 Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz) 
 {
@@ -11,6 +12,14 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 	if (x >= arr.getSizeX() || y >= arr.getSizeY() || z >= arr.getSizeZ())
 	{
 		return NULL;
+	}
+	if (m_added[z * arr.getSizeX() * arr.getSizeY() + y * arr.getSizeX() + x]) 
+	{
+		return NULL;
+	}
+	else 
+	{
+		m_added[z * arr.getSizeX() * arr.getSizeY() + y * arr.getSizeX() + x] = true; 
 	}
 	Vector position((float) x, (float) y, (float) z);
 	bool active = arr(x,y,z);
@@ -32,14 +41,14 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 	}
 	else {
 		node->setChild(false, false, false, addChilds(arr, startx, x, starty, y, startz, z));
-		node->setChild(false, false, true, addChilds(arr, startx, x, starty, y, z+1,  endz));
-		node->setChild(false, true, false, addChilds(arr, startx, x, y+1, endy, startz, z));
-		node->setChild(false, true, true, addChilds(arr, startx, x, y+1, endy, z+1, endz));
+		node->setChild(false, false, true, addChilds(arr, startx, x, starty, y, z,  endz));
+		node->setChild(false, true, false, addChilds(arr, startx, x, y, endy, startz, z));
+		node->setChild(false, true, true, addChilds(arr, startx, x, y, endy, z, endz));
 		
-		node->setChild(true, false, false, addChilds(arr, x+1, endx, starty, y, startz, z));
-		node->setChild(true, false, true, addChilds(arr, x+1, endx, starty, y, z+1,  endz));
-		node->setChild(true, true, false, addChilds(arr, x+1, endx, y+1, endy, startz, z));
-		node->setChild(true, true, true, addChilds(arr, x+1, endx, y+1, endy, z+1, endz));
+		node->setChild(true, false, false, addChilds(arr, x, endx, starty, y, startz, z));
+		node->setChild(true, false, true, addChilds(arr, x, endx, starty, y, z,  endz));
+		node->setChild(true, true, false, addChilds(arr, x, endx, y, endy, startz, z));
+		node->setChild(true, true, true, addChilds(arr, x, endx, y, endy, z, endz));
 	}
 	return node; 
 }
@@ -47,8 +56,8 @@ Octree* Array3DOctreeAdapter::addChilds(Array3D<bool> &arr, int startx, int endx
 Array3DOctreeAdapter::Array3DOctreeAdapter(Array3D<bool> &arr)
 {
 	m_root = NULL;
-
-
+	m_added = new bool[arr.getSizeX() * arr.getSizeY() * arr.getSizeZ()];
+	memset(m_added, 0, arr.getSizeX() * arr.getSizeY() * arr.getSizeZ());
 	int sizex = arr.getSizeX();
 	int sizey = arr.getSizeY(); 
 	int sizez = arr.getSizeZ();
