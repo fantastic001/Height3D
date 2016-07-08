@@ -40,6 +40,7 @@ SET(gui_source_files
 	src/structures/Octree.cpp
 	src/structures/Array3DOctreeAdapter.cpp
 	src/structures/ImplicitOctreeGenerator.cpp
+	src/structures/OctreeModel.cpp
 
 	src/voxel/VoxeledHeightfield.cpp
 )
@@ -85,6 +86,7 @@ add_executable(test_functional
 	functional/perlin_surface.cpp
 	functional/voxel.cpp
 	functional/voxeled_terrain.cpp
+	functional/octree_terrain.cpp
 	${core_source_files}
 	${gui_source_files}
 )

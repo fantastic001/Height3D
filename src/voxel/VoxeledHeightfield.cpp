@@ -21,6 +21,7 @@ Array3D<bool> VoxeledHeightfield::generateArray(int precision)
 
 Octree* VoxeledHeightfield::generateOctree(int precision) 
 {
+	m_precision = precision;
 	generate(precision, precision, precision, true);
 	return getRoot();
 }
