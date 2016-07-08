@@ -9,17 +9,22 @@ class Octree
 	Vector m_position;
 	bool m_active;
 	float m_value; 
+	Vector m_start, m_end;
 	Octree* m_childs[8];
 
 	int getIndex(bool right, bool up, bool front);
 
 public:
 	Octree(Vector position, float value, bool active);
+	Octree(Vector position, float value, bool active, Vector start, Vector end);
 	~Octree();
 
 	bool active();
 	float value();
 	Vector position();
+	
+	Vector start();
+	Vector end();
 	
 	/*
 	Do DFS starting from the root node (this object) and searching for node with given position

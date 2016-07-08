@@ -10,7 +10,9 @@ Octree* ImplicitOctreeGenerator::addChilds(int startx, int endx, int starty, int
 		return new OctreeNode(
 			Vector(startx, starty, startz), 
 			isActive(startx, starty, startz) ? 1.0 : 0.0, 
-			isActive(startx, starty, startz)
+			isActive(startx, starty, startz),
+			Vector(startx, starty, startz),
+			Vector(endx, endy, endz)
 		); 
 	}
 	int x = (startx + endx) / 2; 
@@ -20,7 +22,7 @@ Octree* ImplicitOctreeGenerator::addChilds(int startx, int endx, int starty, int
 	Vector position((float) x, (float) y, (float) z);
 	bool active = isActive(x,y,z);
 	float value = active ? 1.0 : 0.0;
-	Octree *node = new Octree(position,value, active);
+	Octree *node = new Octree(position,value, active, Vector(startx, starty, startz), Vector(endx, endy, endz));
 	
 	node->setChild(false, false, false, addChilds(startx, x, starty, y, startz, z));
 	node->setChild(false, false, true, addChilds(startx, x, starty, y, z,  endz));

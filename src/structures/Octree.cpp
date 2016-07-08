@@ -18,6 +18,13 @@ Octree::Octree(Vector position, float value, bool active)
 	m_value = value; 
 	m_position = position;
 }
+
+Octree::Octree(Vector position, float value, bool active, Vector start, Vector end) : Octree(position, value, active) 
+{
+	m_start = start;
+	m_end = end; 
+}
+
 Octree::~Octree() 
 {
 	for (int i = 0; i<8 ;i++) delete m_childs[i];
@@ -37,6 +44,15 @@ float Octree::value()
 Vector Octree::position() 
 {
 	return m_position;
+}
+
+Vector Octree::start() 
+{
+	return m_start;
+}
+Vector Octree::end() 
+{
+	return m_end;
 }
 	
 Octree* Octree::findNodeByPosition(Vector position) 
