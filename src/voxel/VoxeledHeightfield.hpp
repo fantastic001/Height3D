@@ -4,8 +4,9 @@
 
 #include <core/Array3D.hpp> 
 #include <structures/Octree.hpp>
+#include <structures/ImplicitOctreeGenerator.hpp>
 
-class VoxeledHeightfield 
+class VoxeledHeightfield : public ImplicitOctreeGenerator
 {
 
 	int m_precision;

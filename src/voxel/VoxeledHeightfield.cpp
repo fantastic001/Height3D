@@ -2,7 +2,6 @@
 #include "VoxeledHeightfield.hpp"
 #include <structures/Array3DOctreeAdapter.hpp>
 
-
 Array3D<bool> VoxeledHeightfield::generateArray(int precision) 
 {
 	m_precision = precision; 
@@ -20,11 +19,10 @@ Array3D<bool> VoxeledHeightfield::generateArray(int precision)
 	return a;
 }
 
-Octree* VoxeledHeightfield::generateOctree(int depth) 
+Octree* VoxeledHeightfield::generateOctree(int precision) 
 {
-	Array3D<bool> a = generateArray(128);
-	Array3DOctreeAdapter adapter(a, true);
-	return adapter.getRoot();
+	generate(precision, precision, precision, true);
+	return getRoot();
 }
 
 bool VoxeledHeightfield::isActive(int i, int j, int k) 
