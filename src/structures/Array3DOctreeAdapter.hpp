@@ -5,24 +5,20 @@
 #include <core/Array3D.hpp>
 #include "Octree.hpp"
 
-class Array3DOctreeAdapter 
+#include "ImplicitOctreeGenerator.hpp"
+
+class Array3DOctreeAdapter : public ImplicitOctreeGenerator
 {
-	Octree* m_root; 
-
-	Octree* addChilds(Array3D<bool> &arr, int startx, int endx, int starty, int endy, int startz, int endz);
-	bool* m_added; 
-	bool m_compress;
+	Array3D<bool> *m_arr; 
 public: 
-	/*
-	Compresses given array to octree 
-
-	node values are 0 or 1 
-	node is active if arr()i,j,k is true 
-	position is indices (i,j,k) 
-	*/
 	Array3DOctreeAdapter(Array3D<bool> &arr, bool compress=false);
+	
+	using ImplicitOctreeGenerator::generate;
+	void generate(bool compress=false);
 
-	Octree* getRoot();
+protected:
+	
+	bool isActive(int i, int j, int k);
 };
 
 #endif // HEIGHT3D_STRUCTURES_ARRAY3DOCTREEADAPTER_HPP

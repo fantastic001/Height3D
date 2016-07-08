@@ -5,6 +5,7 @@
 
 Array3D<bool> VoxeledHeightfield::generateArray(int precision) 
 {
+	m_precision = precision; 
 	Array3D<bool> a(precision, precision, precision);
 	for (int i = 0; i<precision; i++) 
 	{
@@ -12,7 +13,7 @@ Array3D<bool> VoxeledHeightfield::generateArray(int precision)
 		{
 			for (int k = 0; k<precision; k++) 
 			{
-				A(i,j,k) = isActive(i,j,k);
+				a(i,j,k) = isActive(i,j,k);
 			}
 		}
 	}
@@ -28,7 +29,7 @@ Octree* VoxeledHeightfield::generateOctree(int depth)
 
 bool VoxeledHeightfield::isActive(int i, int j, int k) 
 {
-	float f = function(2*i / float(precision) - 1.0, 2*k / float(precision) - 1.0);
-	int v = int((f + 1.0) * precision / 2.0 );
+	float f = function(2*i / float(m_precision) - 1.0, 2*k / float(m_precision) - 1.0);
+	int v = int((f + 1.0) * m_precision / 2.0 );
 	return j <= v;
 }

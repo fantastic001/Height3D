@@ -51,9 +51,14 @@ public:
 		destroy();
 	}
 
-	T& operator() (int i, int j, int k) 
+	T& value(int i, int j, int k) 
 	{
 		return m_array[i][j][k];
+	}
+
+	T& operator() (int i, int j, int k) 
+	{
+		return value(i,j,k);
 	}
 	
 	Array3D& operator=(Array3D& a) 

@@ -39,6 +39,7 @@ SET(gui_source_files
 
 	src/structures/Octree.cpp
 	src/structures/Array3DOctreeAdapter.cpp
+	src/structures/ImplicitOctreeGenerator.cpp
 
 	src/voxel/VoxeledHeightfield.cpp
 )

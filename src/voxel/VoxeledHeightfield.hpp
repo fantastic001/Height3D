@@ -8,6 +8,7 @@
 class VoxeledHeightfield 
 {
 
+	int m_precision;
 public:
 	Array3D<bool> generateArray(int precision);
 	Octree* generateOctree(int depth);
