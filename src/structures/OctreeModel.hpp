@@ -18,6 +18,7 @@ class OctreeModel : public AbstractModel
 	std::vector<int> m_indices; 
 	std::vector<float> m_colors;
 	std::vector<float> m_textures;
+	std::vector<float> m_normals;
 
 public:
 	OctreeModel(Octree* root, int precisionx, int precisiony, int precisionz);

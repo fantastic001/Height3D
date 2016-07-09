@@ -39,7 +39,7 @@ class OctreeTerrainGenerator : public VoxeledHeightfield
 protected:
 	float function(float x, float z) 
 	{
-		if (x < 0) return 0; 
+		if (x < 0) return 0;
 		else return x;
 	}
 };
@@ -65,8 +65,8 @@ public:
 		glewInit();
 
 		cout << "Binding program\n";
-		program.addShader(Shader(GL_VERTEX_SHADER, "functional/scene/shader.vp"));
-		program.addShader(Shader(GL_FRAGMENT_SHADER, "functional/scene/shader.fp"));
+		program.addShader(Shader(GL_VERTEX_SHADER, "functional/phong/shader.vp"));
+		program.addShader(Shader(GL_FRAGMENT_SHADER, "functional/phong/shader.fp"));
 		program.link();
 		program.bind();
 		

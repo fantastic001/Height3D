@@ -58,6 +58,17 @@ void OctreeModel::addNode(Octree* node)
 
 			m_indices.push_back(8*m_vertex_count + 4); m_indices.push_back(8*m_vertex_count + 5); m_indices.push_back(8*m_vertex_count + 6);
 			m_indices.push_back(8*m_vertex_count + 4); m_indices.push_back(8*m_vertex_count + 6); m_indices.push_back(8*m_vertex_count + 7);
+			
+			// normals 
+			m_normals.push_back(-1); m_normals.push_back(-1); m_normals.push_back(-1);
+			m_normals.push_back(1); m_normals.push_back(-1); m_normals.push_back(-1);
+			m_normals.push_back(1); m_normals.push_back(-1); m_normals.push_back(1);
+			m_normals.push_back(-1); m_normals.push_back(-1); m_normals.push_back(1);
+	
+			m_normals.push_back(-1); m_normals.push_back(1); m_normals.push_back(-1);
+			m_normals.push_back(1); m_normals.push_back(1); m_normals.push_back(-1);
+			m_normals.push_back(1); m_normals.push_back(1); m_normals.push_back(1);
+			m_normals.push_back(-1); m_normals.push_back(1); m_normals.push_back(1);
 
 			m_vertex_count++;
 			// dummy colors lol
@@ -103,5 +114,5 @@ std::vector<float> OctreeModel::genTextureCoordinates()
 
 std::vector<float> OctreeModel::genNormals() 
 {
-	return std::vector<float>();
+	return m_normals;
 }
