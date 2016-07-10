@@ -75,6 +75,7 @@ public:
 				}
 			}
 		}
+		return (*this);
 	}
 
 	int getSizeX() {return m_a;}

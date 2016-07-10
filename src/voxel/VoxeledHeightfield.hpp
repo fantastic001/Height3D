@@ -13,6 +13,8 @@ class VoxeledHeightfield : public ImplicitOctreeGenerator
 public:
 	Array3D<bool> generateArray(int precision);
 	Octree* generateOctree(int depth);
+	void populateArray(Array3D<bool> *arr, int precision);
+
 
 	bool isActive(int i, int j, int k);
 

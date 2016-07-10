@@ -7,9 +7,15 @@ Heightfield::Heightfield(int precision)
 	m_precision = precision; 
 	m_top = new float[(m_precision + 1) * (m_precision + 1)];
 	m_bottom = new float[(m_precision + 1) * (m_precision + 1)];
-	memset(m_top, 0, (m_precision + 1) * (m_precision + 1));
-	memset(m_bottom, 0, (m_precision + 1) * (m_precision + 1));
 	N = m_precision + 1;
+	for (int i = 0; i<N; i++) 
+	{
+		for (int j = 0; j<N; j++) 
+		{
+			m_top[i*(m_precision + 1) + j] = -1;
+			m_bottom[i*(m_precision + 1) + j] = -1;
+		}
+	}
 }
 
 Heightfield::~Heightfield() 

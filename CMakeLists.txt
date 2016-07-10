@@ -47,6 +47,8 @@ SET(gui_source_files
 	src/structures/heightfield/Heightfield.cpp
 	src/structures/heightfield/LayeredHeightfield.cpp
 	src/structures/heightfield/LayeredHeightfieldModel.cpp
+	src/structures/heightfield/ImplicitLayeredHeightfieldGenerator.cpp
+	src/structures/heightfield/Array3DLayeredHeightfieldAdapter.cpp
 
 	src/voxel/VoxeledHeightfield.cpp
 )
@@ -95,6 +97,7 @@ add_executable(test_functional
 	functional/octree_terrain.cpp
 	functional/filled_surface.cpp
 	functional/layered_heightfield.cpp
+	functional/array_to_layered_heightfield.cpp
 	${core_source_files}
 	${gui_source_files}
 )
