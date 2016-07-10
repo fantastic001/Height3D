@@ -29,7 +29,7 @@
 #include <models/VoxeledModel.hpp>
 
 #include <voxel/VoxeledHeightfield.hpp>
-#include <structures/OctreeModel.hpp>
+#include <structures/octree/OctreeModel.hpp>
 
 using namespace std;
 

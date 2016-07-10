@@ -1,6 +1,6 @@
 
 #include "VoxeledHeightfield.hpp"
-#include <structures/Array3DOctreeAdapter.hpp>
+#include <structures/octree/Array3DOctreeAdapter.hpp>
 
 Array3D<bool> VoxeledHeightfield::generateArray(int precision) 
 {

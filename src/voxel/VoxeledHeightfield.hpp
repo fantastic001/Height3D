@@ -3,8 +3,8 @@
 #define HEIGHT3D_VOXEL_VOXELED_HEIGHTFIELD_HPP
 
 #include <core/Array3D.hpp> 
-#include <structures/Octree.hpp>
-#include <structures/ImplicitOctreeGenerator.hpp>
+#include <structures/octree/Octree.hpp>
+#include <structures/octree/ImplicitOctreeGenerator.hpp>
 
 class VoxeledHeightfield : public ImplicitOctreeGenerator
 {

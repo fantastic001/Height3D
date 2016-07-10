@@ -39,10 +39,10 @@ SET(gui_source_files
 	src/interpolation/AbstractInterpolation.cpp
 	src/interpolation/BilinearInterpolation.cpp
 
-	src/structures/Octree.cpp
-	src/structures/Array3DOctreeAdapter.cpp
-	src/structures/ImplicitOctreeGenerator.cpp
-	src/structures/OctreeModel.cpp
+	src/structures//octree/Octree.cpp
+	src/structures/octree/Array3DOctreeAdapter.cpp
+	src/structures/octree/ImplicitOctreeGenerator.cpp
+	src/structures/octree/OctreeModel.cpp
 
 	src/voxel/VoxeledHeightfield.cpp
 )

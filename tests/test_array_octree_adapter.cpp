@@ -4,7 +4,7 @@
 #include <boost/test/unit_test.hpp>
 
 #include <core/Array3D.hpp>
-#include <structures/Array3DOctreeAdapter.hpp>
+#include <structures/octree/Array3DOctreeAdapter.hpp>
 
 void traverse_octree(int &count, OctreeNode* node) 
 {
