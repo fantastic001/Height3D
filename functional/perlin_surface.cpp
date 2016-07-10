@@ -26,7 +26,7 @@
 #include <loops/SDLLoop.hpp>
 #include <loops/SDLEvent.hpp>
 
-#include <noise/perlin/PerlinSurfaceModel.hpp>
+#include <noise/perlin/PerlinFilledSurfaceModel.hpp>
 
 using namespace std;
 
@@ -99,16 +99,16 @@ protected:
 		cout << "Setting scene\n";
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		camera_position = Vector(0,1,0);
-		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
+		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 30);
 		
-		PerlinSurfaceModel* model = new PerlinSurfaceModel(16);
+		PerlinFilledSurfaceModel* model = new PerlinFilledSurfaceModel(128);
 		model->addFrequency(4, 0.2);
 		cube = scene.addObject(new SceneObject(
 			model, 
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
 			0.0, 0.0, 0.0, // location 
 			0.0, 0.0, // angles of rotation 
-			1.0, 1.0, 1.0,  // size
+			10.0, 10.0, 10.0,  // size
 			Material(
 				Color(1.0,0,0), // ambiental conductivity
 				Color(1.0, 0, 0), // diffusional conductivity

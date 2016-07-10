@@ -34,6 +34,7 @@ SET(gui_source_files
 	src/noise/perlin/Perlin.cpp
 	src/noise/perlin/PerlinImageAdapter.cpp
 	src/noise/perlin/PerlinSurfaceModel.cpp
+	src/noise/perlin/PerlinFilledSurfaceModel.cpp
 
 	src/interpolation/AbstractInterpolation.cpp
 	src/interpolation/BilinearInterpolation.cpp
