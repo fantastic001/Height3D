@@ -26,6 +26,7 @@ SET(gui_source_files
 	src/loops/SDLEvent.cpp
 
 	src/models/SurfaceModel.cpp
+	src/models/FilledSurfaceModel.cpp
 	src/models/VoxeledModel.cpp
 
 	src/textures/GradientTextureFactory.cpp
@@ -87,6 +88,7 @@ add_executable(test_functional
 	functional/voxel.cpp
 	functional/voxeled_terrain.cpp
 	functional/octree_terrain.cpp
+	functional/filled_surface.cpp
 	${core_source_files}
 	${gui_source_files}
 )
