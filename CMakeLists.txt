@@ -44,6 +44,10 @@ SET(gui_source_files
 	src/structures/octree/ImplicitOctreeGenerator.cpp
 	src/structures/octree/OctreeModel.cpp
 
+	src/structures/heightfield/Heightfield.cpp
+	src/structures/heightfield/LayeredHeightfield.cpp
+	src/structures/heightfield/LayeredHeightfieldModel.cpp
+
 	src/voxel/VoxeledHeightfield.cpp
 )
 
@@ -90,6 +94,7 @@ add_executable(test_functional
 	functional/voxeled_terrain.cpp
 	functional/octree_terrain.cpp
 	functional/filled_surface.cpp
+	functional/layered_heightfield.cpp
 	${core_source_files}
 	${gui_source_files}
 )
