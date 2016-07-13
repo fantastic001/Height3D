@@ -34,14 +34,23 @@
 
 #include <morphology/erode.hpp>
 
+#include <noise/perlin/PerlinSignal.hpp>
+
 using namespace std;
 
 class MyLayeredVoxeledHeightfield : public VoxeledHeightfield 
 {
+
+	PerlinSignal* m_signal;
+public:
+	MyLayeredVoxeledHeightfield(PerlinSignal *signal) : VoxeledHeightfield() 
+	{
+		m_signal = signal;
+	}
 protected:
 	float function(float x, float z) 
 	{
-		return 0.5 * (1 - x*x - z*z);
+		return m_signal->value(x,z);
 	}
 };
 
@@ -59,10 +68,11 @@ class MyArray3DLayeredHeightfieldTestLoop : public SDLLoop
 	// angle of rotation
 	float alpha;
 
-	MyLayeredVoxeledHeightfield generator;
+	MyLayeredVoxeledHeightfield *generator;
 	Array3DLayeredHeightfieldAdapter *adapter;
 	LayeredHeightfield *h;
 	Array3D<bool> *voxels;
+	PerlinSignal* signal;
 
 public:
 	MyArray3DLayeredHeightfieldTestLoop(Window *w) : SDLLoop(w) 
@@ -95,8 +105,13 @@ public:
 		program.enableAttributeArray(vertexColorLocation);
 		program.enableAttributeArray(normalLocation);
 		
+		signal = new PerlinSignal;
+		signal->addFrequency(2, 0.5);
+		signal->addFrequency(16, 0.01);
+		generator = new MyLayeredVoxeledHeightfield(signal);
+
 		voxels = new Array3D<bool>(128, 128, 128);
-		generator.populateArray(voxels, 128);
+		generator->populateArray(voxels, 128);
 		
 		make_hole(*voxels);
 		for (int i =0; i<50; i++) (*voxels).copy(erode(*voxels));

@@ -4,6 +4,7 @@
 
 #include <models/SurfaceModel.hpp>
 #include "Perlin.hpp"
+#include "PerlinSignal.hpp"
 
 #include <vector>
 
@@ -11,6 +12,8 @@ class PerlinSurfaceModel : public SurfaceModel
 {
 	std::vector<Perlin*> m_perlins;
 	std::vector<float> m_amplitudes;
+	PerlinSignal m_signal;
+
 public:
 	PerlinSurfaceModel(int sampling_frequency);
 	~PerlinSurfaceModel();
