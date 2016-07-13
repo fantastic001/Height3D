@@ -1,0 +1,74 @@
+
+#include "erode.hpp"
+
+#include <cstdlib>
+
+using namespace std;
+
+void make_hole(Array3D<bool>& arr) 
+{
+	int sizex = arr.getSizeX();
+	int sizey = arr.getSizeY();
+	int sizez = arr.getSizeZ();
+	
+	int i,j,k;
+
+
+	int direction; 
+
+	do 
+	{
+		i = rand() % sizex;
+		j = rand() % sizey;
+		k = rand() % sizez; 
+		direction = rand() % 6;
+	}
+	while (! arr(i,j,k));
+	int di=0,dj=0,dk=0;
+	switch (direction) 
+	{
+		case 0: di = 1; break;
+		case 1: di = -1; break;
+		case 2: dj = 1; break;
+		case 3: dj = -1; break;
+		case 4: dk = 1; break;
+		case 5: dk = -1; break;
+	}
+	int l = 0;
+	while (arr(i,j,k) && i+di*l<sizex && j + dj*l < sizey && k + dk*l < sizez
+		&& i >= 0 && j >= 0 && k >= 0
+	) 
+	{
+		arr(i + di*l, j + dj*l, k + dk*l) = false; 
+		l++;
+	}
+}
+
+Array3D<bool> erode(Array3D<bool> &arr) 
+{
+	Array3D<bool> *res = new Array3D<bool>(arr.getSizeX(), arr.getSizeY(), arr.getSizeZ());; 
+	for (int i = 1; i<arr.getSizeX()-1; i++) 
+	{
+		for (int j = 1; j<arr.getSizeY()-1; j++) 
+		{
+			for (int k = 1; k<arr.getSizeZ()-1; k++) 
+			{
+				if (! arr(i,j,k)) 
+				{
+					(*res)(i,j,k) = arr(i,j,k);
+					(*res)(i+1,j,k) = false;
+					(*res)(i-1,j,k) = false;
+					(*res)(i,j+1,k) = false;
+					(*res)(i,j-1,k) = false; 
+					(*res)(i,j,k+1) = false;
+					(*res)(i,j,k-1) = false;
+				}
+				else 
+				{
+					(*res)(i,j,k) = arr(i,j,k);
+				}
+			}
+		}
+	}
+	return *res; 
+}

@@ -50,6 +50,8 @@ SET(gui_source_files
 	src/structures/heightfield/Array3DLayeredHeightfieldAdapter.cpp
 
 	src/voxel/VoxeledHeightfield.cpp
+
+	src/morphology/erode.cpp
 )
 
 add_compile_options(-std=c++11)

@@ -32,6 +32,8 @@
 #include <voxel/VoxeledHeightfield.hpp>
 #include <structures/heightfield/Array3DLayeredHeightfieldAdapter.hpp>
 
+#include <morphology/erode.hpp>
+
 using namespace std;
 
 class MyLayeredVoxeledHeightfield : public VoxeledHeightfield 
@@ -95,9 +97,14 @@ public:
 		
 		voxels = new Array3D<bool>(128, 128, 128);
 		generator.populateArray(voxels, 128);
+		
+		make_hole(*voxels);
+		for (int i =0; i<50; i++) (*voxels).copy(erode(*voxels));
+		
 		adapter = new Array3DLayeredHeightfieldAdapter(*voxels);
 		adapter->generate();
 		h = adapter->getField();
+
 	}
 	
 

@@ -77,6 +77,22 @@ public:
 		}
 		return (*this);
 	}
+	void copy(Array3D a) 
+	{
+		
+		destroy();
+		create(a.getSizeX(), a.getSizeY(), a.getSizeZ());
+		for (int i = 0; i<a.getSizeX(); i++) 
+		{
+			for (int j = 0; j<a.getSizeY(); j++) 
+			{
+				for (int k = 0; k<a.getSizeZ(); k++) 
+				{
+					m_array[i][j][k] = a(i,j,k);
+				}
+			}
+		}
+	}
 
 	int getSizeX() {return m_a;}
 	int getSizeY() {return m_b;}
