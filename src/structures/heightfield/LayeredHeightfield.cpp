@@ -54,6 +54,15 @@ void LayeredHeightfield::setBottom(int level, float x, float z, float y)
 {
 	m_layers->at(level)->setBottomLevel(x,z,y);
 }
+	
+void LayeredHeightfield::setTop(int level, int i, int j, float y) 
+{
+	m_layers->at(level)->setTopLevel(i,j,y);
+}
+void LayeredHeightfield::setBottom(int level, int i, int j, float y) 
+{
+	m_layers->at(level)->setBottomLevel(i,j,y);
+}
 
 int LayeredHeightfield::getPrecision() 
 {

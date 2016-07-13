@@ -47,7 +47,6 @@ SET(gui_source_files
 	src/structures/heightfield/Heightfield.cpp
 	src/structures/heightfield/LayeredHeightfield.cpp
 	src/structures/heightfield/LayeredHeightfieldModel.cpp
-	src/structures/heightfield/ImplicitLayeredHeightfieldGenerator.cpp
 	src/structures/heightfield/Array3DLayeredHeightfieldAdapter.cpp
 
 	src/voxel/VoxeledHeightfield.cpp

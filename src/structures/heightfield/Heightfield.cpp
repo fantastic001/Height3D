@@ -29,7 +29,7 @@ void Heightfield::setTopLevel(float x, float z, float y)
 	int i,j; 
 	i = int((x+1) * m_precision / 2);
 	j = int((z+1) * m_precision / 2);
-	m_top[i*(m_precision + 1) + j] = y;
+	setTopLevel(i,j,y);
 }
 
 void Heightfield::setBottomLevel(float x, float z, float y) 
@@ -37,6 +37,15 @@ void Heightfield::setBottomLevel(float x, float z, float y)
 	int i,j; 
 	i = int((x+1) * m_precision / 2);
 	j = int((z+1) * m_precision / 2);
+	setBottomLevel(i,j,y);
+}
+
+void Heightfield::setTopLevel(int i, int j, float y) 
+{
+	m_top[i*(m_precision + 1) + j] = y;
+}
+void Heightfield::setBottomLevel(int i, int j, float y) 
+{
 	m_bottom[i*(m_precision + 1) + j] = y;
 }
 

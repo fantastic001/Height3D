@@ -18,6 +18,8 @@ public:
 	*/
 	void setTopLevel(float x, float z, float y);
 	void setBottomLevel(float x, float z, float y);
+	void setTopLevel(int i, int j, float y);
+	void setBottomLevel(int i, int j, float y);
 
 	float getTopLevel(float x, float z);
 	float getBottomLevel(float x, float z);

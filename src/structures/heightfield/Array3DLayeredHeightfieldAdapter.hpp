@@ -2,21 +2,20 @@
 #ifndef HEIGHT3D_STRUCTURES_HEIGHTFIELD_ARRAY3D_LAYERED_HEGHTFIELD_ADAPTER_HPP
 #define HEIGHT3D_STRUCTURES_HEIGHTFIELD_ARRAY3D_LAYERED_HEGHTFIELD_ADAPTER_HPP
 
-#include "ImplicitLayeredHeightfieldGenerator.hpp"
-
+#include "LayeredHeightfield.hpp"
 #include <core/Array3D.hpp>
 
-class Array3DLayeredHeightfieldAdapter : public ImplicitLayeredHeightfieldGenerator
+class Array3DLayeredHeightfieldAdapter 
 {
 	Array3D<bool>* m_arr; 
 	int m_precision;
+	LayeredHeightfield* m_h;
 public:
 	Array3DLayeredHeightfieldAdapter(Array3D<bool> arr);
 	void generate();
+	LayeredHeightfield* getField(); 
 
-protected:
-	using ImplicitLayeredHeightfieldGenerator::generate;
-	bool isActive(float x, float y, float z);
+	bool isActive(int i, int j, int k);
 };
 
 #endif // HEIGHT3D_STRUCTURES_HEIGHTFIELD_ARRAY3D_LAYERED_HEGHTFIELD_ADAPTER_HPP
