@@ -47,21 +47,21 @@ void make_hole(Array3D<bool>& arr)
 Array3D<bool> erode(Array3D<bool> &arr) 
 {
 	Array3D<bool> *res = new Array3D<bool>(arr.getSizeX(), arr.getSizeY(), arr.getSizeZ());; 
-	for (int i = 1; i<arr.getSizeX()-1; i++) 
+	for (int i = 0; i<arr.getSizeX(); i++) 
 	{
-		for (int j = 1; j<arr.getSizeY()-1; j++) 
+		for (int j = 0; j<arr.getSizeY(); j++) 
 		{
-			for (int k = 1; k<arr.getSizeZ()-1; k++) 
+			for (int k = 0; k<arr.getSizeZ(); k++) 
 			{
 				if (! arr(i,j,k)) 
 				{
 					(*res)(i,j,k) = arr(i,j,k);
-					(*res)(i+1,j,k) = false;
-					(*res)(i-1,j,k) = false;
-					(*res)(i,j+1,k) = false;
-					(*res)(i,j-1,k) = false; 
-					(*res)(i,j,k+1) = false;
-					(*res)(i,j,k-1) = false;
+					if (i<arr.getSizeX() - 1) (*res)(i+1,j,k) = false;
+					if (i>0) (*res)(i-1,j,k) = false;
+					if (j < arr.getSizeY() - 1) (*res)(i,j+1,k) = false;
+					if (j>0) (*res)(i,j-1,k) = false; 
+					if (k < arr.getSizeZ() - 1) (*res)(i,j,k+1) = false;
+					if (k>0) (*res)(i,j,k-1) = false;
 				}
 				else 
 				{

@@ -114,7 +114,7 @@ public:
 		generator->populateArray(voxels, 128);
 		
 		make_hole(*voxels);
-		for (int i =0; i<50; i++) (*voxels).copy(erode(*voxels));
+		for (int i =0; i<10; i++) (*voxels).copy(erode(*voxels));
 		
 		adapter = new Array3DLayeredHeightfieldAdapter(*voxels);
 		adapter->generate();
