@@ -45,7 +45,7 @@ std::vector<float> AbstractModel::genNormals()
 
 int AbstractModel::countVertices() 
 {
-	return genVertices().size();
+	return genVertices().size() / 3;
 }
 
 int AbstractModel::countTriangles() 
