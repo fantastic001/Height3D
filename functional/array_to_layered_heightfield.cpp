@@ -131,8 +131,10 @@ protected:
 
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
+		LayeredHeightfieldModel* model = new LayeredHeightfieldModel(h);
+		cout << "Number of vertices: " << model->countVertices() << endl;
 		cube = scene.addObject(new SceneObject(
-			new  LayeredHeightfieldModel(h), // use cube model to draw this object
+			model, // use cube model to draw this object
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
 			0.0, 0.0, 0.0, // location 
 			0.0, 0.0, // angles of rotation 
