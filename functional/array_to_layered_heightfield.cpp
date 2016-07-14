@@ -113,12 +113,13 @@ public:
 		voxels = new Array3D<bool>(128, 128, 128);
 		generator->populateArray(voxels, 128);
 		
-		make_hole(*voxels);
+		for (int j = 0; j<5; j++) make_hole(*voxels);
 		for (int i =0; i<10; i++) (*voxels).copy(erode(*voxels));
 		
 		adapter = new Array3DLayeredHeightfieldAdapter(*voxels);
 		adapter->generate();
 		h = adapter->getField();
+		cout << "Number of levels " << h->levelCount() << endl;
 
 	}
 	
@@ -135,7 +136,7 @@ protected:
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
 			0.0, 0.0, 0.0, // location 
 			0.0, 0.0, // angles of rotation 
-			0.5, 0.5, 0.5,  // size
+			10, 10, 10,  // size
 			Material(
 				Color(1.0,0,0), // ambiental conductivity
 				Color(1.0, 0, 0), // diffusional conductivity
