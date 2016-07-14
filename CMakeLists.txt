@@ -85,18 +85,18 @@ add_test(NAME unittest COMMAND unittest)
 
 add_executable(test_functional
 	functional/basic.cpp
-	functional/textures.cpp
-	functional/scene.cpp
-	functional/scene_loop.cpp
-	functional/phong.cpp
-	functional/surface.cpp
-	functional/noise.cpp
+	#functional/textures.cpp
+	#functional/scene.cpp
+	#functional/scene_loop.cpp
+	#functional/phong.cpp
+	#functional/surface.cpp
+	#functional/noise.cpp
 	functional/perlin_surface.cpp
-	functional/voxel.cpp
-	functional/voxeled_terrain.cpp
+	#functional/voxel.cpp
+	#functional/voxeled_terrain.cpp
 	functional/octree_terrain.cpp
-	functional/filled_surface.cpp
-	functional/layered_heightfield.cpp
+	#functional/filled_surface.cpp
+	#functional/layered_heightfield.cpp
 	functional/array_to_layered_heightfield.cpp
 	${core_source_files}
 	${gui_source_files}

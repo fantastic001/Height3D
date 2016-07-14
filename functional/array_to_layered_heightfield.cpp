@@ -106,15 +106,16 @@ public:
 		program.enableAttributeArray(normalLocation);
 		
 		signal = new PerlinSignal;
-		signal->addFrequency(2, 0.5);
-		signal->addFrequency(16, 0.01);
+		signal->addFrequency(2, 0.8);
+		signal->addFrequency(16, 0.02);
+		signal->addFrequency(32, 0.01);
 		generator = new MyLayeredVoxeledHeightfield(signal);
 
 		voxels = new Array3D<bool>(128, 128, 128);
 		generator->populateArray(voxels, 128);
 		
 		for (int j = 0; j<5; j++) make_hole(*voxels);
-		for (int i =0; i<10; i++) (*voxels).copy(erode(*voxels));
+		for (int i =0; i<30; i++) (*voxels).copy(erode(*voxels));
 		
 		adapter = new Array3DLayeredHeightfieldAdapter(*voxels);
 		adapter->generate();
@@ -130,7 +131,7 @@ protected:
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
-		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
+		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 30);
 		LayeredHeightfieldModel* model = new LayeredHeightfieldModel(h);
 		cout << "Number of vertices: " << model->countVertices() << endl;
 		cube = scene.addObject(new SceneObject(
