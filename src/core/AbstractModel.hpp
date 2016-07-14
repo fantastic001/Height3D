@@ -12,6 +12,8 @@ class AbstractModel
 public:
 	void send(Buffer* vertexBuffer, Buffer* indexBuffer, Buffer* colorBuffer, Buffer* textureBuffer, Buffer* normalsBuffer = NULL); 
 	int count();
+	int countVertices();
+	int countTriangles();
 
 protected:
 	/*

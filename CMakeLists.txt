@@ -68,6 +68,14 @@ include_directories(${GLEW_INCLUDE_DIRS} src/)
 link_libraries(${OpenCV_LIBS})
 
 
+add_executable(measure
+	measure.cpp
+	${core_source_files}
+	${gui_source_files}
+)
+target_link_libraries(measure ${GLEW_LIBRARIES})
+target_LINK_LIBRARIES(measure ${OPENGL_LIBRARIES})
+target_link_libraries(measure SDL2)
 
 add_executable(unittest
 	tests/test_vector.cpp
