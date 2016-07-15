@@ -31,16 +31,25 @@
 #include <voxel/VoxeledHeightfield.hpp>
 #include <structures/octree/OctreeModel.hpp>
 
+#include <noise/perlin/PerlinSignal.hpp>
+#include <morphology/erode.hpp>
+#include <structures/octree/Array3DOctreeAdapter.hpp>
+
 using namespace std;
 
 
 class OctreeTerrainGenerator : public VoxeledHeightfield 
 {
+	PerlinSignal* m_signal;
+public:
+	OctreeTerrainGenerator(PerlinSignal *signal) : VoxeledHeightfield() 
+	{
+		m_signal = signal;
+	}
 protected:
 	float function(float x, float z) 
 	{
-		if (x < 0) return 0;
-		else return x;
+		m_signal->value(x,z);
 	}
 };
 
@@ -57,6 +66,11 @@ class MyOctreeTerrainTestLoop : public SDLLoop
 	// angle of rotation
 	float alpha;
 	Vector camera_position;
+
+	Array3D<bool> *voxels; 
+
+	Array3DOctreeAdapter *adapter;
+	Octree* octree;
 
 public:
 	MyOctreeTerrainTestLoop(Window *w) : SDLLoop(w) 
@@ -94,20 +108,39 @@ public:
 protected:
 	void onInit() 
 	{
+		voxels = new Array3D<bool>(128,128,128);
 		cout << "Setting scene\n";
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		camera_position = Vector(0,1,0);
-		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
+		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 30);
 		
 		
-		OctreeTerrainGenerator generator;
-		OctreeModel* model = new OctreeModel(generator.generateOctree(128), 128, 128, 128);
+		cout << "Generating signal\n";
+		PerlinSignal *signal = new PerlinSignal;
+		signal->addFrequency(4, 0.8);
+		signal->addFrequency(16, 0.01);
+		cout << "Generating voxels\n";
+		OctreeTerrainGenerator generator(signal);
+		generator.populateArray(voxels, 128);
+		cout << "Erosion\n";
+		for (int j = 0; j<5; j++) make_hole(*voxels);
+		for (int i =0; i<30; i++) (*voxels).copy(erode(*voxels));
+		cout << "Creating adapter\n";
+		adapter = new Array3DOctreeAdapter(*voxels, 128);
+		cout << "Generating octree\n";
+		adapter->generate(true);
+		octree = adapter->getRoot();
+		cout << "Creating model\n";
+		OctreeModel* model = new OctreeModel(octree, 128, 128, 128);
+
+		cout << "Number of vertices: " << model->countVertices() << endl;
+		cout << "Number of triangles: " << model->countTriangles() << endl;
 		cube = scene.addObject(new SceneObject(
 			model, 
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
 			0.0, 0.0, 0.0, // location 
 			0.0, 0.0, // angles of rotation 
-			1.0, 1.0, 1.0,  // size
+			10.0, 10.0, 10.0,  // size
 			Material(
 				Color(1.0,0,0), // ambiental conductivity
 				Color(1.0, 0, 0), // diffusional conductivity
@@ -155,7 +188,6 @@ protected:
 
 	void onFrame() 
 	{
-		cout << "Drawing\n";
 		scene.drawObjects(
 			&program, 
 			modelLocation, 

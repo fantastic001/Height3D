@@ -106,9 +106,8 @@ public:
 		program.enableAttributeArray(normalLocation);
 		
 		signal = new PerlinSignal;
-		signal->addFrequency(2, 0.8);
-		signal->addFrequency(16, 0.02);
-		signal->addFrequency(32, 0.01);
+		signal->addFrequency(4, 0.5);
+		signal->addFrequency(16, 0.01);
 		generator = new MyLayeredVoxeledHeightfield(signal);
 
 		voxels = new Array3D<bool>(128, 128, 128);
@@ -134,6 +133,7 @@ protected:
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 30);
 		LayeredHeightfieldModel* model = new LayeredHeightfieldModel(h);
 		cout << "Number of vertices: " << model->countVertices() << endl;
+		cout << "Number of triangles: " << model->countTriangles() << endl;
 		cube = scene.addObject(new SceneObject(
 			model, // use cube model to draw this object
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
