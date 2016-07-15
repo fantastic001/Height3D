@@ -20,6 +20,7 @@ Array3DLayeredHeightfieldAdapter::Array3DLayeredHeightfieldAdapter(Array3D<bool>
 void Array3DLayeredHeightfieldAdapter::generate()
 {
 
+	m_h->addLevel();
 	for (int i = 0; i<m_precision; i++)
 	{
 		for (int k = 0; k<= m_precision; k++) 
@@ -32,10 +33,10 @@ void Array3DLayeredHeightfieldAdapter::generate()
 				float y = 2.0 * j / m_precision - 1.0;
 				if (isActive(i,j,k) && !was_active) 
 				{
-					level++;
 					was_active = true;
-					if (level == m_h->levelCount()) 
+					if (level+1 == m_h->levelCount()) 
 					{
+						level++;
 						m_h->addLevel();
 					}
 					m_h->setBottom(level,i,k,y);
