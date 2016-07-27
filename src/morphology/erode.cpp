@@ -2,11 +2,13 @@
 #include "erode.hpp"
 
 #include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 void make_hole(Array3D<bool>& arr) 
 {
+	srand(time(NULL));
 	int sizex = arr.getSizeX();
 	int sizey = arr.getSizeY();
 	int sizez = arr.getSizeZ();

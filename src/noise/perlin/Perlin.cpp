@@ -2,6 +2,7 @@
 #include "Perlin.hpp"
 #include <interpolation/BilinearInterpolation.hpp>
 #include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -71,5 +72,6 @@ Vector Perlin::getRandomGradient()
 		Vector(1,-1, 0, 0),
 		Vector(-1,-1,0, 0)
 	};
+	srand(time(NULL));
 	return gradients[rand() % 4].normalized();
 }
