@@ -20,7 +20,11 @@ std::vector<float> LayeredHeightfieldModel::genVertices()
 		{
 			for (float z = -1.0; z<1.0; z += dz) 
 			{
-				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0)
+				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0
+					&& m_heightfield->getTop(level,x+dx,z) - m_heightfield->getBottom(level,x+dx,z) != 0
+					&& m_heightfield->getTop(level,x,z+dz) - m_heightfield->getBottom(level,x,z+dz) != 0
+					&& m_heightfield->getTop(level,x+dx,z+dz) - m_heightfield->getBottom(level,x+dx,z+dz) != 0
+				)
 				{
 					// top
 					vertices.push_back(x);
@@ -75,7 +79,11 @@ std::vector<int> LayeredHeightfieldModel::genIndices()
 		{
 			for (float z = -1.0; z<1.0; z += dz) 
 			{
-				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0) 
+				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0
+					&& m_heightfield->getTop(level,x+dx,z) - m_heightfield->getBottom(level,x+dx,z) != 0
+					&& m_heightfield->getTop(level,x,z+dz) - m_heightfield->getBottom(level,x,z+dz) != 0
+					&& m_heightfield->getTop(level,x+dx,z+dz) - m_heightfield->getBottom(level,x+dx,z+dz) != 0
+				)
 				{
 					// top
 					indices.push_back(8*index + 0);
@@ -148,7 +156,11 @@ std::vector<float> LayeredHeightfieldModel::genVertexColors()
 		{
 			for (float z = -1.0; z<1.0; z += dz) 
 			{
-				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0)
+				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0
+					&& m_heightfield->getTop(level,x+dx,z) - m_heightfield->getBottom(level,x+dx,z) != 0
+					&& m_heightfield->getTop(level,x,z+dz) - m_heightfield->getBottom(level,x,z+dz) != 0
+					&& m_heightfield->getTop(level,x+dx,z+dz) - m_heightfield->getBottom(level,x+dx,z+dz) != 0
+				)
 				{
 					vertexColors.push_back(1.0);
 					vertexColors.push_back(1.0);
@@ -200,7 +212,11 @@ std::vector<float> LayeredHeightfieldModel::genTextureCoordinates()
 		{
 			for (float z = -1.0; z<1.0; z += dz) 
 			{
-				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0)
+				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0
+					&& m_heightfield->getTop(level,x+dx,z) - m_heightfield->getBottom(level,x+dx,z) != 0
+					&& m_heightfield->getTop(level,x,z+dz) - m_heightfield->getBottom(level,x,z+dz) != 0
+					&& m_heightfield->getTop(level,x+dx,z+dz) - m_heightfield->getBottom(level,x+dx,z+dz) != 0
+				)
 				{
 					float u,v; 
 					u = 0.5*x + 0.5;
@@ -247,7 +263,11 @@ std::vector<float> LayeredHeightfieldModel::genNormals()
 		{
 			for (float z = -1.0; z<1.0; z += dz) 
 			{
-				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0)
+				if (m_heightfield->getTop(level,x,z) - m_heightfield->getBottom(level,x,z) != 0
+					&& m_heightfield->getTop(level,x+dx,z) - m_heightfield->getBottom(level,x+dx,z) != 0
+					&& m_heightfield->getTop(level,x,z+dz) - m_heightfield->getBottom(level,x,z+dz) != 0
+					&& m_heightfield->getTop(level,x+dx,z+dz) - m_heightfield->getBottom(level,x+dx,z+dz) != 0
+				)
 				{
 					int i;
 					// top
