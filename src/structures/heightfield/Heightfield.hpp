@@ -23,6 +23,9 @@ public:
 
 	float getTopLevel(float x, float z);
 	float getBottomLevel(float x, float z);
+	
+	float getTopLevel(int i, int j);
+	float getBottomLevel(int i, int j);
 };
 
 #endif // HEIGHT3D_STRUCTURES_HEIGHTFIELD_HEIGHTFIELD_HPP

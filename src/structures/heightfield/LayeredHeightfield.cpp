@@ -45,6 +45,16 @@ float LayeredHeightfield::getBottom(int level, float x, float z)
 	return m_layers->at(level)->getBottomLevel(x,z);
 }
 
+float LayeredHeightfield::getTop(int level, int i, int j) 
+{
+	return m_layers->at(level)->getTopLevel(i,j);
+}
+
+float LayeredHeightfield::getBottom(int level, int i, int j) 
+{
+	return m_layers->at(level)->getBottomLevel(i,j);
+}
+
 void LayeredHeightfield::setTop(int level, float x, float z, float y) 
 {
 	m_layers->at(level)->setTopLevel(x,z,y);
@@ -62,6 +72,11 @@ void LayeredHeightfield::setTop(int level, int i, int j, float y)
 void LayeredHeightfield::setBottom(int level, int i, int j, float y) 
 {
 	m_layers->at(level)->setBottomLevel(i,j,y);
+}
+
+float LayeredHeightfield::toContinious(int i) 
+{
+	return 2*float(i) / m_precision - 1;
 }
 
 int LayeredHeightfield::getPrecision() 

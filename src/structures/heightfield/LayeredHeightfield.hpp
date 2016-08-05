@@ -19,14 +19,20 @@ public:
 	int levelCount();
 	void addLevel();
 	void set(int level, float x, float z, float yb, float yt);
+
 	float getTop(int level, float x, float z);
 	float getBottom(int level, float x, float z);
+	
+	float getTop(int level, int i, int j);
+	float getBottom(int level, int i, int j);
 
 	void setTop(int level, float x, float z, float y);
 	void setBottom(int level, float x, float z, float y);
 	
 	void setTop(int level, int i, int j, float y);
 	void setBottom(int level, int i, int j, float y);
+
+	float toContinious(int i);
 
 	int getPrecision();
 };

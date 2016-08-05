@@ -64,3 +64,13 @@ float Heightfield::getBottomLevel(float x, float z)
 	j = int((z+1) * m_precision / 2);
 	return m_bottom[i*(m_precision + 1) + j];
 }
+
+float Heightfield::getTopLevel(int i, int j) 
+{
+	return m_top[i*(m_precision + 1) + j];
+}
+
+float Heightfield::getBottomLevel(int i, int j) 
+{
+	return m_bottom[i*(m_precision + 1) + j];
+}

@@ -53,6 +53,7 @@ SET(gui_source_files
 	src/voxel/VoxeledHeightfield.cpp
 
 	src/morphology/erode.cpp
+	src/morphology/CaveGenerator.cpp
 )
 
 add_compile_options(-std=c++11)
@@ -97,6 +98,7 @@ add_executable(test_functional
 	functional/octree_terrain.cpp
 	functional/filled_surface.cpp
 	functional/layered_heightfield.cpp
+	functional/cave_generator.cpp
 	functional/array_to_layered_heightfield.cpp
 	${core_source_files}
 	${gui_source_files}
