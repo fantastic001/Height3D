@@ -54,6 +54,7 @@ SET(gui_source_files
 
 	src/morphology/erode.cpp
 	src/morphology/CaveGenerator.cpp
+	src/morphology/kernels/SphericalKernel.cpp
 )
 
 add_compile_options(-std=c++11)

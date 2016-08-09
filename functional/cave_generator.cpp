@@ -30,28 +30,28 @@
 #include <structures/heightfield/LayeredHeightfieldModel.hpp>
 
 #include <morphology/CaveGenerator.hpp>
-#include <morphology/kernels/Kernel.hpp>
+#include <morphology/kernels/SphericalKernel.hpp>
 
 using namespace std;
 
-class MyKernel : public Kernel 
+class MyKernel : public SphericalKernel 
 {
+public:
+	
+	MyKernel() : SphericalKernel(0.8, 1, 0, 0) 
+	{
+		
+	}
 protected:
-	bool defined(float x,float z) 
-	{
-		return -0.5 < x && x < 0.5 && -0.5 < z && z < 0.5;
-	}
 
-	float bottom(float x, float z) 
-	{
-		return -0.5;
-	}
 
-	float top(float x, float z) 
+
+	float noise(float theta, float phi) 
 	{
-		return 0.5;
+		return 0;
 	}
 };
+
 
 class MyCaveGeneratorTestLoop : public SDLLoop 
 {
