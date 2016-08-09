@@ -49,6 +49,14 @@ void CaveGenerator::generate(Kernel *k, LayeredHeightfield *h)
 					{
 						h->setBottom(l,i,j,k->top(x,z));
 					}
+					else if (
+						k->bottom(x,z) <= h->getBottom(l,i,j) 
+						&& h->getTop(l,i,j) <= k->top(x,z)
+					)
+					{
+						h->setTop(l,i,j,-1);
+						h->setBottom(l,i,j, -1);
+					}
 				}
 			}
 		}
