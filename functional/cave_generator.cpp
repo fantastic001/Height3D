@@ -30,27 +30,9 @@
 #include <structures/heightfield/LayeredHeightfieldModel.hpp>
 
 #include <morphology/CaveGenerator.hpp>
-#include <morphology/kernels/SphericalKernel.hpp>
+#include <morphology/kernels/PerlinSphericalKernel.hpp>
 
 using namespace std;
-
-class MyKernel : public SphericalKernel 
-{
-public:
-	
-	MyKernel() : SphericalKernel(0.8, 1, 0, 0) 
-	{
-		
-	}
-protected:
-
-
-
-	float noise(float theta, float phi) 
-	{
-		return 0;
-	}
-};
 
 
 class MyCaveGeneratorTestLoop : public SDLLoop 
@@ -66,6 +48,8 @@ class MyCaveGeneratorTestLoop : public SDLLoop
 
 	// angle of rotation
 	float alpha;
+
+	PerlinSignal* signal;
 
 public:
 	MyCaveGeneratorTestLoop(Window *w) : SDLLoop(w) 
@@ -97,6 +81,10 @@ public:
 		program.enableAttributeArray(texCoordLocation);
 		program.enableAttributeArray(vertexColorLocation);
 		program.enableAttributeArray(normalLocation);
+		
+		signal = new PerlinSignal;
+		signal->addFrequency(2, 0.2);
+		signal->addFrequency(16, 0.01);
 	}
 	
 
@@ -116,7 +104,7 @@ protected:
 			}
 		} 
 		CaveGenerator generator;
-		generator.generate(new MyKernel, h);
+		generator.generate(new PerlinSphericalKernel(0.5, 0,0,0, signal), h);
 
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
