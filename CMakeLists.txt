@@ -44,6 +44,7 @@ SET(gui_source_files
 	src/structures/octree/Array3DOctreeAdapter.cpp
 	src/structures/octree/ImplicitOctreeGenerator.cpp
 	src/structures/octree/OctreeModel.cpp
+	src/structures/octree/OctreeFileStorage.cpp
 
 	src/structures/heightfield/Heightfield.cpp
 	src/structures/heightfield/LayeredHeightfield.cpp
@@ -75,6 +76,7 @@ add_executable(unittest
 	tests/test_matrix.cpp
 	tests/test_3darray.cpp
 	tests/test_array_octree_adapter.cpp
+	tests/test_octree_file_storage.cpp
 	${core_source_files}
 	${gui_source_files}
 )
