@@ -77,6 +77,7 @@ add_executable(unittest
 	tests/test_3darray.cpp
 	tests/test_array_octree_adapter.cpp
 	tests/test_octree_file_storage.cpp
+	tests/test_lhf_file.cpp
 	${core_source_files}
 	${gui_source_files}
 )

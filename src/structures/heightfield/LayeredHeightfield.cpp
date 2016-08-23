@@ -1,6 +1,22 @@
 
 #include "LayeredHeightfield.hpp"
 
+#include <fstream>
+
+using namespace std;
+
+typedef struct 
+{
+	int version = 1;
+	int levels;
+	int precision; 
+} lhf_header; 
+
+typedef struct 
+{
+	float top; 
+	float bottom; 
+} lhf_element;
 
 LayeredHeightfield::LayeredHeightfield(int precision) 
 {
@@ -15,6 +31,54 @@ LayeredHeightfield::~LayeredHeightfield()
 		delete m_layers->at(i);
 	}
 	delete m_layers;
+}
+
+
+void LayeredHeightfield::writeToFile(char* path) 
+{
+	fstream f(path, ios::out | ios::binary);
+	lhf_header header;
+	header.levels = levelCount();
+	header.precision = getPrecision();
+	f.write((char*) &header, sizeof(header));
+	for (int l = 0; l<header.levels; l++) 
+	{
+		for (int i = 0; i<=header.precision; i++) 
+		{
+			for (int j = 0; j<=header.precision; j++) 
+			{
+				lhf_element elem;
+				elem.top = getTop(l,i,j);
+				elem.bottom = getBottom(l,i,j);
+				f.write((char* ) &elem, sizeof(elem));
+			}
+		}
+	}
+	f.close();
+
+}
+LayeredHeightfield* LayeredHeightfield::readFromFile(char* path) 
+{
+	fstream f(path, ios::in | ios::binary);
+	lhf_header header;
+	f.read((char*) &header, sizeof(header));
+	LayeredHeightfield* h = new LayeredHeightfield(header.precision);
+	for (int l = 0; l<header.levels; l++) 
+	{
+		h->addLevel();
+		for (int i = 0; i<=header.precision; i++) 
+		{
+			for (int j = 0; j<=header.precision; j++) 
+			{
+				lhf_element elem;
+				f.read((char* ) &elem, sizeof(elem));
+				h->setTop(l,i,j, elem.top);
+				h->setBottom(l,i,j,elem.bottom);
+			}
+		}
+	}
+	f.close();
+	return h;
 }
 
 Heightfield* LayeredHeightfield::levelAt(int index) 
