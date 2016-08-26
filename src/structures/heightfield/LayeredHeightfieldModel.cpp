@@ -4,6 +4,12 @@
 
 using namespace std;
 
+#define EDGE_RIGHT(h) x == 1.0 || h->getTop(level, x+dx,z) == h->getBottom(level, x+dx,z)
+#define EDGE_LEFT(h) x == -1.0 || h->getTop(level, x-dx,z) == h->getBottom(level, x-dx,z)
+
+#define EDGE_UP(h) z == 1.0 || h->getTop(level, x,z+dz) == h->getBottom(level, x,z+dz)
+#define EDGE_DOWN(h) z == -1.0 || h->getTop(level, x,z-dz) == h->getBottom(level, x,z-dz)
+
 LayeredHeightfieldModel::LayeredHeightfieldModel(LayeredHeightfield *heightfield) 
 {
 	m_heightfield = heightfield;
@@ -15,7 +21,8 @@ std::vector<float> LayeredHeightfieldModel::genVertices()
 	float dz = 2.0 / m_precision; 
 	float dx = dz = 2.0 / m_precision;
 	vector<float> vertices; 
-	for (int level = 0; level<m_heightfield->levelCount(); level++) {
+	int level;
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
 		for (float x = -1.0; x< 1.0; x += dx) 
 		{
 			for (float z = -1.0; z<1.0; z += dz) 
@@ -63,6 +70,57 @@ std::vector<float> LayeredHeightfieldModel::genVertices()
 			}
 		}
 	}
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
+		float x,z;
+		for (x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+				{
+					vertices.push_back(x);
+					vertices.push_back(m_heightfield->getTop(level,x,z)); 
+					vertices.push_back(z);
+					
+					vertices.push_back(x);
+					vertices.push_back(m_heightfield->getTop(level,x,z+dz)); 
+					vertices.push_back(z+dz);
+					
+					vertices.push_back(x);
+					vertices.push_back(m_heightfield->getBottom(level,x,z)); 
+					vertices.push_back(z);
+					
+					vertices.push_back(x);
+					vertices.push_back(m_heightfield->getBottom(level,x,z+dz)); 
+					vertices.push_back(z+dz);
+				}
+			}
+		}
+		for (x = -1.0; x < 1.0; x += dx) 
+		{
+			for (z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+				{
+					vertices.push_back(x);
+					vertices.push_back(m_heightfield->getTop(level,x,z)); 
+					vertices.push_back(z);
+					
+					vertices.push_back(x+dx);
+					vertices.push_back(m_heightfield->getTop(level,x+dx,z)); 
+					vertices.push_back(z);
+					
+					vertices.push_back(x);
+					vertices.push_back(m_heightfield->getBottom(level,x,z)); 
+					vertices.push_back(z);
+					
+					vertices.push_back(x+dx);
+					vertices.push_back(m_heightfield->getBottom(level,x+dx,z)); 
+					vertices.push_back(z);
+				}
+			}
+		}
+	}
 	return vertices;
 	
 }
@@ -73,7 +131,8 @@ std::vector<int> LayeredHeightfieldModel::genIndices()
 	float dx = dz = 2.0 / m_precision;
 	vector<int> indices; 
 	int index = 0;
-	for (int level = 0; level<m_heightfield->levelCount();  level++) 
+	int level;
+	for (level = 0; level<m_heightfield->levelCount();  level++) 
 	{
 		for (float x = -1.0; x< 1.0; x += dx) 
 		{
@@ -103,39 +162,46 @@ std::vector<int> LayeredHeightfieldModel::genIndices()
 					indices.push_back(8*index + 6);
 					indices.push_back(8*index + 7);
 		
-					// sides 
-					indices.push_back(8*index + 0);
-					indices.push_back(8*index + 1);
-					indices.push_back(8*index + 4);
 		
-					indices.push_back(8*index + 1);
-					indices.push_back(8*index + 4);
-					indices.push_back(8*index + 5);
+					index++;
+				}
+			}
+		}
+	}
+	int points = index;
+	index = 0;
+
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
+		float x,z;
+		for (x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+				{
+					indices.push_back(8*points + 4*index + 0);
+					indices.push_back(8*points + 4*index + 1);
+					indices.push_back(8*points + 4*index + 2);
+					indices.push_back(8*points + 4*index + 1);
+					indices.push_back(8*points + 4*index + 2);
+					indices.push_back(8*points + 4*index + 3);
 					
-					indices.push_back(8*index + 0);
-					indices.push_back(8*index + 2);
-					indices.push_back(8*index + 4);
-		
-					indices.push_back(8*index + 2);
-					indices.push_back(8*index + 4);
-					indices.push_back(8*index + 6);
-					
-					indices.push_back(8*index + 1);
-					indices.push_back(8*index + 3);
-					indices.push_back(8*index + 5);
-		
-					indices.push_back(8*index + 3);
-					indices.push_back(8*index + 5);
-					indices.push_back(8*index + 7);
-				
-					indices.push_back(8*index + 2);
-					indices.push_back(8*index + 3);
-					indices.push_back(8*index + 6);
-	
-					indices.push_back(8*index + 3);
-					indices.push_back(8*index + 6);
-					indices.push_back(8*index + 7);
-		
+					index++;
+				}
+			}
+		}
+		for (x = -1.0; x < 1.0; x += dx) 
+		{
+			for (z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+				{
+					indices.push_back(8*points + 4*index + 0);
+					indices.push_back(8*points + 4*index + 1);
+					indices.push_back(8*points + 4*index + 2);
+					indices.push_back(8*points + 4*index + 1);
+					indices.push_back(8*points + 4*index + 2);
+					indices.push_back(8*points + 4*index + 3);
 					index++;
 				}
 			}
@@ -150,7 +216,8 @@ std::vector<float> LayeredHeightfieldModel::genVertexColors()
 	float dz = 2.0 / m_precision; 
 	float dx = dz = 2.0 / m_precision;
 	vector<float> vertexColors; 
-	for (int level = 0; level<m_heightfield->levelCount(); level++) 
+	int level;
+	for (level = 0; level<m_heightfield->levelCount(); level++) 
 	{
 		for (float x = -1.0; x< 1.0; x += dx) 
 		{
@@ -197,6 +264,58 @@ std::vector<float> LayeredHeightfieldModel::genVertexColors()
 			}
 		}
 	}
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
+		float x,z;
+		for (x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+				{
+
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+		
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+		
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+		
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+				}
+			}
+		}
+		for (x = -1.0; x < 1.0; x += dx) 
+		{
+			for (z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+				{
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+		
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+		
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+		
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+					vertexColors.push_back(1.0);
+				}
+			}
+		}
+	}
 	return vertexColors;
 	
 }
@@ -206,7 +325,8 @@ std::vector<float> LayeredHeightfieldModel::genTextureCoordinates()
 	float dz = 2.0 / m_precision; 
 	float dx = dz = 2.0 / m_precision;
 	vector<float> coords; 
-	for (int level = 0; level<m_heightfield->levelCount(); level++)
+	int level;
+	for (level = 0; level<m_heightfield->levelCount(); level++)
 	{
 		for (float x = -1.0; x< 1.0; x += dx) 
 		{
@@ -248,6 +368,49 @@ std::vector<float> LayeredHeightfieldModel::genTextureCoordinates()
 			}
 		}
 	}
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
+		float x,z;
+		for (x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+				{
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+				}
+			}
+		}
+		for (x = -1.0; x < 1.0; x += dx) 
+		{
+			for (z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+				{
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+
+					coords.push_back(0.0);
+					coords.push_back(0.0);
+				}
+			}
+		}
+	}
 	return coords;
 }
 
@@ -257,7 +420,8 @@ std::vector<float> LayeredHeightfieldModel::genNormals()
 	float dz = 2.0 / m_precision; 
 	float dx = dz = 2.0 / m_precision;
 	vector<float> normals; 
-	for (int level = 0; level<m_heightfield->levelCount(); level++) 
+	int level;
+	for (level = 0; level<m_heightfield->levelCount(); level++) 
 	{
 		for (float x = -1.0; x< 1.0; x += dx) 
 		{
@@ -294,6 +458,43 @@ std::vector<float> LayeredHeightfieldModel::genNormals()
 						normals.push_back(normal2.getX());
 						normals.push_back(normal2.getY());
 						normals.push_back(normal2.getZ());
+					}
+				}
+			}
+		}
+	}
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
+		float x,z;
+		for (x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+				{
+					Vector normal(0.0,0.0,0.0);
+					if (EDGE_RIGHT(m_heightfield)) normal = Vector(1.0,0.0,0.0);
+					if (EDGE_LEFT(m_heightfield)) normal = Vector(-1.0,0.0,0.0);
+					for (int i = 0; i<4 ;i++) {
+						normals.push_back(normal.getX());
+						normals.push_back(normal.getY());
+						normals.push_back(normal.getZ());
+					}
+				}
+			}
+		}
+		for (x = -1.0; x < 1.0; x += dx) 
+		{
+			for (z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+				{
+					Vector normal(0.0,0.0,0.0);
+					if (EDGE_UP(m_heightfield)) normal = Vector(0.0,0.0,1.0);
+					if (EDGE_DOWN(m_heightfield)) normal = Vector(0.0,0.0,-1.0);
+					for (int i = 0; i<4; i++) {
+						normals.push_back(normal.getX());
+						normals.push_back(normal.getY());
+						normals.push_back(normal.getZ());
 					}
 				}
 			}
