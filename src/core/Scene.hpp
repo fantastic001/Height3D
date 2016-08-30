@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "SceneObject.hpp"
+#include "DynamicSceneObject.hpp"
 #include "AbstractModel.hpp"
 #include "Matrix.hpp"
 #include "Vector.hpp"
@@ -15,6 +16,7 @@ class Scene
 {
 	// scene parameters 
 	std::vector<SceneObject*> m_objects; 
+	std::vector<DynamicSceneObject*> m_dynamic_objects;
 	float m_fovy, m_aspect, m_near, m_far;
 	
 	// camera parameters
@@ -33,8 +35,10 @@ public:
 	~Scene();
 
 	SceneObject* addObject(SceneObject* object);
+	SceneObject* addObject(DynamicSceneObject* object);
 	// addLight(AbstractLight, float x, float y, float z);
 	void setCamera(float x, float y, float z, Vector direction, Vector up);
+	Vector getCameraPosition();
 	
 	/*
 	Sets perspective parameters

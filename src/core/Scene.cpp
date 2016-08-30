@@ -12,9 +12,14 @@ Scene::Scene()
 
 Scene::~Scene() 
 {
-	for (int i = 0; i<m_objects.size(); i++) 
+	int i;
+	for (i = 0; i<m_objects.size(); i++) 
 	{
 		delete m_objects.at(i);
+	}
+	for (i = 0; i<m_dynamic_objects.size(); i++) 
+	{
+		delete m_dynamic_objects.at(i);
 	}
 }
 
@@ -24,6 +29,12 @@ SceneObject* Scene::addObject(SceneObject* object)
 	return object;
 }
 
+SceneObject* Scene::addObject(DynamicSceneObject* object) 
+{
+	m_dynamic_objects.push_back(object);
+	return object->getObject(getCameraPosition());
+}
+
 void Scene::setCamera(float x, float y, float z, Vector direction, Vector up) 
 {
 	m_cx = x; 
@@ -31,6 +42,11 @@ void Scene::setCamera(float x, float y, float z, Vector direction, Vector up)
 	m_cz = z;
 	m_direction = direction;
 	m_up = up;
+}
+
+Vector Scene::getCameraPosition() 
+{
+	return Vector(m_cx, m_cy, m_cz);
 }
 
 void Scene::setPerspective(float fovy, float aspect, float near, float far) 
@@ -71,9 +87,29 @@ Matrix Scene::getPerspectiveMatrix(float x, float y, float z, Vector direction, 
 void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int perspectiveMatrixLocation, int vLocation, int texCoordLocation, int vertexColorLocation, int samplerLocation, bool phong, int shininessLocation, int normalLocation)
 {
 	prog->setUniformValue(perspectiveMatrixLocation, getPerspectiveMatrix(m_cx, m_cy, m_cz, m_direction, m_up, m_fovy, m_aspect, m_near, m_far));
-	for (int i = 0; i<m_objects.size(); i++) 
+	int i;
+	for (i = 0; i<m_objects.size(); i++) 
 	{
 		SceneObject *obj = m_objects.at(i);
+		if (phong) 
+		{
+			prog->setUniformValue(shininessLocation, obj->getMaterial().shininess);
+			for (int j = 0; j<lights.size(); j++) 
+			{
+				prog->setUniformValue(lightPositions.at(j), lights.at(j)->getPosition());
+				prog->setUniformValue(ambientProducts.at(j), obj->getAmbientProduct(lights.at(j)));
+				prog->setUniformValue(diffuseProducts.at(j), obj->getDiffuseProduct(lights.at(j)));
+				prog->setUniformValue(specularProducts.at(j), obj->getSpecularProduct(lights.at(j)));
+			}
+		}
+		obj->setAttributes(prog, vLocation, texCoordLocation, vertexColorLocation, modelUniformMatrixLocation, samplerLocation, normalLocation);
+		obj->bindTexture();
+		obj->bindIndexBuffer();
+		obj->draw();
+	}
+	for (i = 0; i<m_dynamic_objects.size(); i++) 
+	{
+		SceneObject *obj = m_dynamic_objects.at(i)->getObject(getCameraPosition());
 		if (phong) 
 		{
 			prog->setUniformValue(shininessLocation, obj->getMaterial().shininess);
