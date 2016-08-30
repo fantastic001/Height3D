@@ -110,6 +110,7 @@ void Scene::drawObjects(Program *prog, int modelUniformMatrixLocation, int persp
 	for (i = 0; i<m_dynamic_objects.size(); i++) 
 	{
 		SceneObject *obj = m_dynamic_objects.at(i)->getObject(getCameraPosition());
+		if (obj == NULL) continue; 
 		if (phong) 
 		{
 			prog->setUniformValue(shininessLocation, obj->getMaterial().shininess);

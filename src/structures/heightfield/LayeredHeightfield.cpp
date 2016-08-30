@@ -34,7 +34,7 @@ LayeredHeightfield::~LayeredHeightfield()
 }
 
 
-void LayeredHeightfield::writeToFile(char* path) 
+void LayeredHeightfield::writeToFile(const char* path) 
 {
 	fstream f(path, ios::out | ios::binary);
 	lhf_header header;
@@ -57,7 +57,7 @@ void LayeredHeightfield::writeToFile(char* path)
 	f.close();
 
 }
-LayeredHeightfield* LayeredHeightfield::readFromFile(char* path) 
+LayeredHeightfield* LayeredHeightfield::readFromFile(const char* path) 
 {
 	fstream f(path, ios::in | ios::binary);
 	lhf_header header;

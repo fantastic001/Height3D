@@ -13,6 +13,7 @@ class LayeredHeightfieldModel : public AbstractModel
 
 public:
 	LayeredHeightfieldModel(LayeredHeightfield *heightfield);
+	LayeredHeightfield* getField();
 
 protected:
 
