@@ -15,8 +15,8 @@ public:
 	LayeredHeightfield(int precision);
 	~LayeredHeightfield();
 
-	void writeToFile(char* path);
-	static LayeredHeightfield* readFromFile(char* path);
+	void writeToFile(const char* path);
+	static LayeredHeightfield* readFromFile(const char* path);
 
 	Heightfield* levelAt(int index); 
 	int levelCount();

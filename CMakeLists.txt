@@ -57,6 +57,8 @@ SET(gui_source_files
 	src/morphology/CaveGenerator.cpp
 	src/morphology/kernels/SphericalKernel.cpp
 	src/morphology/kernels/PerlinSphericalKernel.cpp
+
+	src/terrain/TerrainPart.cpp
 )
 
 add_compile_options(-std=c++11)
@@ -105,6 +107,7 @@ add_executable(test_functional
 	functional/filled_surface.cpp
 	functional/layered_heightfield.cpp
 	functional/cave_generator.cpp
+	functional/big_terrain.cpp
 	functional/array_to_layered_heightfield.cpp
 	${core_source_files}
 	${gui_source_files}

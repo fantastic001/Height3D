@@ -16,6 +16,11 @@ LayeredHeightfieldModel::LayeredHeightfieldModel(LayeredHeightfield *heightfield
 	m_precision = m_heightfield->getPrecision();
 }
 
+LayeredHeightfield* LayeredHeightfieldModel::getField() 
+{
+	return m_heightfield;
+}
+
 std::vector<float> LayeredHeightfieldModel::genVertices() 
 {
 	float dz = 2.0 / m_precision; 
