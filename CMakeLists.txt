@@ -95,6 +95,7 @@ add_executable(test_functional
 	functional/scene.cpp
 	functional/scene_loop.cpp
 	functional/phong.cpp
+	functional/dynamic_scene_object.cpp
 	functional/surface.cpp
 	functional/noise.cpp
 	functional/perlin_surface.cpp
