@@ -105,18 +105,20 @@ protected:
 				{
 					for (float z = -1; z<=1; z += 2.0/128) 
 					{
+						float xi = 0.25*i + 0.25 * 0.5 * (x+1);
+						float zi = 0.25*j + 0.25 * 0.5 * (z+1);
 						h->setBottom(0,x,z,-1);
-						h->setTop(0, x, z, m_terrain->value(0.25*i + 0.25*x, 0.25*j + 0.25*z));
+						h->setTop(0, x, z, m_terrain->value(xi, zi));
 					}
 				}
 				string path = string("big-terrain-") + string(int_to_char.substr(i,1)) + "-" + string(int_to_char.substr(j,1));
 				h->writeToFile(path.c_str());
 				float size = 5;
 				scene.addObject(new TerrainPart(path.c_str(), 
-					10*i, 10*j, // position
+					2*size*i, 2*size*j, // position
 					size, // size
 					1, // height
-					Material(Color(1.0, 0, 0), Color(1,0,0), Color(1,0,0), 1,0,0,1),
+					Material(Color(1.0, 0, 0), Color(1,0,0), Color(0,0,0), 1,0,0,1),
 					3*size // threshold
 				));
 			}
