@@ -16,6 +16,7 @@ float lerp(float a0, float a1, float w)
 
 Perlin::Perlin(int size)
 {
+	srand(time(NULL));
 	m_size = size; 
 	m_gradients = (Vector*) malloc(sizeof(Vector) * (m_size + 1) * (m_size + 1));
 	for (int i = 0; i<=m_size; i++) 
@@ -72,6 +73,5 @@ Vector Perlin::getRandomGradient()
 		Vector(1,-1, 0, 0),
 		Vector(-1,-1,0, 0)
 	};
-	srand(time(NULL));
 	return gradients[rand() % 4].normalized();
 }
