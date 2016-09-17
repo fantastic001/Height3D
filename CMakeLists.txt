@@ -72,6 +72,7 @@ include_directories(${GLEW_INCLUDE_DIRS} src/)
 
 
 link_libraries(${OpenCV_LIBS})
+link_libraries(noise)
 
 add_executable(unittest
 	tests/test_vector.cpp

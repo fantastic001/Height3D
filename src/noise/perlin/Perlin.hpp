@@ -4,19 +4,19 @@
 
 #include <core/Vector.hpp>
 
+#include <noise/noise.h>
+
 class Perlin 
 {
-	Vector* m_gradients;
 	int m_size;
+	noise::module::Perlin m_noise;
+
 
 public:
 	Perlin(int size);
 	~Perlin();
 	
 	
-	float getDotProduct(int ix, int iy, float xf, float yf);
-	Vector getRandomGradient();
-
 	/*
 	(0,0) <= (x,y) <= (1,1)
 

@@ -13,7 +13,7 @@
 
 using namespace std;
 
-BOOST_AUTO_TEST_CASE( noise )
+BOOST_AUTO_TEST_CASE( noise_perlin_test )
 {
 	PerlinImageAdapter p;
 	cout << "Adding frequency 4\n";
