@@ -34,12 +34,15 @@ void CaveGenerator::generate(Kernel *k, LayeredHeightfield *h)
 						if (!added) 
 						{
 							h->addLevel();
+							h->addLevel();
 							added = true;
 						}
-						float tmp = h->getTop(l,i,j);
-						h->setTop(l,i,j,k->bottom(x,z));
+						h->setTop(levels+1,i,j,k->bottom(x,z));
+						h->setBottom(levels+1,i,j,h->getBottom(l,i,j));
 						h->setBottom(levels,i,j,k->top(x,z));
-						h->setTop(levels,i,j,tmp);
+						h->setTop(levels,i,j,h->getTop(l,i,j));
+						h->setTop(l,i,j,-1);
+						h->setBottom(l,i,j,-1);
 					}
 					else if (
 						k->bottom(x,z) <= h->getBottom(l,i,j) 
