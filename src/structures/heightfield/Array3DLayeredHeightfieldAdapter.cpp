@@ -27,7 +27,6 @@ void Array3DLayeredHeightfieldAdapter::generate()
 		{
 			bool was_active = false;
 			int level = 0;
-			m_h->addLevel();
 			for (int j =0; j<= m_precision; j++)
 			{
 				float y = 2.0 * j / m_precision - 1.0;
