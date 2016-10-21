@@ -507,3 +507,4 @@ std::vector<float> LayeredHeightfieldModel::genNormals()
 	}
 	return normals;
 }
+

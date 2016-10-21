@@ -26,6 +26,7 @@ protected:
 	std::vector<float> genTextureCoordinates();
 
 	std::vector<float> genNormals();
+
 	
 };
 

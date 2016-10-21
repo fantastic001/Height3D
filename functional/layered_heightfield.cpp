@@ -100,6 +100,8 @@ protected:
 
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
+		cout << "L/R edges: " << h->countLeftRightEdges() << endl;
+		cout << "F/B edges: " << h->countForwardBackwardEdges() << endl;
 		cube = scene.addObject(new SceneObject(
 			new  LayeredHeightfieldModel(h), // use cube model to draw this object
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 

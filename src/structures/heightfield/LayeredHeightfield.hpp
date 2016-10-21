@@ -38,6 +38,9 @@ public:
 	float toContinious(int i);
 
 	int getPrecision();
+
+	int countLeftRightEdges();
+	int countForwardBackwardEdges();
 };
 
 #endif // HEIGHT3D_STRUCTURES_HEIGHTFIELD_LAYERED_HEIGHTFIELD_HPP
