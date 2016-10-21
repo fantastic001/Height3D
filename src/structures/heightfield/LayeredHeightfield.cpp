@@ -147,3 +147,51 @@ int LayeredHeightfield::getPrecision()
 {
 	return m_precision;
 }
+
+
+#define EDGE_RIGHT x == 1.0 || getTop(level, x+dx,z) == getBottom(level, x+dx,z)
+#define EDGE_LEFT x == -1.0 || getTop(level, x-dx,z) == getBottom(level, x-dx,z)
+
+#define EDGE_UP z == 1.0 || getTop(level, x,z+dz) == getBottom(level, x,z+dz)
+#define EDGE_DOWN z == -1.0 || getTop(level, x,z-dz) == getBottom(level, x,z-dz)
+
+int LayeredHeightfield::countLeftRightEdges() 
+{
+	int c = 0;
+	float dz = 2.0 / m_precision; 
+	float dx = dz = 2.0 / m_precision;
+	for (int level = 0; level<levelCount(); level++) {
+		float x,z;
+		for (float x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (float z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT || EDGE_LEFT) 
+				{
+					c++;
+				}
+			}
+		}
+	}
+	return c;
+}
+int LayeredHeightfield::countForwardBackwardEdges() 
+{
+	
+	int c = 0;
+	float dz = 2.0 / m_precision; 
+	float dx = dz = 2.0 / m_precision;
+	for (int level = 0; level<levelCount(); level++) {
+		for (float x = -1.0; x < 1.0; x += dx) 
+		{
+			for (float z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP || EDGE_DOWN) 
+				{
+					c++;
+				}
+			}
+		}
+	}
+	return c; 
+}
