@@ -26,6 +26,9 @@ protected:
 	std::vector<float> genTextureCoordinates();
 
 	std::vector<float> genNormals();
+
+	int countLeftRightEdges(); 
+	int countForwardBackwardEdges();
 	
 };
 

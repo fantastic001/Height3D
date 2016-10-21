@@ -507,3 +507,48 @@ std::vector<float> LayeredHeightfieldModel::genNormals()
 	}
 	return normals;
 }
+
+
+int LayeredHeightfieldModel::countLeftRightEdges() 
+{
+	int c = 0
+	for (level = 0; level<m_heightfield->levelCount(); level++) {
+		float x,z;
+		for (x = -1.0; x<= 1.0; x += dx) 
+		{
+			for (z = -1.0; z<1.0; z += dz) 
+			{
+				if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+				{
+					c++;
+				}
+			}
+		}
+	}
+	return c;
+}
+int LayeredHeightfieldModel::countForwardBackwardEdges() 
+{
+	
+	int c = 0;
+	for (int level = 0; level<m_heightfield->levelCount(); level++) {
+		for (x = -1.0; x < 1.0; x += dx) 
+		{
+			for (z = -1.0; z<=1.0; z += dz) 
+			{
+				if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+				{
+					Vector normal(0.0,0.0,0.0);
+					if (EDGE_UP(m_heightfield)) normal = Vector(0.0,0.0,1.0);
+					if (EDGE_DOWN(m_heightfield)) normal = Vector(0.0,0.0,-1.0);
+					for (int i = 0; i<4; i++) {
+						normals.push_back(normal.getX());
+						normals.push_back(normal.getY());
+						normals.push_back(normal.getZ());
+					}
+				}
+			}
+		}
+	}
+	return c; 
+}
