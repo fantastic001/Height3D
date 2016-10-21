@@ -42,7 +42,8 @@ public:
 protected:
 	float function_top(float x,float z) 
 	{
-		return 0.5 * (x*x + z*z);
+		if (-1 <= x && x <= 1 && -1 <= z && z <= 1) return 0.5 * (x*x + z*z);
+		else return -1;
 	}
 	float function_bottom(float x, float z) 
 	{

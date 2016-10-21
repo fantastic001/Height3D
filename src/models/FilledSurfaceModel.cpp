@@ -4,11 +4,11 @@
 
 using namespace std;
 
-#define EDGE_RIGHT(h) x == 1.0 || function_top(x+dx,z) == function_bottom(x+dx,z)
-#define EDGE_LEFT(h) x == -1.0 || function_top(x-dx,z) == function_bottom(x-dx,z)
+#define EDGE_RIGHT x == 1.0 || function_top(x+dx,z) == function_bottom(x+dx,z)
+#define EDGE_LEFT x == -1.0 || function_top(x-dx,z) == function_bottom(x-dx,z)
 
-#define EDGE_UP(h) z == 1.0 || function_top(x,z+dz) == function_bottom(x,z+dz)
-#define EDGE_DOWN(h) z == -1.0 || function_top(x,z-dz) == function_bottom(x,z-dz)
+#define EDGE_UP z == 1.0 || function_top(x,z+dz) == function_bottom(x,z+dz)
+#define EDGE_DOWN z == -1.0 || function_top(x,z-dz) == function_bottom(x,z-dz)
 
 FilledSurfaceModel::FilledSurfaceModel(int precision) 
 {
@@ -72,7 +72,7 @@ std::vector<float> FilledSurfaceModel::genVertices()
 	{
 		for (z = -1.0; z<1.0; z += dz) 
 		{
-			if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+			if (EDGE_RIGHT || EDGE_LEFT) 
 			{
 				vertices.push_back(x);
 				vertices.push_back(function_top(x,z)); 
@@ -96,7 +96,7 @@ std::vector<float> FilledSurfaceModel::genVertices()
 	{
 		for (z = -1.0; z<=1.0; z += dz) 
 		{
-			if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+			if (EDGE_UP || EDGE_DOWN) 
 			{
 				vertices.push_back(x);
 				vertices.push_back(function_top(x,z)); 
@@ -168,7 +168,7 @@ std::vector<int> FilledSurfaceModel::genIndices()
 	{
 		for (z = -1.0; z<1.0; z += dz) 
 		{
-			if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+			if (EDGE_RIGHT || EDGE_LEFT) 
 			{
 				indices.push_back(8*points + 4*index + 0);
 				indices.push_back(8*points + 4*index + 1);
@@ -185,7 +185,7 @@ std::vector<int> FilledSurfaceModel::genIndices()
 	{
 		for (z = -1.0; z<=1.0; z += dz) 
 		{
-			if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+			if (EDGE_UP || EDGE_DOWN) 
 			{
 				indices.push_back(8*points + 4*index + 0);
 				indices.push_back(8*points + 4*index + 1);
@@ -256,7 +256,7 @@ std::vector<float> FilledSurfaceModel::genVertexColors()
 	{
 		for (z = -1.0; z<1.0; z += dz) 
 		{
-			if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+			if (EDGE_RIGHT || EDGE_LEFT) 
 			{
 
 				vertexColors.push_back(1.0);
@@ -281,7 +281,7 @@ std::vector<float> FilledSurfaceModel::genVertexColors()
 	{
 		for (z = -1.0; z<=1.0; z += dz) 
 		{
-			if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+			if (EDGE_UP || EDGE_DOWN) 
 			{
 				vertexColors.push_back(1.0);
 				vertexColors.push_back(1.0);
@@ -355,7 +355,7 @@ std::vector<float> FilledSurfaceModel::genTextureCoordinates()
 	{
 		for (z = -1.0; z<1.0; z += dz) 
 		{
-			if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+			if (EDGE_RIGHT || EDGE_LEFT) 
 			{
 				coords.push_back(0.0);
 				coords.push_back(0.0);
@@ -375,7 +375,7 @@ std::vector<float> FilledSurfaceModel::genTextureCoordinates()
 	{
 		for (z = -1.0; z<=1.0; z += dz) 
 		{
-			if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+			if (EDGE_UP || EDGE_DOWN) 
 			{
 				coords.push_back(0.0);
 				coords.push_back(0.0);
@@ -445,11 +445,11 @@ std::vector<float> FilledSurfaceModel::genNormals()
 	{
 		for (z = -1.0; z<1.0; z += dz) 
 		{
-			if (EDGE_RIGHT(m_heightfield) || EDGE_LEFT(m_heightfield)) 
+			if (EDGE_RIGHT || EDGE_LEFT) 
 			{
 				Vector normal(0.0,0.0,0.0);
-				if (EDGE_RIGHT(m_heightfield)) normal = Vector(1.0,0.0,0.0);
-				if (EDGE_LEFT(m_heightfield)) normal = Vector(-1.0,0.0,0.0);
+				if (EDGE_RIGHT) normal = Vector(1.0,0.0,0.0);
+				if (EDGE_LEFT) normal = Vector(-1.0,0.0,0.0);
 				for (int i = 0; i<4 ;i++) {
 					normals.push_back(normal.getX());
 					normals.push_back(normal.getY());
@@ -462,11 +462,11 @@ std::vector<float> FilledSurfaceModel::genNormals()
 	{
 		for (z = -1.0; z<=1.0; z += dz) 
 		{
-			if (EDGE_UP(m_heightfield) || EDGE_DOWN(m_heightfield)) 
+			if (EDGE_UP || EDGE_DOWN) 
 			{
 				Vector normal(0.0,0.0,0.0);
-				if (EDGE_UP(m_heightfield)) normal = Vector(0.0,0.0,1.0);
-				if (EDGE_DOWN(m_heightfield)) normal = Vector(0.0,0.0,-1.0);
+				if (EDGE_UP) normal = Vector(0.0,0.0,1.0);
+				if (EDGE_DOWN) normal = Vector(0.0,0.0,-1.0);
 				for (int i = 0; i<4; i++) {
 					normals.push_back(normal.getX());
 					normals.push_back(normal.getY());
