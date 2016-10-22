@@ -26,7 +26,6 @@ SET(gui_source_files
 	src/loops/SDLEvent.cpp
 
 	src/models/SurfaceModel.cpp
-	src/models/FilledSurfaceModel.cpp
 	src/models/VoxeledModel.cpp
 
 	src/textures/GradientTextureFactory.cpp
@@ -34,7 +33,6 @@ SET(gui_source_files
 	src/noise/perlin/Perlin.cpp
 	src/noise/perlin/PerlinImageAdapter.cpp
 	src/noise/perlin/PerlinSurfaceModel.cpp
-	src/noise/perlin/PerlinFilledSurfaceModel.cpp
 	src/noise/perlin/PerlinSignal.cpp
 
 	src/interpolation/AbstractInterpolation.cpp
@@ -105,7 +103,6 @@ add_executable(test_functional
 	functional/voxel.cpp
 	functional/voxeled_terrain.cpp
 	functional/octree_terrain.cpp
-	functional/filled_surface.cpp
 	functional/layered_heightfield.cpp
 	functional/cave_generator.cpp
 	functional/big_terrain.cpp

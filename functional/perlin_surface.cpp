@@ -26,7 +26,7 @@
 #include <loops/SDLLoop.hpp>
 #include <loops/SDLEvent.hpp>
 
-#include <noise/perlin/PerlinFilledSurfaceModel.hpp>
+#include <noise/perlin/PerlinSurfaceModel.hpp>
 
 using namespace std;
 
@@ -101,7 +101,7 @@ protected:
 		camera_position = Vector(0,1,0);
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 30);
 		
-		PerlinFilledSurfaceModel* model = new PerlinFilledSurfaceModel(128);
+		PerlinSurfaceModel* model = new PerlinSurfaceModel(128);
 		model->addFrequency(2, 0.5);
 		model->addFrequency(16, 0.01);
 		cube = scene.addObject(new SceneObject(
