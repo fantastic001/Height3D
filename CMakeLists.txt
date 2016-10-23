@@ -18,6 +18,7 @@ SET(core_source_files
 	src/core/Event.cpp
 	src/core/Light.cpp
 	src/core/TextureFactory.cpp
+	src/core/TextureAtlas.cpp
 )
 
 SET(gui_source_files 
