@@ -96,6 +96,7 @@ add_executable(test_functional
 	functional/textures.cpp
 	functional/scene.cpp
 	functional/scene_loop.cpp
+	functional/atlas.cpp
 	functional/phong.cpp
 	functional/dynamic_scene_object.cpp
 	functional/surface.cpp
