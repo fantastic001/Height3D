@@ -67,11 +67,18 @@ find_package(GLEW)
 find_package(SDL2)
 find_package( OpenCV REQUIRED )
 include_directories(${GLEW_INCLUDE_DIRS} src/)
-
-
-
 link_libraries(${OpenCV_LIBS})
 link_libraries(noise)
+link_libraries(SDL2)
+link_librarieS(${OPENGL_LIBRARIES})
+link_libraries(${GLEW_LIBRARIES})
+
+add_library(height3d_core 
+	${core_source_files}
+)
+add_library(height3d_gui
+	${gui_source_files}
+)
 
 add_executable(unittest
 	tests/test_vector.cpp
@@ -80,12 +87,9 @@ add_executable(unittest
 	tests/test_array_octree_adapter.cpp
 	tests/test_octree_file_storage.cpp
 	tests/test_lhf_file.cpp
-	${core_source_files}
-	${gui_source_files}
 )
-target_link_libraries(unittest ${GLEW_LIBRARIES})
-target_LINK_LIBRARIES(unittest ${OPENGL_LIBRARIES})
-target_link_libraries(unittest SDL2)
+target_link_libraries(unittest height3d_core)
+target_LINK_LIBRARIES(unittest height3d_gui)
 target_link_libraries(unittest boost_unit_test_framework)
 add_test(NAME unittest COMMAND unittest)
 
@@ -109,12 +113,9 @@ add_executable(test_functional
 	functional/cave_generator.cpp
 	functional/big_terrain.cpp
 	functional/array_to_layered_heightfield.cpp
-	${core_source_files}
-	${gui_source_files}
 )
+target_link_libraries(test_functional height3d_core)
+target_LINK_LIBRARIES(test_functional height3d_gui)
 include_directories(functional/)
-target_link_libraries(test_functional ${GLEW_LIBRARIES})
-target_LINK_LIBRARIES(test_functional ${OPENGL_LIBRARIES})
-target_link_libraries(test_functional SDL2)
 target_link_libraries(test_functional boost_unit_test_framework)
 add_custom_target(functional test_functional)
