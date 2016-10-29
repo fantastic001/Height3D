@@ -60,7 +60,7 @@ float TextureAtlas::getTexturePosition(int index)
 
 float TextureAtlas::getX(int index, float x) 
 {
-	return getTexturePosition(index) + x*m_textures[index].getWidth() / (1.0 * m_width);
+	return 0.0 + x*m_textures[index].getWidth() / (1.0 * m_width);
 }
 
 float TextureAtlas::getY(int index, float y) 
