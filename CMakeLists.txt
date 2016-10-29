@@ -73,10 +73,10 @@ link_libraries(SDL2)
 link_librarieS(${OPENGL_LIBRARIES})
 link_libraries(${GLEW_LIBRARIES})
 
-add_library(height3d_core 
+add_library(height3d_core SHARED
 	${core_source_files}
 )
-add_library(height3d_gui
+add_library(height3d_gui SHARED
 	${gui_source_files}
 )
 
@@ -119,3 +119,16 @@ target_LINK_LIBRARIES(test_functional height3d_gui)
 include_directories(functional/)
 target_link_libraries(test_functional boost_unit_test_framework)
 add_custom_target(functional test_functional)
+
+
+install(
+	TARGETS height3d_core height3d_gui 
+	RUNTIME DESTINATION bin 
+	LIBRARY DESTINATION lib 
+)
+
+install(DIRECTORY src/ DESTINATION include/Height3D
+	FILES_MATCHING PATTERN "*.hpp"
+)
+
+
