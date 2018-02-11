@@ -7,13 +7,17 @@ class SurfaceModel : public AbstractModel
 {
 
 	int m_precision;
+	float (*f)(float, float);
 
 public:
 
 	/*
 	Specify precision, from precision dx and dz will be derived: dx = dz = 2 / precision
+
+	f is function which returns surface height for every x,z in range [-1, 1]
 	*/
 	SurfaceModel(int precision); 
+	SurfaceModel(int precision, float (*f) (float ,float)); 
 
 protected:
 	std::vector<float> genVertices(); 
@@ -27,7 +31,7 @@ protected:
 	
 	It should return real value for EVERY (x,z) in range [-1, 1]
 	*/
-	virtual float function(float x, float z) = 0;
+	virtual float function(float x, float z);
 };
 
 #endif // HEIGHT3D_MODELS_SURFACE_MODEL_HPP

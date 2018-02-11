@@ -30,21 +30,6 @@
 
 using namespace std;
 
-class MySurfaceModel : public SurfaceModel
-{
-public:
-
-	MySurfaceModel(int precision) : SurfaceModel(precision) 
-	{
-		
-	}
-
-protected:
-	float function(float x,float z) 
-	{
-		return 0.5 * (x*x + z*z);
-	}
-};
 
 class MySurfaceTestLoop : public SDLLoop 
 {
@@ -116,7 +101,9 @@ protected:
 		camera_position = Vector(0,1,0);
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
 		cube = scene.addObject(new SceneObject(
-			new MySurfaceModel(200), // use surface parametrized model to draw this object
+			new SurfaceModel(200, [] (float x, float z) -> float {return 0.5 + (x*x + z*z);}), 
+			// use surface parametrized model to draw this object
+			
 			new Texture(GL_TEXTURE_2D, 1, 1, GL_RGB), // use dummy texture 
 			0.0, 0.0, 0.0, // location 
 			0.0, 0.0, // angles of rotation 

@@ -8,6 +8,13 @@ using namespace std;
 SurfaceModel::SurfaceModel(int precision) 
 {
 	m_precision = precision; 
+	f = NULL;
+}
+
+SurfaceModel::SurfaceModel(int precision, float (*f) (float, float)) 
+{
+	m_precision = precision; 
+	this->f = f;
 }
 
 std::vector<float> SurfaceModel::genVertices() 
@@ -145,4 +152,16 @@ std::vector<float> SurfaceModel::genNormals()
 		}
 	}
 	return normals;
+}
+
+float SurfaceModel::function(float x, float z)
+{
+	if (f != NULL) 
+	{
+		return f(x,z);
+	}
+	else
+	{
+		return 0;
+	}
 }
