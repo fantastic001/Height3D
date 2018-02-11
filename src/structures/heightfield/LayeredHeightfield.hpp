@@ -3,8 +3,10 @@
 #define HEIGHT3D_STRUCTURES_HEIGHTFIELD_LAYERED_HEIGHTFIELD_HPP
 
 #include <vector>
+#include <functional>
 
 #include "Heightfield.hpp"
+using namespace std;
 
 class LayeredHeightfield 
 {
@@ -41,6 +43,10 @@ public:
 
 	int countLeftRightEdges();
 	int countForwardBackwardEdges();
+
+	// This function iterates over field on all levels and assigns apropirate value for top and bottom
+	// it recieves function (int level, float x, float z) -> pair<float, float> (bottom, top)
+	void assign(function<pair<float, float> (int, float, float)>);
 };
 
 #endif // HEIGHT3D_STRUCTURES_HEIGHTFIELD_LAYERED_HEIGHTFIELD_HPP

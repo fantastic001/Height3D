@@ -195,3 +195,13 @@ int LayeredHeightfield::countForwardBackwardEdges()
 	}
 	return c; 
 }
+void LayeredHeightfield::assign(function<pair<float, float>(int, float, float)> f) 
+{
+	for (int l = 0; l<levelCount(); l++) 
+	{
+		m_layers->at(l)->assign([=] (float x, float z) -> pair<float, float>
+		{
+			return f(l, x,z);
+		});
+	}
+}

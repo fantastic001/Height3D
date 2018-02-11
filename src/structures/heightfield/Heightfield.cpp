@@ -1,6 +1,7 @@
 
 #include "Heightfield.hpp"
 #include <cstring>
+using namespace std;
 
 Heightfield::Heightfield(int precision) 
 {
@@ -73,4 +74,19 @@ float Heightfield::getTopLevel(int i, int j)
 float Heightfield::getBottomLevel(int i, int j) 
 {
 	return m_bottom[i*(m_precision + 1) + j];
+}
+
+void Heightfield::assign(function<pair<float, float> (float, float)> f) 
+{
+	for (int i = 0; i<=m_precision; i++) 
+	{
+		for (int j = 0; j<=m_precision; j++) 
+		{
+			float x =  2*float(i) / m_precision - 1;
+			float z =  2*float(j) / m_precision - 1;
+
+			setBottomLevel(x,z,f(x,z).first);
+			setTopLevel(x,z,f(x,z).second);
+		}
+	}
 }

@@ -2,6 +2,10 @@
 #ifndef HEIGHT3D_STRUCTURES_HEIGHTFIELD_HEIGHTFIELD_HPP
 #define HEIGHT3D_STRUCTURES_HEIGHTFIELD_HEIGHTFIELD_HPP
 
+#include <utility>
+#include <functional>
+using namespace std;
+
 class Heightfield 
 {
 	float *m_top;
@@ -26,6 +30,11 @@ public:
 	
 	float getTopLevel(int i, int j);
 	float getBottomLevel(int i, int j);
+
+	// This function traverses whole heightfield and assigns values to top and bottom
+	// it recieves function which returns pair<float, float> which is pair of pair (bottom, top) for given parameters x,z
+	void assign(function<pair<float, float> (float, float)>);
+
 };
 
 #endif // HEIGHT3D_STRUCTURES_HEIGHTFIELD_HEIGHTFIELD_HPP

@@ -104,12 +104,12 @@ add_executable(test_functional
 	functional/phong.cpp
 	functional/dynamic_scene_object.cpp
 	functional/surface.cpp
+	functional/layered_heightfield.cpp
 	functional/noise.cpp
 	functional/perlin_surface.cpp
 	functional/voxel.cpp
 	functional/voxeled_terrain.cpp
 	functional/octree_terrain.cpp
-	functional/layered_heightfield.cpp
 	functional/cave_generator.cpp
 	functional/big_terrain.cpp
 	functional/array_to_layered_heightfield.cpp

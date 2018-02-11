@@ -85,18 +85,15 @@ protected:
 		LayeredHeightfield *h = new LayeredHeightfield(128);
 		h->addLevel();
 		h->addLevel();
-		for (float x = -1; x<=1; x += 2.0/128) 
-		{
-			for (float z = -1; z<=1; z += 2.0/128) 
+
+		h->assign([=] (int level, float x, float z) -> pair<float, float> {
+			switch (level) 
 			{
-				cout << x << " " << z << endl;
-				h->setBottom(0,x,z, 0.4 * (x*x + z*z) - 1.0);
-				h->setTop(0,x,z, 0.4 * (x*x + z*z));
-				
-				h->setBottom(1, x,z, 1.2);
-				h->setTop(1, x,z, 1.4);
+				case 0: return make_pair(0.4 * (x*x + z*z) - 1, 0.4 * (x*x + z*z));
+				case 1: return make_pair(1.2, 1.4);
+				default: return make_pair(0,0);
 			}
-		} 
+		});
 
 		scene.setCamera(0, 0, 0, Vector(0, 0.0, 1.00), Vector(0, 1, 0));
 		scene.setPerspective(3.1415 / 2, 1.0, 0.1, 10);
