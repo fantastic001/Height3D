@@ -116,7 +116,7 @@ BOOST_AUTO_TEST_CASE( functional_scene )
 	Window win(512, 512, "tutorial");
 	
 	glClearColor ( 0.0, 0.0, 0.0, 1.0 );
-	glClear ( GL_COLOR_BUFFER_BIT );
+	glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	win.redraw();
 	win.delay(2000);
 	
@@ -154,7 +154,7 @@ BOOST_AUTO_TEST_CASE( functional_scene )
 	for (int i = 0; i<60; i++) 
 	{
 		glClearColor ( 0.0, 0.0, 0.0, 1.0 );
-		glClear ( GL_COLOR_BUFFER_BIT );
+		glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		alpha += 3.14 / 20;
 		scene.setCamera(0,1,0, Vector(5*cos(alpha), -1, 5*sin(alpha)), Vector(0,1,0));
 		scene.drawObjects(&program, modelLocation, perspectiveLocation, vertexLocation, texCoordLocation, vertexColorLocation, samplerLocation);

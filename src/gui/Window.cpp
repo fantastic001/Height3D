@@ -31,7 +31,6 @@ Window::~Window()
 
 void Window::redraw() 
 {
-	glClear(GL_DEPTH_BUFFER_BIT);
 	SDL_GL_SwapWindow(mainwindow);
 }
 

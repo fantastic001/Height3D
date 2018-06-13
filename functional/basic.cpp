@@ -27,18 +27,20 @@ BOOST_AUTO_TEST_CASE( basic )
 
 	Window win(512, 512, "tutorial");
 	
+
+	glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor ( 1.0, 0.0, 0.0, 1.0 );
-	glClear ( GL_COLOR_BUFFER_BIT );
 	win.redraw();
 	win.delay(2000);
 	
+	glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor ( 0.0, 1.0, 0.0, 1.0 );
-	glClear ( GL_COLOR_BUFFER_BIT );
 	win.redraw();
 	win.delay(2000);
 	
+
+	glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor ( 0.0, 0.0, 1.0, 1.0 );
-	glClear ( GL_COLOR_BUFFER_BIT );
 	win.redraw();
 	win.delay(2000);
 	
@@ -72,6 +74,7 @@ BOOST_AUTO_TEST_CASE( basic )
 	
 	program.setAttributeArray(loc, 3);
 	
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
 	
 	win.redraw();
