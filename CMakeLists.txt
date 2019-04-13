@@ -59,6 +59,56 @@ SET(gui_source_files
 
 	src/terrain/TerrainPart.cpp
 )
+SET(header_files
+	src/gui/Window.hpp
+	src/noise/perlin/PerlinSurfaceModel.hpp
+	src/noise/perlin/PerlinImageAdapter.hpp
+	src/noise/perlin/PerlinSignal.hpp
+	src/noise/perlin/Perlin.hpp
+	src/interpolation/BilinearInterpolation.hpp
+	src/interpolation/AbstractInterpolation.hpp
+	src/textures/GradientTextureFactory.hpp
+	src/voxel/VoxeledHeightfield.hpp
+	src/morphology/CaveGenerator.hpp
+	src/morphology/erode.hpp
+	src/morphology/kernels/PerlinSphericalKernel.hpp
+	src/morphology/kernels/Kernel.hpp
+	src/morphology/kernels/SphericalKernel.hpp
+	src/core/TextureAtlas.hpp
+	src/core/Shader.hpp
+	src/core/Loop.hpp
+	src/core/Material.hpp
+	src/core/TextureFactory.hpp
+	src/core/AbstractModel.hpp
+	src/core/Array3D.hpp
+	src/core/Matrix.hpp
+	src/core/Scene.hpp
+	src/core/Buffer.hpp
+	src/core/Vector.hpp
+	src/core/common.hpp
+	src/core/Program.hpp
+	src/core/Light.hpp
+	src/core/Texture.hpp
+	src/core/DynamicSceneObject.hpp
+	src/core/Color.hpp
+	src/core/SceneObject.hpp
+	src/core/Event.hpp
+	src/models/SurfaceModel.hpp
+	src/models/VoxeledModel.hpp
+	src/terrain/TerrainPart.hpp
+	src/structures/octree/OctreeFileStorage.hpp
+	src/structures/octree/ImplicitOctreeGenerator.hpp
+	src/structures/octree/Octree.hpp
+	src/structures/octree/OctreeModel.hpp
+	src/structures/octree/Array3DOctreeAdapter.hpp
+	src/structures/heightfield/Array3DLayeredHeightfieldAdapter.hpp
+	src/structures/heightfield/LayeredHeightfieldModel.hpp
+	src/structures/heightfield/Heightfield.hpp
+	src/structures/heightfield/LayeredHeightfield.hpp
+	src/loops/SDLEvent.hpp
+	src/loops/SDLLoop.hpp
+
+)
 
 add_compile_options(-std=c++11)
 
@@ -131,4 +181,26 @@ install(DIRECTORY src/ DESTINATION include/Height3D
 	FILES_MATCHING PATTERN "*.hpp"
 )
 
+# first we can indicate the documentation build as an option and set it to ON by default
+option(BUILD_DOC "Build documentation" ON)
+
+# check if Doxygen is installed
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+    # set input and output files
+    set(DOXYGEN_IN Doxyfile.in)
+    set(DOXYGEN_OUT Doxyfile.out)
+    string(REPLACE ";" " " DOXYGEN_HEADER_INPUT "${header_files}")
+    configure_file(${DOXYGEN_IN} ${DOXYGEN_OUT})
+
+
+    # note the option ALL which allows to build the docs together with the application
+    add_custom_target( doxygen ALL
+        COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_OUT}
+        WORKING_DIRECTORY .
+        COMMENT "Generating API documentation with Doxygen"
+        VERBATIM )
+else (DOXYGEN_FOUND)
+  message("Doxygen need to be installed to generate the doxygen documentation")
+endif (DOXYGEN_FOUND)
 

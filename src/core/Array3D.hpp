@@ -1,7 +1,12 @@
 
 #ifndef HEIGHT3D_ARRAY3D_HPP
 #define HEIGHT3D_ARRAY3D_HPP
-
+/*
+ * \brief Array with 3-dimensions
+ *
+ * Represents an array of 3 dimmensions of specified type
+ *
+ * */
 template <typename T> class Array3D
 {
 	T ***m_array;
