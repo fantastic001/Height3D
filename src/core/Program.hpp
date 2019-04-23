@@ -13,18 +13,29 @@ class Program
 public:
 	Program(); 
 	~Program();
-
+	
+	/// Add shader to program
 	bool addShader(Shader shader);
+
+	/// Returns attribute location for specified attribute name. Location can be passed to setUniformValue, setAttributeArray etc...
 	int getAttributeLocation(const char* name);
 	
+	/// Enables attribute on specified location to be used in vertex shader
 	void enableAttributeArray(int location);
 	void disableAttributeArray(int location);
-
+	
+	/// link program's shaders and compile them
+	/// \sa bind()
 	void link();
+
+	/// bind program (after linking)
 	void bind(); 
 
 	GLuint getProgramId();
-
+	
+	/// Sets attribute on specified location to currently bound buffer (last Buffer object which called bind method).
+	/// \sa Buffer::bind()
+	/// \sa enableAttributeArray
 	void setAttributeArray(int location, int vertex_size);
 	
 	void setUniformValue(int location, GLfloat value);
@@ -35,7 +46,7 @@ public:
 	*/
 	void setUniformValue(int location, Vector v);
 	
-	/*
+	/*!
 	Sets vec4 type variable to specified color (fourth component is 1.0)
 	*/
 	void setUniformValue(int location, Color c);

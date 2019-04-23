@@ -4,6 +4,7 @@
 
 #include "Texture.hpp"
 
+///  Abstract class which implements generating textures dynamically.
 class TextureFactory
 {
 

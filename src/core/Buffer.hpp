@@ -15,9 +15,11 @@ class Buffer
 	GLenum type;
 
 public: 
+	/// Create new buffer with given type
+	/// \param _type GLenum specified type
 	Buffer(GLenum _type);
 
-
+	/// bind buffer
 	void bind();
 
 	void sendData(std::vector<float> data);

@@ -40,7 +40,7 @@ public:
 	void setCamera(float x, float y, float z, Vector direction, Vector up);
 	Vector getCameraPosition();
 	
-	/*
+	/*!
 	Sets perspective parameters
 
 	NOTE: fovy is given in radians
@@ -48,7 +48,7 @@ public:
 	void setPerspective(float fovy, float aspect, float near, float far);
 	
 
-	/*
+	/*!
 	Return matrix to project scene object into camera space with perspective projection
 
 	NOTE: fovy is given in radians 

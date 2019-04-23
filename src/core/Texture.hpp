@@ -26,7 +26,7 @@ public:
 	Texture& operator=(Texture t);
 
 	
-	/*
+	/*!
 	NOTE: data has to be in the correct format data[height][width][format] where format is 3 or 4
 	NOTE 2: data is array of type float
 	*/

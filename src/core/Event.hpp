@@ -8,6 +8,7 @@ typedef struct
 	char keycode; 
 } Key; 
 
+/// Represents event when key is pressed
 class Event {
 
 	Key m_key; 

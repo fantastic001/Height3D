@@ -5,6 +5,7 @@
 #include "Vector.hpp"
 #include "Color.hpp"
 
+/// Represents light which can be added to Scene object
 class Light 
 {
 
