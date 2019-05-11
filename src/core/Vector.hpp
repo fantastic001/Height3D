@@ -22,14 +22,14 @@ public:
 	
 	float dot(Vector v); 
 
-	/*
+	/*!
 	Computes cross product
 	*/
 	Vector cross(Vector v);
 
 	Vector transpose();
 
-	/*
+	/*!
 	Return normalized vector (except w-component)
 	*/
 	Vector normalized();

@@ -4,7 +4,7 @@
 
 #include "LayeredHeightfield.hpp"
 #include <core/Array3D.hpp>
-
+/// Convert voxel representation to layered heightfield representation
 class Array3DLayeredHeightfieldAdapter 
 {
 	Array3D<bool>* m_arr; 

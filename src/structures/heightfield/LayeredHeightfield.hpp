@@ -36,7 +36,7 @@ public:
 	
 	void setTop(int level, int i, int j, float y);
 	void setBottom(int level, int i, int j, float y);
-
+	/// Convert given index in array to representation in x,z plane
 	float toContinious(int i);
 
 	int getPrecision();
@@ -44,8 +44,8 @@ public:
 	int countLeftRightEdges();
 	int countForwardBackwardEdges();
 
-	// This function iterates over field on all levels and assigns apropirate value for top and bottom
-	// it recieves function (int level, float x, float z) -> pair<float, float> (bottom, top)
+	/// This function iterates over field on all levels and assigns apropirate value for top and bottom
+	/// it recieves function (int level, float x, float z) -> pair<float, float> (bottom, top)
 	void assign(function<pair<float, float> (int, float, float)>);
 };
 

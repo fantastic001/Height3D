@@ -7,6 +7,7 @@
 
 #include "ImplicitOctreeGenerator.hpp"
 
+/// Convertvoxel model representation into Octree representation
 class Array3DOctreeAdapter : public ImplicitOctreeGenerator
 {
 	Array3D<bool> *m_arr; 

@@ -5,6 +5,7 @@
 #include "kernels/Kernel.hpp"
 #include <structures/heightfield/LayeredHeightfield.hpp>
 
+/// Make holes on terrain with given kernel specifying where holes should be made (forall x,y where defined(x,y) and bottom(x,z) < y < top(x,z))
 class CaveGenerator 
 {
 public:

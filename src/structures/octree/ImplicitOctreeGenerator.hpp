@@ -4,6 +4,7 @@
 
 #include "Octree.hpp"
 
+/// Generates Ocree representation but wiithout actual explicit voxel model but using isActive function instead
 class ImplicitOctreeGenerator 
 {
 	Octree* m_root; 

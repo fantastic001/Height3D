@@ -7,11 +7,13 @@
 #include <SDL2/SDL.h>
 #include <gui/Window.hpp>
 
+/// Loop class which redraws SDL Window on every frame
 class SDLLoop : public Loop{
 
 	SDL_Event event;
 	Window* window; 
 public:
+	/// Construct SDL loop for given SDL Window
 	SDLLoop(Window *w);
 	~SDLLoop();
 

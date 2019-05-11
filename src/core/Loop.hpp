@@ -9,8 +9,13 @@ class Loop
 
 	bool finished; 
 public:
+	/// Run loop (is not run in separate thread)
 	void run(); 
+
+	/// Quit running the loop
 	void quit(); 
+
+	/// Check is loop finished
 	bool isFinished();
 
 protected:

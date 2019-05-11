@@ -26,7 +26,7 @@ public:
 	Vector start();
 	Vector end();
 	
-	/*
+	/*!
 	Do DFS starting from the root node (this object) and searching for node with given position
 
 	If no such node is found, return NULL

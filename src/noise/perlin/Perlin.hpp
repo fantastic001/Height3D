@@ -17,7 +17,7 @@ public:
 	~Perlin();
 	
 	
-	/*
+	/*!
 	(0,0) <= (x,y) <= (1,1)
 
 	Get Specified value from noise

@@ -6,11 +6,19 @@
 
 #include <noise/perlin/PerlinSignal.hpp>
 
+/// Construct kernel which is spherical where radius is determined by perlin noise
 class PerlinSphericalKernel : public SphericalKernel 
 {
 
 	PerlinSignal* m_signal;
 public:
+	/*!
+	\param initial_radius radius of sphere
+	\param p x coordinate of center
+	\param h y coordinate of center
+	\param q z coordinate of center
+	\param signal PerlinSignal object representing actual signal
+	*/
 	PerlinSphericalKernel(float initial_radius, float p, float h, float q, PerlinSignal* signal);
 
 protected:

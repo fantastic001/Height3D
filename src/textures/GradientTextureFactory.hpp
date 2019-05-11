@@ -13,7 +13,7 @@ class GradientTextureFactory : public TextureFactory
 	bool m_vertical;
 
 public:
-	/*
+	/*!
 	If vertical is false then horizontal linear gradient is applied
 
 	Horizontal gradient is formed from left to right 

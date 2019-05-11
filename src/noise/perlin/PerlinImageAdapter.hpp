@@ -14,7 +14,7 @@ class PerlinImageAdapter
 public:
 	void addFrequency(int frequency, float amplitude);
 	
-	/*
+	/*!
 	Best results are achieved if frequency = 2 * size of Perlin noise
 	*/
 	void saveToFile(char* filename, int frequency);

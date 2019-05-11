@@ -3,6 +3,7 @@
 
 #include <core/AbstractModel.hpp>
 
+/// Class which constructs model based on given function y = f(x,z) which represents height at point(x,z)
 class SurfaceModel : public AbstractModel 
 {
 
@@ -11,12 +12,18 @@ class SurfaceModel : public AbstractModel
 
 public:
 
-	/*
+	/*!
+	Construct SurfaceModel with given precision.
+	Specify precision, from precision dx and dz will be derived: dx = dz = 2 / precision
+
+	If you are using this constructor, then subclass this class and override function(float, float)
+	*/
+	SurfaceModel(int precision); 
+	/*!
 	Specify precision, from precision dx and dz will be derived: dx = dz = 2 / precision
 
 	f is function which returns surface height for every x,z in range [-1, 1]
 	*/
-	SurfaceModel(int precision); 
 	SurfaceModel(int precision, float (*f) (float ,float)); 
 
 protected:
@@ -26,8 +33,10 @@ protected:
 	std::vector<float> genTextureCoordinates();
 	std::vector<float> genNormals();
 	
-	/*
+	/*!
 	Defines function y = f(x,z) 
+
+	This class does not need to be subclassed but then function pointer has to be provided to constructor
 	
 	It should return real value for EVERY (x,z) in range [-1, 1]
 	*/

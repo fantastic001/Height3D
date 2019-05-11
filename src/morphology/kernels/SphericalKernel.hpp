@@ -9,7 +9,7 @@ class SphericalKernel : public Kernel
 	float m_radius;
 	float m_p, m_q, m_h; 
 public:
-	/*
+	/*!
 	initial_radius: radius of sphere
 	p: x coordinate of center
 	h: y coordinate of center

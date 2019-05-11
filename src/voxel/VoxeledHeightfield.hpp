@@ -19,7 +19,7 @@ public:
 	bool isActive(int i, int j, int k);
 
 protected:
-	/*
+	/*!
 	Specified values have to be between -1 and 1 and returned value should be between -1 and 1 
 	*/
 	virtual float function(float x, float z) = 0;
